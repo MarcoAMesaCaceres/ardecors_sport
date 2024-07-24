@@ -1,3 +1,33 @@
-<h1>Detalle de Configuración</h1>
-<p>Nombre: {{ configuracion.nombre }}</p>
-<p>Valor: {{ configuracion.valor }}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuraciones</title>
+    <link rel="stylesheet" href="{% static 'css/configuraciones.css' %}">
+    <script src="{% static 'js/configuraciones.js' %}" defer></script>
+</head>
+<body>
+    <div class="configuraciones-container">
+
+            <h1>Detalle de Configuración</h1>
+            <p>Nombre: {{ configuracion.nombre }}</p>
+            <p>Valor: {{ configuracion.valor }}</p>
+        
+    <h2>Actualizar Configuración</h2>
+        <form id="config-form" method="POST" action="{% url 'actualizar_configuracion' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="text" id="valor" name="valor" required>
+            </div>
+            <button type="submit" class="btn">Actualizar Configuración</button>
+        </form>
+    </div>
+</body>
+</html>   
+    
