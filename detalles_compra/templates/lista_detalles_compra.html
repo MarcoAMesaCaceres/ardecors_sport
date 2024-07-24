@@ -1,0 +1,7 @@
+<h1>Lista de Detalles de Compra</h1>
+<ul>
+    {% for detalle in detalles %}
+    <li>Orden: {{ detalle.orden.id }}, Producto: {{ detalle.producto.nombre }} - 
+    <a href="{% url 'detalle_detalle_compra' detalle.id %}">Ver Detalle</a></li>
+    {% endfor %}
+</ul>

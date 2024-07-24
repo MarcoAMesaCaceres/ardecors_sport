@@ -1,0 +1,6 @@
+<h1>Lista de Configuraciones</h1>
+<ul>
+    {% for configuracion in configuraciones %}
+    <li>{{ configuracion.nombre }} - <a href="{% url 'detalle_configuracion' configuracion.id %}">Ver Detalle</a></li>
+    {% endfor %}
+</ul>

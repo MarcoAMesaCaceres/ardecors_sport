@@ -1,0 +1,7 @@
+<h1>Lista de Proveedores</h1>
+<ul>
+    {% for proveedor in proveedores %}
+    <li>{{ proveedor.nombre }} - 
+    <a href="{% url 'detalle_proveedor' proveedor.id %}">Ver Detalle</a></li>
+    {% endfor %}
+</ul>

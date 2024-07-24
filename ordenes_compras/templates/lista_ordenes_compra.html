@@ -1,0 +1,7 @@
+<h1>Lista de Órdenes de Compra</h1>
+<ul>
+    {% for orden in ordenes %}
+    <li>Orden ID: {{ orden.id }}, Proveedor: {{ orden.proveedor.nombre }} - 
+    <a href="{% url 'detalle_orden_compra' orden.id %}">Ver Detalle</a></li>
+    {% endfor %}
+</ul>

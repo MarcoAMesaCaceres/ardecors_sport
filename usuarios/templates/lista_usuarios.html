@@ -1,0 +1,7 @@
+<h1>Lista de Usuarios</h1>
+<ul>
+    {% for usuario in usuarios %}
+    <li>{{ usuario.nombre }} - 
+    <a href="{% url 'detalle_usuario' usuario.id %}">Ver Detalle</a></li>
+    {% endfor %}
+</ul>

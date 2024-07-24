@@ -1,24 +1,42 @@
+<!-- templates/admin/dashboard.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Administración</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static '' %}">
 </head>
 <body>
-    <h1>Panel de Administración</h1>
-    
-    <h2>Resumen</h2>
-    <ul>
-        <li>Usuarios: {{ usuarios_count }}</li>
-        <li>Productos: {{ productos_count }}</li>
-        <li>Materiales: {{ materiales_count }}</li>
-        <li>Compras: {{ compras_count }}</li>
-        <li>Ventas: {{ ventas_count }}</li>
-    </ul>
-    <h2>Gestión</h2>
-    <ul>
-        <a href="{% url 'usuario_list' %}">Gestionar Usuarios</a>
-        <!-- Puedes agregar más enlaces para otras secciones aquí -->
-    </ul>
+    <header>
+        <h1>Panel de Administración</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url '' %}">Inicio</a></li>
+                <li><a href="{% url '' %}">Aplicaciones</a></li>
+                <li><a href="{% url '' %}">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Productos</h2>
+            <!-- Contenido de productos -->
+        </section>
+        <section>
+            <h2>Proveedores</h2>
+            <!-- Contenido de proveedores -->
+        </section>
+        <section>
+            <h2>Órdenes de Compra</h2>
+            <!-- Contenido de órdenes de compra -->
+        </section>
+        <section>
+            <h2>Detalles de Órdenes de Compra</h2>
+            <!-- Contenido de detalles de órdenes de compra -->
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Mi Proyecto</p>
+    </footer>
 </body>
 </html>

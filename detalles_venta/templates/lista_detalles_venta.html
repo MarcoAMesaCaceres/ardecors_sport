@@ -1,0 +1,7 @@
+<h1>Lista de Detalles de Venta</h1>
+<ul>
+    {% for detalle in detalles %}
+    <li>Venta: {{ detalle.venta.id }}, Producto: {{ detalle.producto.nombre }} - 
+    <a href="{% url 'detalle_detalle_venta' detalle.id %}">Ver Detalle</a></li>
+    {% endfor %}
+</ul>
