@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+    
+    <h2>Resumen</h2>
+    <ul>
+        <li>Usuarios: {{ usuarios_count }}</li>
+        <li>Productos: {{ productos_count }}</li>
+        <li>Materiales: {{ materiales_count }}</li>
+        <li>Compras: {{ compras_count }}</li>
+        <li>Ventas: {{ ventas_count }}</li>
+    </ul>
+    <h2>Gestión</h2>
+    <ul>
+        <a href="{% url 'usuario_list' %}">Gestionar Usuarios</a>
+        <!-- Puedes agregar más enlaces para otras secciones aquí -->
+    </ul>
+</body>
+</html>
