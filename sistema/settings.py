@@ -88,10 +88,12 @@ DATABASES = {
         'NAME': 'ardecors',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',  # O la dirección de tu servidor MySQL
-        'PORT': '3306',       # El puerto por defecto de MySQL
+        'HOST': 'localhost',
+        'PORT': '3306',
+        
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -133,3 +135,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'iniciar_sesion'  # Nombre de URL para la página de inicio de sesión
+LOGIN_REDIRECT_URL = 'admin_dashboard'  # Nombre de URL para el panel de administración
