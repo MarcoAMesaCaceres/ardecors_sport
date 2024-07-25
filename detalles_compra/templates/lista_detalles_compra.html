@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Compra</title>
     <link rel="stylesheet" href="{% static 'css/detalles_compra.css' %}">
+    <script src="{% static 'js/detalles_compra.js' %}" defer></script>
 </head>
 <body>
     <div class="detalles-compra-container">
@@ -17,34 +18,35 @@
                 <a href="{% url 'detalle_detalle_compra' detalle.id %}">Ver Detalle</a></li>
                 {% endfor %}
             </ul>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for detalle in detalles_compra %}
-                    <tr>
-                        <td>{{ detalle.producto.nombre }}</td>
-                        <td>{{ detalle.cantidad }}</td>
-                        <td>${{ detalle.precio }}</td>
-                        <td>${{ detalle.cantidad|floatformat:2|multiply:detalle.precio|floatformat:2 }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="4">No hay detalles de compra disponibles.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="total-container">
-                Total: <span>${{ total_compra|floatformat:2 }}</span>
-            </div>
-            <a href="{% url 'alguna_url' %}" class="btn">Volver</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles_compra %}
+                <tr>
+                    <td>{{ detalle.producto.nombre }}</td>
+                    <td class="cantidad">{{ detalle.cantidad }}</td>
+                    <td class="precio">{{ detalle.precio }}</td>
+                    <td>${{ detalle.cantidad|floatformat:2|multiply:detalle.precio|floatformat:2 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No hay detalles de compra disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total-container">
+            Total: <span>${{ total_compra|floatformat:2 }}</span>
         </div>
-    </body>
-    </html>
+        <a href="{% url 'alguna_url' %}" class="btn">Volver</a>
+    </div>
+</body>
+</html>

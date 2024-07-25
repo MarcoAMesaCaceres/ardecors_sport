@@ -1,7 +1,52 @@
-<h1>Lista de Órdenes de Compra</h1>
-<ul>
-    {% for orden in ordenes %}
-    <li>Orden ID: {{ orden.id }}, Proveedor: {{ orden.proveedor.nombre }} - 
-    <a href="{% url 'detalle_orden_compra' orden.id %}">Ver Detalle</a></li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes de Compras</title>
+    <link rel="stylesheet" href="{% static 'css/ordenes_compras.css' %}">
+    <script src="{% static 'js/ordenes_compras.js' %}" defer></script>
+</head>
+<body>
+    <div class="ordenes-compras-container">
+        <h1>Órdenes de Compras</h1>
+
+            <h1>Lista de Órdenes de Compra</h1>
+            <ul>
+                {% for orden in ordenes %}
+                <li>Orden ID: {{ orden.id }}, Proveedor: {{ orden.proveedor.nombre }} - 
+                <a href="{% url 'detalle_orden_compra' orden.id %}">Ver Detalle</a></li>
+                {% endfor %}
+            </ul>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Orden</th>
+                        <th>Fecha</th>
+                        <th>Proveedor</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orden in ordenes %}
+                    <tr>
+                        <td>{{ orden.id }}</td>
+                        <td>{{ orden.fecha }}</td>
+                        <td>{{ orden.proveedor.nombre }}</td>
+                        <td>${{ orden.total|floatformat:2 }}</td>
+                        <td><a href="{% url 'detalle_orden' orden.id %}">Ver Detalle</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No hay órdenes de compra disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'nueva_orden' %}" class="btn">Nueva Orden</a>
+        </div>
+    </body>
+    </html>
+    
