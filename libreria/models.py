@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=200)
@@ -9,6 +10,7 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+    
 
 class Contacto(models.Model):
     nombre = models.CharField(max_length=100)
@@ -47,6 +49,10 @@ class DetalleVenta(models.Model):
 
     def __str__(self):
         return f"{self.cantidad} x {self.producto.nombre} en Venta {self.venta.id}"
+
+class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Añade otros campos si son necesarios
 
     def __str__(self):
         return f"Carrito de {self.usuario.username}"

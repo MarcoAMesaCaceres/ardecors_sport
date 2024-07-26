@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import RegistroForm, ContactoForm, ProductoForm, LoginForm
-from .models import Producto, Contacto
+from .forms import RegistroForm, ContactoForm, LoginForm
+from .models import Producto, Carrito, ItemCarrito  # Asegúrate de importar los modelos necesarios
 
 def ardecors(request):
     return render(request, 'ardecors.html')
@@ -83,20 +83,26 @@ def usuarios(request):
 def ventas(request):
     return render(request, 'ventas.html')
 
-def logout_view(request):
-    logout(request)
-    return redirect('ardecors')
 @login_required
 def ver_carrito(request):
     carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
     items = carrito.items.all()
-    total = sum(item.producto.precio * item.cantidad for item in items)
+    total = sum(item.cantidad * item.producto.precio for item in items)
     return render(request, 'carrito.html', {'items': items, 'total': total})
 
 @login_required
 def pagar(request):
     # Aquí iría la lógica para procesar el pago
     return render(request, 'pagar.html')
+
+@login_required
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+    item, created = ItemCarrito.objects.get_or_create(carrito=carrito, producto=producto)
+    item.cantidad += 1
+    item.save()
+    return redirect('ver_carrito')
 
 def logout_view(request):
     logout(request)

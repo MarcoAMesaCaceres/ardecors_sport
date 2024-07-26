@@ -1,8 +1,8 @@
 from django import forms
-from .models import Producto
+from .models import Article
 
-class ProductoForm(forms.ModelForm):
+class ArticleForm(forms.ModelForm):
     class Meta:
-        model = Producto
+        model = Article
         fields = ['nombre', 'descripcion', 'precio', 'cantidad', 'ubicacion']
         
