@@ -22,7 +22,15 @@ from django.contrib.auth import views as auth_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('libreria.urls') ),
+    path('libreria/', include('libreria.urls')),
+    path('configuraciones/', include('configuraciones.urls')),
+    path('articles/', include('articles.urls')),
+    path('proveedores/', include('proveedores.urls')),
+    path('ordenes_compras/', include('ordenes_compras.urls')),
+    path('detalles_compra/', include('detalles_compra.urls')),
+    path('detalles_venta/', include('detalles_venta.urls')),
+    path('usuarios/', include('usuarios.urls')),
+    path('ventas/', include('ventas.urls')),
 ]
 
 if settings.DEBUG:

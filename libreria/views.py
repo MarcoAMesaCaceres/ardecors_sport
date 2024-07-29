@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from .forms import RegistroForm, ContactoForm, LoginForm
 from .models import Producto, Carrito, ItemCarrito  # Asegúrate de importar los modelos necesarios
 
@@ -26,19 +27,15 @@ def contacto(request):
 
 def iniciar_sesion(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('admin_dashboard')
-            else:
-                form.add_error(None, 'Credenciales inválidas')
-    else:
-        form = LoginForm()
-    return render(request, 'iniciar_sesion.html', {'form': form})
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(reverse('admin_dashboard'))
+        else:
+            return render(request, 'iniciar_sesion.html', {'error': 'Credenciales incorrectas'})
+    return render(request, 'iniciar_sesion.html')
 
 def registro(request):
     if request.method == 'POST':
@@ -57,31 +54,31 @@ def admin_dashboard(request):
 
 @login_required
 def configuraciones(request):
-    return render(request, 'configuraciones.html')
+    return render(request, 'crear_configuracion.html')
 
 @login_required
 def proveedores(request):
-    return render(request, 'proveedores.html')
+    return render(request, 'crear_proveedor.html')
 
 @login_required
 def ordenes_compras(request):
-    return render(request, 'ordenes_compras.html')
+    return render(request, 'crear_orden_compra.html')
 
 @login_required
 def detalles_compra(request):
-    return render(request, 'detalles_compra.html')
+    return render(request, 'detalle_orden_compra.html')
 
 @login_required
 def detalles_venta(request):
-    return render(request, 'detalles_venta.html')
+    return render(request, 'crear_detalle_venta.html')
 
 @login_required
 def usuarios(request):
-    return render(request, 'usuarios.html')
+    return render(request, 'crear_usuario.html')
 
 @login_required
 def ventas(request):
-    return render(request, 'ventas.html')
+    return render(request, 'crear_ventas.html')
 
 @login_required
 def ver_carrito(request):
@@ -106,4 +103,4 @@ def agregar_al_carrito(request, producto_id):
 
 def logout_view(request):
     logout(request)
-    return redirect('ardecors')
+    return redirect('/ardecors/')
