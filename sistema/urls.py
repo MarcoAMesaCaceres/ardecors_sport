@@ -17,8 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
-from django.contrib.auth import views as auth_view
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,8 +30,10 @@ urlpatterns = [
     path('detalles_venta/', include('detalles_venta.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('ventas/', include('ventas.urls')),
+    
+    # Añade esta línea para redirigir la raíz a la página principal de 'libreria'
+    path('', RedirectView.as_view(url='/libreria/', permanent=True)),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

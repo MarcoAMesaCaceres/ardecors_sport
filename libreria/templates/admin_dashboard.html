@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <script src="{% static 'js/admin_dashboard.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración</h1>
+        <nav>
+            <ul>
+                
+                
+                
+                
+               
+                
+                
+                
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2><li><a href="{% url 'crear_usuario' %}">Usuarios</a></li></h2>
+            <!-- Contenido de configuraciones -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'crear_articles' %}">Productos</a></li></h2>
+            <!-- Contenido de órdenes de compra -->
+        </section>
+       
+        <section>
+            <h2><li><a href="{% url 'crear_venta' %}">Ventas</a></li></h2>
+            <!-- Contenido de configuraciones -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'crear_detalle_venta' %}">Detalles de Venta</a></li></h2>
+            <!-- Contenido de ventas -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'crear_orden_compra' %}">Órdenes de Compra</a></li></h2>
+            <!-- Contenido de detalles de ventas -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'crear_detalle_compra' %}">Detalles de Compra</a></li></h2>
+            <!-- Contenido de usuarios -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'crear_proveedor' %}">Proveedores</a></li></h2>
+            <!-- Contenido de detalles de órdenes de compra -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'crear_configuracion' %}">Configuraciones</a></li></h2>
+            <!-- Contenido de proveedores -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'ardecors' %}"> Volver al Inicio</a></li></h2>
+            <!-- Contenido de productos -->
+        </section>
+        <section>
+            <h2><li><a href="{% url 'iniciar_sesion' %}">Cerrar Sesión</a></li></h2>
+            <!-- Contenido de configuraciones -->
+        </section>
+    </main>
+    <footer>
+        <p>Ardecors Sport</p>
+    </footer>
+</body>
+</html>

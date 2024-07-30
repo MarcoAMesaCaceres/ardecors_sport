@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from .forms import RegistroForm, ContactoForm, LoginForm
-from .models import Producto, Carrito, ItemCarrito  # Asegúrate de importar los modelos necesarios
+from .forms import RegistroForm, ContactoForm
+from .models import Producto, Carrito, ItemCarrito # Asegúrate de importar los modelos necesarios
 
 def ardecors(request):
     return render(request, 'ardecors.html')
@@ -50,7 +50,10 @@ def registro(request):
 
 @login_required
 def admin_dashboard(request):
-    return render(request, 'admin_dasboard.html')
+    return render(request, 'admin_dashboard.html')
+@login_required
+def articles(request):
+    return render(request, 'crear_articles.html')
 
 @login_required
 def configuraciones(request):
@@ -103,4 +106,4 @@ def agregar_al_carrito(request, producto_id):
 
 def logout_view(request):
     logout(request)
-    return redirect('/ardecors/')
+    return redirect('ardecors')
