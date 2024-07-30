@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Configuracion
 from .forms import ConfiguracionForm
 
@@ -18,3 +18,10 @@ def crear_configuracion(request):
     else:
         form = ConfiguracionForm()
     return render(request, 'configuraciones/crear_configuracion.html', {'form': form})
+
+def eliminar_configuracion(request, pk):
+    configuracion = get_object_or_404(Configuracion, pk=pk)
+    if request.method == 'POST':
+        configuracion.delete()
+        return redirect('lista_configuraciones')
+    return render(request, 'confirmar_eliminacion.html', {'configuracion': configuracion})

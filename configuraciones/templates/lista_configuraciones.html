@@ -14,7 +14,10 @@
             <h1>Lista de Configuraciones</h1>
             <ul>
                 {% for configuracion in configuraciones %}
-                <li>{{ configuracion.nombre }} - <a href="{% url 'detalle_configuracion' configuracion.id %}">Ver Detalle</a></li>
+                <li>{{ configuracion.nombre }} 
+                    - <a href="{% url 'detalle_configuracion' configuracion.id %}">Ver Detalle</a></li>
+                    - <a href="{% url 'editar_configuracion' configuracion.id %}">Editar</a>
+                - <a href="{% url 'eliminar_configuracion' configuracion.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar esta configuración?');">Eliminar</a>
                 {% endfor %}
             </ul>
 

@@ -3,6 +3,7 @@ from .models import Article
 from .forms import ArticleForm
 
 
+
 def lista_articles(request):
     articles = Article.objects.all()
     return render(request, 'lista_articles.html', {'articles': articles})
@@ -20,3 +21,10 @@ def crear_articles(request):
     else:
         form = ArticleForm()
     return render(request, 'crear_articles.html', {'form': form})
+
+def eliminar_article(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    if request.method == 'POST':
+        article.delete()
+        return redirect('lista_articles')
+    return render(request, 'confirmar_eliminacion.html', {'article': article})

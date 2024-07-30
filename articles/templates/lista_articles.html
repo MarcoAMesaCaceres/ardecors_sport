@@ -40,7 +40,12 @@
                     <td>${{ producto.precio|floatformat:2 }}</td>
                     <td>{{ producto.cantidad }}</td>
                     <td>{{ producto.ubicacion }}</td>
-                    <td><a href="{% url 'editar_articles' articles.id %}">Editar</a></td>
+                    <td>
+                        <a href="{% url 'editar_articles' producto.id %}">Editar</a>
+                        <a href="{% url 'eliminar_articles' producto.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</a>
+                    </td>
+                    
+
                 </tr>
                 {% empty %}
                 <tr>

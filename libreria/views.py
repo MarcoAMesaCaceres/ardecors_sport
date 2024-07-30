@@ -52,23 +52,23 @@ def registro(request):
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 @login_required
-def articles(request):
+def crear_articles(request):
     return render(request, 'crear_articles.html')
 
 @login_required
-def configuraciones(request):
+def crear_configuracion(request):
     return render(request, 'crear_configuracion.html')
 
 @login_required
-def proveedores(request):
+def crear_proveedor(request):
     return render(request, 'crear_proveedor.html')
 
 @login_required
-def ordenes_compras(request):
+def crear_orden_compra(request):
     return render(request, 'crear_orden_compra.html')
 
 @login_required
-def detalles_compra(request):
+def crear_detalle_compra(request):
     return render(request, 'detalle_orden_compra.html')
 
 @login_required
@@ -76,12 +76,12 @@ def detalles_venta(request):
     return render(request, 'crear_detalle_venta.html')
 
 @login_required
-def usuarios(request):
+def crear_usuario(request):
     return render(request, 'crear_usuario.html')
 
 @login_required
-def ventas(request):
-    return render(request, 'crear_ventas.html')
+def crear_venta(request):
+    return render(request, 'crear_venta.html')
 
 @login_required
 def ver_carrito(request):
