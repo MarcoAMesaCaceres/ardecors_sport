@@ -10,13 +10,14 @@
 </head>
 <body>
     <div class="ordenes-compras-container">
-        <h1>Órdenes de Compras</h1>
 
             <h1>Lista de Órdenes de Compra</h1>
             <ul>
                 {% for orden in ordenes %}
                 <li>Orden ID: {{ orden.id }}, Proveedor: {{ orden.proveedor.nombre }} - 
-                <a href="{% url 'detalle_orden_compra' orden.id %}">Ver Detalle</a></li>
+                <a href="{% url 'detalle_orden_compra' orden.id %}">Ver Detalle</a>
+                <a href="{% url 'eliminar_orden_compra' orden.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar esta orden de compra?');">Eliminar</a>
+                </li>
                 {% endfor %}
             </ul>
 
@@ -37,7 +38,10 @@
                         <td>{{ orden.fecha }}</td>
                         <td>{{ orden.proveedor.nombre }}</td>
                         <td>${{ orden.total|floatformat:2 }}</td>
-                        <td><a href="{% url 'detalle_orden' orden.id %}">Ver Detalle</a></td>
+                        <td>
+                            <a href="{% url 'detalle_orden_compra' orden.id %}">Ver Detalle</a>
+                            <a href="{% url 'eliminar_orden_compra' orden.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar esta orden de compra?');">Eliminar</a>
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>
@@ -46,7 +50,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{% url 'nueva_orden' %}" class="btn">Nueva Orden</a>
+            <a href="" class="btn">Nueva Orden</a>
         </div>
     </body>
     </html>

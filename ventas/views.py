@@ -1,14 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Venta
 from .forms import VentaForm
 
 def lista_ventas(request):
     ventas = Venta.objects.all()
-    return render(request, 'ventas/lista_ventas.html', {'ventas': ventas})
+    return render(request, 'lista_ventas.html', {'ventas': ventas})
 
 def detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, id=venta_id)
-    return render(request, 'ventas/detalle_venta.html', {'venta': venta})
+    return render(request, 'detalle_venta.html', {'venta': venta})
 
 def crear_venta(request):
     if request.method == 'POST':
@@ -17,4 +17,12 @@ def crear_venta(request):
             form.save()
     else:
         form = VentaForm()
-    return render(request, 'ventas/crear_venta.html', {'form': form})
+    return render(request, 'crear_venta.html', {'form': form})
+
+def eliminar_venta(request, pk):
+    venta = get_object_or_404(Venta, pk=pk)
+    if request.method == 'POST':
+        venta.delete()
+        return redirect('lista_ventas')
+    return render(request, 'eliminar_venta.html', {'venta': venta})
+

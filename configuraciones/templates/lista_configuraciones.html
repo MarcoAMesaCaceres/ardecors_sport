@@ -13,16 +13,16 @@
 
             <h1>Lista de Configuraciones</h1>
             <ul>
-                {% for configuracion in configuraciones %}
+                
                 <li>{{ configuracion.nombre }} 
-                    - <a href="{% url 'detalle_configuracion' configuracion.id %}">Ver Detalle</a></li>
-                    - <a href="{% url 'editar_configuracion' configuracion.id %}">Editar</a>
-                - <a href="{% url 'eliminar_configuracion' configuracion.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar esta configuración?');">Eliminar</a>
-                {% endfor %}
+                    - <a href="">Ver Detalle</a></li>
+                    - <a href="">Editar</a>
+                - <a href="" onclick="return confirm('¿Estás seguro de que deseas eliminar esta configuración?');">Eliminar</a>
+                
             </ul>
 
             <h2>Actualizar Configuración</h2>
-            <form id="config-form" method="POST" action="{% url 'actualizar_configuracion' %}">
+            <form id="config-form" method="POST" action="">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>

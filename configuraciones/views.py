@@ -4,11 +4,11 @@ from .forms import ConfiguracionForm
 
 def lista_configuraciones(request):
     configuraciones = Configuracion.objects.all()
-    return render(request, 'configuraciones/lista_configuraciones.html', {'configuraciones': configuraciones})
+    return render(request, 'lista_configuraciones.html', {'configuraciones': configuraciones})
 
 def detalle_configuracion(request, config_id):
     configuracion = get_object_or_404(Configuracion, id=config_id)
-    return render(request, 'configuraciones/detalle_configuracion.html', {'configuracion': configuracion})
+    return render(request, 'detalle_configuracion.html', {'configuracion': configuracion})
 
 def crear_configuracion(request):
     if request.method == 'POST':
@@ -17,7 +17,7 @@ def crear_configuracion(request):
             form.save()
     else:
         form = ConfiguracionForm()
-    return render(request, 'configuraciones/crear_configuracion.html', {'form': form})
+    return render(request, 'crear_configuracion.html', {'form': form})
 
 def eliminar_configuracion(request, pk):
     configuracion = get_object_or_404(Configuracion, pk=pk)

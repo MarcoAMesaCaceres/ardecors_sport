@@ -10,29 +10,23 @@ urlpatterns = [
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('registro/', views.registro, name='registro'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
-    
-    # URLs para ventas
-    
-    path('ventas/crear_venta/', views.crear_venta, name='crear_venta'),
-    
-
-    # URLs para usuarios
-    
-    path('usuarios/crear_usuario/', views.crear_usuario, name='crear_usuario'),
-   
-
-    # URLs para órdenes de compra
-    
-    path('ordenes_compras/crear_orden_compra/', views.crear_orden_compra, name='crear_orden_compra'),
-    
-
-    # URLs para proveedores
-    
-    path('proveedores/crear_proveedor/', views.crear_proveedor, name='crear_proveedor'),
-    
-
-    # URLs para detalles de compra
-    
+    path('crear_usuario/', views.crear_usuario, name='crear_usuario'),
+    path('lista_usuarios/', views.lista_usuarios, name='lista_usuarios'),
+    path('lista_articles/', views.lista_articles, name='lista_articles'),
+    path('crear_venta/', views.crear_venta, name='crear_venta'),
+    path('lista_ventas/', views.lista_ventas, name='lista_ventas'),
+    path('crear_detalle_venta/', views.crear_detalle_venta, name='crear_detalle_venta'),
+    path('lista_detalles_venta/', views.lista_detalles_venta, name='lista_detalles_venta'),
+    path('crear_orden_compra/', views.crear_orden_compra, name='crear_orden_compra'),
+    path('lista_ordenes_compra/', views.lista_ordenes_compra, name='lista_ordenes_compra'),
+    path('crear_detalle_compra/', views.crear_detalle_compra, name='crear_detalle_compra'),
+    path('lista_detalles_compra/', views.lista_detalles_compra, name='lista_detalles_compra'),
+    path('crear_proveedor/', views.crear_proveedor, name='crear_proveedor'),
+    path('lista_proveedores/', views.lista_proveedores, name='lista_proveedores'),
+    path('crear_configuracion/', views.crear_configuracion, name='crear_configuracion'),
+    path('lista_configuraciones/', views.lista_configuraciones, name='lista_configuraciones'),
+    path('ardecors/', views.ardecors, name='ardecors'),
+    path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('detalles_compra/crear/', views.crear_detalle_compra, name='crear_detalle_compra'),
     path('ver_carrito/', views.ver_carrito, name='ver_carrito'),
     path('pagar/', views.pagar, name='pagar'),

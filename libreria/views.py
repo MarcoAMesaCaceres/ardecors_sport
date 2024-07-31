@@ -52,36 +52,48 @@ def registro(request):
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 @login_required
-def crear_articles(request):
-    return render(request, 'crear_articles.html')
-
-@login_required
-def crear_configuracion(request):
-    return render(request, 'crear_configuracion.html')
-
-@login_required
-def crear_proveedor(request):
-    return render(request, 'crear_proveedor.html')
-
-@login_required
-def crear_orden_compra(request):
-    return render(request, 'crear_orden_compra.html')
-
-@login_required
-def crear_detalle_compra(request):
-    return render(request, 'detalle_orden_compra.html')
-
-@login_required
-def detalles_venta(request):
-    return render(request, 'crear_detalle_venta.html')
-
-@login_required
 def crear_usuario(request):
     return render(request, 'crear_usuario.html')
+def lista_usuarios(request):
+    return render(request, 'lista_usuarios.html')
 
-@login_required
+def crear_articles(request):
+    return render(request, 'crear_articles.html')
+def lista_articles(request):
+    return render(request, 'lista_articles.html')
+
 def crear_venta(request):
     return render(request, 'crear_venta.html')
+
+def lista_ventas(request):
+    return render(request, 'lista_ventas.html')
+
+def crear_detalle_venta(request):
+    return render(request, 'crear_detalle_venta.html')
+def lista_detalles_venta(request):
+    return render(request, 'lista_detalles_venta.html')
+
+def crear_orden_compra(request):
+    return render(request, 'crear_orden_compra.html')
+def lista_ordenes_compra(request):
+    return render(request, 'lista_ordenes_compra.html')
+
+def crear_detalle_compra(request):
+    return render(request, 'crear_detalle_compra.html')
+def lista_detalles_compra(request):
+    return render(request, 'lista_detalles_compra.html')
+
+def crear_proveedor(request):
+    return render(request, 'crear_proveedor.html')
+def lista_proveedores(request):
+    return render(request, 'lista_proveedores.html')
+
+
+
+def crear_configuracion(request):
+    return render(request, 'crear_configuracion.html')
+def lista_configuraciones(request):
+    return render(request, 'lista_configuraciones.html')
 
 @login_required
 def ver_carrito(request):

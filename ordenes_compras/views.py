@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import OrdenCompra
 from .forms import OrdenCompraForm
 
@@ -18,3 +18,10 @@ def crear_orden_compra(request):
     else:
         form = OrdenCompraForm()
     return render(request, 'ordenes_compra/crear_orden_compra.html', {'form': form})
+
+def eliminar_orden_compra(request, pk):
+    orden = get_object_or_404(OrdenCompra, pk=pk)
+    if request.method == 'POST':
+        orden.delete()
+        return redirect('lista_ordenes_compra')
+    return render(request, 'eliminar_orden_compra.html', {'orden': orden})

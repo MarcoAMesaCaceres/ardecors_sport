@@ -16,7 +16,10 @@
 <ul>
     {% for usuario in usuarios %}
     <li>{{ usuario.nombre }} - 
-    <a href="{% url 'detalle_usuario' usuario.id %}">Ver Detalle</a></li>
+    <a href="{% url 'detalle_usuario' usuario.id %}">Ver Detalle</a>
+    <a href="{% url 'eliminar_usuario' usuario.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</a>
+            </li>
+    </li>
     {% endfor %}
 </ul>
 
@@ -37,7 +40,11 @@
                     <td>{{ usuario.nombre }}</td>
                     <td>{{ usuario.usuario }}</td>
                     <td>{{ usuario.rol }}</td>
-                    <td><a href="{% url 'editar_usuario' usuario.id %}">Editar</a></td>
+                    <td>
+                        <a href="{% url 'detalle_usuario' usuario.id %}">Ver Detalle</a> - 
+                        <a href="{% url 'editar_usuario' usuario.id %}">Editar</a> - 
+                        <a href="{% url 'eliminar_usuario' usuario.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</a>
+                        </td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -46,7 +53,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'nuevo_usuario' %}" class="btn">Nuevo Usuario</a>
+        <a href="{% url 'crear_usuario' %}" class="btn">Nuevo Usuario</a>
     </div>
 </body>
 </html>
