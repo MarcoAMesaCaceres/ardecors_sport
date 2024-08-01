@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'ordenes_compras',
     'configuraciones',
     'detalles_compra',
-    'detalles_venta',
-    
+    'detalles_venta',    
 ]
 
 MIDDLEWARE = [

@@ -16,10 +16,3 @@ class Proveedor(models.Model):
     def __str__(self):
         return self.nombre
 
-class OrdenCompra(models.Model):
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    fecha = models.DateField()
-    total = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"Orden {self.id} - {self.proveedor.nombre}"

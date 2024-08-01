@@ -22,11 +22,3 @@ class Venta(models.Model):
     def __str__(self):
         return str(self.id)
 
-class DetalleVenta(models.Model):
-    venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField()
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.producto.nombre} - {self.cantidad}"

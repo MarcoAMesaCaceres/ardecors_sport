@@ -26,5 +26,5 @@ def eliminar_article(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
         article.delete()
-        return redirect('lista_articles')
-    return render(request, 'confirmar_eliminacion.html', {'article': article})
+        return redirect('lista_articles.html')
+    return render(request, 'eliminar_articles.html', {'article': article})
