@@ -61,7 +61,10 @@ def crear_articles(request):
     return render(request, 'crear_articles.html')
 def lista_articles(request):
     return render(request, 'lista_articles.html')
-
+def eliminar_articles(request):
+    return render(request, 'eliminar_articles.html')
+def detalle_articles(request):
+    return render(request, 'detalle_articles.html')
 def crear_venta(request):
     return render(request, 'crear_venta.html')
 

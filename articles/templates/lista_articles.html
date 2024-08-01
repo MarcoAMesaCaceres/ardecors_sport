@@ -41,8 +41,8 @@
                     <td>{{ producto.cantidad }}</td>
                     <td>{{ producto.ubicacion }}</td>
                     <td>
-                        <a href="{% url 'editar_articles' producto.id %}">Editar</a>
-                        <a href="{% url 'eliminar_articles' producto.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</a>
+                        <a href="{% url 'detalle_articles'  %}">Editar</a>
+                        <a href="{% url 'eliminar_articles' %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</a>
                     </td>
                     
 
@@ -54,7 +54,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="" class="btn">Nuevo Producto</a>
+        <a href="crear_articles" class="btn">Nuevo Producto</a>
     </div>
 </body>
 </html>
