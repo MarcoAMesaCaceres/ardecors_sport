@@ -1,61 +1,32 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles de Compra</title>
-    <link rel="stylesheet" href="{% static 'css/detalles_compra.css' %}">
-    <script src="{% static 'js/detalles_compra.js' %}" defer></script>
-</head>
-<body>
-    <div class="detalles-compra-container">
-        <h1>Detalles de Compra</h1>
+{% extends 'base.html' %}
 
-            <h1>Lista de Detalles de Compra</h1>
-            <ul>
-               
-                <li>Orden: {{ detalle.orden.id }}, Producto: {{ detalle.producto.nombre }} 
-                    - <a href="">Ver Detalle</a>
-                    - <a href="" onclick="return confirm('¿Estás seguro de que deseas eliminar este detalle de compra?');">Eliminar</a>
-                    </li>
-                    
-                
-            </ul>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr>
-                    <td>{{ detalle.producto.nombre }}</td>
-                    <td class="cantidad">{{ detalle.cantidad }}</td>
-                    <td class="precio">{{ detalle.precio }}</td>
-                    
-                    <td>
-                    <a href="">Ver Detalle</a>
-                    <a href="" onclick="return confirm('¿Estás seguro de que deseas eliminar este detalle de compra?');">Eliminar</a>
-                    </td>
-                </tr>
-               
-                <tr>
-                    <td colspan="5">No hay detalles de compra disponibles.</td>
-                </tr>
-                
-            </tbody>
-        </table>
-        <div class="total-container">
-            Total: <span>${{ total_compra|floatformat:2 }}</span>
-        </div>
-        <a href="{% url 'admin_dashboard' %}" class="btn">Volver</a>
-    </div>
-</body>
-</html>
+{% block content %}
+<h1 class="mb-4">Lista de Detalles de Compra</h1>
+<a href="{% url 'crear_detalle_compra' %}" class="btn btn-primary mb-3">Crear Detalle de Compra</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Orden de Compra</th>
+            <th>producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for detalle in detalles %}
+        <tr>
+            <td>{{ detalle.orden }}</td>
+            <td>{{ detalle.producto}}</td>
+            <td>{{ detalle.cantidad }}</td>
+            <td>{{ detalle.precio }}</td>
+            
+            <td>
+                <a href="{% url 'editar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_detalles_compra' detalle.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

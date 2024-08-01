@@ -63,8 +63,8 @@ def lista_articles(request):
     return render(request, 'lista_articles.html')
 def eliminar_articles(request):
     return render(request, 'eliminar_articles.html')
-def detalle_articles(request):
-    return render(request, 'detalle_articles.html')
+def base(request):
+    return render(request, 'base.html')
 def crear_venta(request):
     return render(request, 'crear_venta.html')
 
@@ -85,7 +85,8 @@ def crear_detalle_compra(request):
     return render(request, 'crear_detalle_compra.html')
 def lista_detalles_compra(request):
     return render(request, 'lista_detalles_compra.html')
-
+def eliminar_detalles_compra(request):
+    return render(request, 'eliminar_detalles_compra.html')
 def crear_proveedor(request):
     return render(request, 'crear_proveedor.html')
 def lista_proveedores(request):
