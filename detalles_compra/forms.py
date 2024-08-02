@@ -1,7 +1,7 @@
 from django import forms
-from .models import DetalleOrdenCompra
+from .models import DetalleCompra
 
-class DetalleOrdenCompraForm(forms.ModelForm):
+class DetalleCompraForm(forms.ModelForm):
     class Meta:
-        model = DetalleOrdenCompra
-        fields = ['orden', 'producto', 'cantidad', 'precio']
+        model = DetalleCompra
+        fields = ['articulo', 'cantidad', 'precio_unitario', 'total']

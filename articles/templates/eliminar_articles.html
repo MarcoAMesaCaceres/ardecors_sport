@@ -1,8 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_articles.html' %}
+
+{% block title %}Eliminar Artículo{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Eliminar Producto</h1>
-<p>¿Estás seguro de que quieres eliminar el producto "{{ articles.nombre }}"?</p>
+<h1>Eliminar Artículo</h1>
+<p>¿Estás seguro de que deseas eliminar el artículo "{{ article.nombre }}"?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Sí, eliminar</button>

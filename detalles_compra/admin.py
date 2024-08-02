@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import DetalleOrdenCompra
+from .models import DetalleCompra
 
 # Register your models here.
 
-admin.site.register(DetalleOrdenCompra)
+admin.site.register(DetalleCompra)

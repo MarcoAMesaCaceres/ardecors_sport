@@ -7,4 +7,4 @@ class Venta(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"Venta {self.id}" 
+        return f"Venta {self.id}"

@@ -2,28 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from .forms import RegistroForm, ContactoForm
-from .models import Producto, Carrito, ItemCarrito # Asegúrate de importar los modelos necesarios
-
+from .forms import RegistroForm
 def ardecors(request):
     return render(request, 'ardecors.html')
 
 def productos(request):
-    productos = Producto.objects.all()
+
     return render(request, 'productos.html', {'productos': productos})
 
 def sobre(request):
     return render(request, 'sobre.html')
 
 def contacto(request):
-    if request.method == 'POST':
-        form = ContactoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('ardecors')
-    else:
-        form = ContactoForm()
-    return render(request, 'contacto.html', {'form': form})
+    return render(request, 'contacto.html', {'contato': contacto})
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -63,8 +54,8 @@ def lista_articles(request):
     return render(request, 'lista_articles.html')
 def eliminar_articles(request):
     return render(request, 'eliminar_articles.html')
-def base(request):
-    return render(request, 'base.html')
+def base_articles(request):
+    return render(request, 'base_articles.html')
 def crear_venta(request):
     return render(request, 'crear_venta.html')
 

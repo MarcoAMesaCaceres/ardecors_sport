@@ -1,28 +1,35 @@
-{% extends 'base.html' %}
+{% extends 'base_articles.html' %}
+
+{% block title %}Lista de Artículos{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Lista de Productos</h1>
-<a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Producto</a>
+<h1>Lista de Artículos</h1>
+<a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>cantidad</th>
-            <th>ubicacion</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        {% for producto in productos %}
+        {% for article in articles %}
         <tr>
-            <td>{{ articles.nombre }}</td>
-            <td>{{ articles.descripcion }}</td>
-            <td>{{ articles.cantidad }}</td>
-            <td>{{ articles.ubicacion }}</td>
+            <td>{{ article.nombre }}</td>
+            <td>{{ article.descripcion|truncatewords:10 }}</td>
+            <td>${{ article.precio }}</td>
+            <td>{{ article.stock }}</td>
             <td>
-                <a href="{% url 'editar_articles' articles.pk %}" class="btn btn-sm btn-warning">Editar</a>
-                <a href="{% url 'eliminar_articles' articles.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+                <a href="{% url 'editar_articles' article.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_articles' article.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
             </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay artículos disponibles.</td>
         </tr>
         {% endfor %}
     </tbody>

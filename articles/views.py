@@ -13,25 +13,25 @@ def crear_articles(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('crear_articles.html')  # Cambia esto por la vista adecuada
+            return redirect('lista_articles')
     else:
         form = ArticleForm()
     return render(request, 'crear_articles.html', {'form': form})
 
-def editar_articles(request):
+def editar_articles(request, pk):
+    article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
             form.save()
-            return redirect('crear_articles.html')  # Cambia esto por la vista adecuada
+            return redirect('lista_articles')
     else:
-        form = ArticleForm()
-    return render(request, 'crear_articles.html', {'form': form})
-    
+        form = ArticleForm(instance=article)
+    return render(request, 'editar_articles.html', {'form': form, 'article': article})
 
 def eliminar_articles(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
         article.delete()
-        return redirect('lista_articles.html')
+        return redirect('lista_articles')
     return render(request, 'eliminar_articles.html', {'article': article})

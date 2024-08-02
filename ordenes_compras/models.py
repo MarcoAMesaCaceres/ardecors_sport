@@ -9,10 +9,5 @@ class OrdenCompra(models.Model):
     def __str__(self):
         return f"Orden {self.id}"
     
-class Proveedor(models.Model):
-    nombre = models.CharField(max_length=200)
-    # Otros campos relevantes para Proveedor
 
-    def __str__(self):
-        return self.nombre
 
