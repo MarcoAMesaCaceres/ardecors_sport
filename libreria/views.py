@@ -56,6 +56,8 @@ def eliminar_articles(request):
     return render(request, 'eliminar_articles.html')
 def base_articles(request):
     return render(request, 'base_articles.html')
+def base_configuracion(request):
+    return render(request, 'base_configuracion.html')
 def crear_venta(request):
     return render(request, 'crear_venta.html')
 
@@ -82,34 +84,16 @@ def crear_proveedor(request):
     return render(request, 'crear_proveedor.html')
 def lista_proveedores(request):
     return render(request, 'lista_proveedores.html')
-
-
-
 def crear_configuracion(request):
     return render(request, 'crear_configuracion.html')
 def lista_configuraciones(request):
     return render(request, 'lista_configuraciones.html')
+def editar_configuracion(request):
+    return render(request, 'editar_configuracion.html')
+def eliminar_configuraciones(request):
+    return render(request, 'eliminar_configuraciones.html')
 
-@login_required
-def ver_carrito(request):
-    carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
-    items = carrito.items.all()
-    total = sum(item.cantidad * item.producto.precio for item in items)
-    return render(request, 'carrito.html', {'items': items, 'total': total})
 
-@login_required
-def pagar(request):
-    # Aquí iría la lógica para procesar el pago
-    return render(request, 'pagar.html')
-
-@login_required
-def agregar_al_carrito(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
-    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
-    item, created = ItemCarrito.objects.get_or_create(carrito=carrito, producto=producto)
-    item.cantidad += 1
-    item.save()
-    return redirect('ver_carrito')
 
 def logout_view(request):
     logout(request)
