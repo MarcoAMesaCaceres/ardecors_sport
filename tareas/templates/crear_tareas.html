@@ -1,0 +1,19 @@
+{% extends 'base_tareas.html' %}
+
+{% block title %}Crear Configuración{% endblock %}
+
+{% block content %}
+<h1>Crear tarea</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field.errors }}
+        {{ field }}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'lista_tareas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

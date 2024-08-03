@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'proveedores',
     'ventas',
     'usuarios',
-    'ordenes_compras',
-    'configuraciones',
+    'compras',
+    'tareas',
     'detalles_compra',
     'detalles_venta',    
 ]

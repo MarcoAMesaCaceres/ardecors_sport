@@ -42,59 +42,37 @@ def registro(request):
 @login_required
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
-@login_required
-def crear_usuario(request):
-    return render(request, 'crear_usuario.html')
-def lista_usuarios(request):
-    return render(request, 'lista_usuarios.html')
-
 def crear_articles(request):
     return render(request, 'crear_articles.html')
 def lista_articles(request):
     return render(request, 'lista_articles.html')
+def editar_articles(request):
+    return render(request, 'editar_articles.html')
 def eliminar_articles(request):
     return render(request, 'eliminar_articles.html')
 def base_articles(request):
     return render(request, 'base_articles.html')
-def base_configuracion(request):
-    return render(request, 'base_configuracion.html')
-def crear_venta(request):
-    return render(request, 'crear_venta.html')
+def base_tareas(request):
+    return render(request, 'base_tareas.html')
+def crear_tareas(request):
+    return render(request, 'crear_tareas.html')
+def lista_tareas(request):
+    return render(request, 'lista_tareas.html')
+def editar_tareas(request):
+    return render(request, 'editar_tareas.html')
+def eliminar_tareas(request):
+    return render(request, 'eliminar_tareas.html')
 
-def lista_ventas(request):
-    return render(request, 'lista_ventas.html')
-
-def crear_detalle_venta(request):
-    return render(request, 'crear_detalle_venta.html')
-def lista_detalles_venta(request):
-    return render(request, 'lista_detalles_venta.html')
-
-def crear_orden_compra(request):
-    return render(request, 'crear_orden_compra.html')
-def lista_ordenes_compra(request):
-    return render(request, 'lista_ordenes_compra.html')
-
-def crear_detalle_compra(request):
-    return render(request, 'crear_detalle_compra.html')
-def lista_detalles_compra(request):
-    return render(request, 'lista_detalles_compra.html')
-def eliminar_detalles_compra(request):
-    return render(request, 'eliminar_detalles_compra.html')
-def crear_proveedor(request):
-    return render(request, 'crear_proveedor.html')
-def lista_proveedores(request):
-    return render(request, 'lista_proveedores.html')
-def crear_configuracion(request):
-    return render(request, 'crear_configuracion.html')
-def lista_configuraciones(request):
-    return render(request, 'lista_configuraciones.html')
-def editar_configuracion(request):
-    return render(request, 'editar_configuracion.html')
-def eliminar_configuraciones(request):
-    return render(request, 'eliminar_configuraciones.html')
-
-
-
+def base_compras(request):
+    return render(request, 'base_compras.html')
+def crear_compras(request):
+    return render(request, 'crear_compras.html')
+def lista_compras(request):
+    return render(request, 'lista_compras.html')
+def editar_compras(request):
+    return render(request, 'editar_compras.html')
+def eliminar_compras(request):
+    return render(request, 'eliminar_compras.html')
 def logout_view(request):
     logout(request)
     return redirect('ardecors')

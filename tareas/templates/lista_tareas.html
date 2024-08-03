@@ -1,0 +1,38 @@
+{% extends 'base_tareas.html' %}
+
+{% block title %}Lista de tareas{% endblock %}
+
+{% block content %}
+<h1>Lista de Tareas</h1>
+<a href="{% url 'crear_tareas' %}" class="btn btn-primary mb-3">Crear Nueva Tarea</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th>Fecha Creación</th>
+            <th>Fecha Vencimiento</th>
+            <th>Completada</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tarea in tareas %}
+        <tr>
+            <td>{{ tarea.descripcion|truncatechars:30 }}</td>
+            <td>{{ tarea.fecha_creacion|date:"d/m/Y H:i" }}</td>
+            <td>{{ tarea.fecha_vencimiento|date:"d/m/Y H:i" }}</td>
+            <td>{% if tarea.completada %}Sí{% else %}No{% endif %}</td>
+            <td>
+                <a href="{% url 'editar_tareas' tarea.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_tareas' tarea.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay tareas disponibles.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
