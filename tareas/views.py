@@ -10,11 +10,12 @@ def lista_tareas(request):
 
 def crear_tareas(request):
     if request.method == 'POST':
-        form =TareaForm(request.POST)
+        form = TareaForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('lista_tareas')
     else:
-        form =TareaForm()
+        form = TareaForm()
     return render(request, 'crear_tareas.html', {'form': form})
     
 def editar_tareas(request, pk):

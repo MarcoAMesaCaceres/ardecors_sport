@@ -1,47 +1,19 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventas</title>
-    <link rel="stylesheet" href="{% static 'css/ventas.css' %}">
-    <script src="{% static 'js/ventas.js' %}" defer></script>
-</head>
-<body>
-    <div class="ventas-container">
-        <h1>Lista de Ventas</h1>
+{% extends 'base_venta.html' %}
 
-            <h1>Detalle de Venta</h1>
-            <p>Venta ID: {{ venta.id }}</p>
-            <p>Fecha: {{ venta.fecha }}</p>
-            <p>Total: {{ venta.total }}</p>
+{% block title %}Editar venta{% endblock %}
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for venta in ventas %}
-                <tr>
-                    <td>{{ venta.id }}</td>
-                    <td>{{ venta.fecha }}</td>
-                    <td>${{ venta.total }}</td>
-                    <td><a href="{% url 'detalle_venta' venta.id %}">Ver Detalle</a></td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">No hay ventas disponibles.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'nueva_venta' %}" class="btn">Nueva Venta</a>
+{% block content %}
+<h1>Editar Venta</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field.errors }}
+        {{ field }}
     </div>
-</body>
-</html>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

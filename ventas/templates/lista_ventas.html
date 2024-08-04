@@ -1,55 +1,35 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventas</title>
-    <link rel="stylesheet" href="{% static 'css/ventas.css' %}">
-    <script src="{% static 'js/ventas.js' %}" defer></script>
-</head>
-<body>
-    <div class="ventas-container">
-        <h1>Lista de Ventas</h1>
+{% extends 'base_venta.html' %}
 
-            <h1>Lista de Ventas</h1>
-            <ul>
-                
-                <li>Venta ID: {{ venta.id }} - 
-                <a href="">Ver Detalle</a>
-                <a href="" onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?');">Eliminar</a>
-            </li>
-                
-            </ul>
+{% block content %}
+<h1>Lista de Ventas</h1>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr>
-                    <td>{{ venta.id }}</td>
-                    <td>{{ venta.fecha }}</td>
-                    <td>${{ venta.total }}</td>
-                    <td>
-                        <a href="">Ver Detalle</a>
-                        <a href="" onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?');">Eliminar</a>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td colspan="4">No hay ventas disponibles.</td>
-                </tr>
-               
-            </tbody>
-        </table>
-        <a href="" class="btn">Nueva Venta</a>
-    </div>
-</body>
-</html>
+<a href="{% url 'crear_venta' %}" class="btn btn-primary mb-3">Crear Nueva Venta</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for venta in ventas %}
+        <tr>
+            <td>{{ venta.id }}</td>
+            <td>{{ venta.fecha }}</td>
+            <td>${{ venta.total|floatformat:2 }}</td>
+            <td>
+                <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay ventas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

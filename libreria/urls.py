@@ -10,21 +10,37 @@ urlpatterns = [
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('registro/', views.registro, name='registro'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    
     path('eliminar_articles/', views.eliminar_articles, name='eliminar_articles'),
     path('editar_articles/', views.editar_articles, name='editar_articles'),
     path('crear_articles/', views.crear_articles, name='crear_articles'),
     path('lista_articles/', views.lista_articles, name='_articles'),
     path('base_articles/', views.base_articles, name='base_articles'),
+    
     path('base_tareas/', views.base_tareas, name='base_tareas'),
     path('crear_tareas/', views.crear_tareas, name='crear_tareas'),
     path('lista_tareas/', views.lista_tareas, name='lista_tareas'),
     path('editar_tareas/', views.editar_tareas, name='editar_tareas'),
     path('eliminar_tareas/', views.eliminar_tareas, name='eliminar_tareas'),
+    
     path('base_compras/', views.base_compras, name='base_compras'),
     path('crear_compras/', views.crear_compras, name='crear_compras'),
     path('lista_compras/', views.lista_compras, name='lista_compras'),
     path('editar_compras/', views.editar_compras, name='editar_compras'),
     path('eliminar_compras/', views.eliminar_compras, name='eliminar_compras'),
+    
+    path('base_usuario/', views.base_usuario, name='base_usuario'),
+    path('crear_usuario/', views.crear_usuario, name='crear_usuario'),
+    path('lista_usuarios/', views.lista_usuarios, name='lista_usuarios'),
+    path('editar_usuario/', views.editar_usuario, name='editar_usuario'),
+    path('eliminar_usuario/', views.eliminar_usuario, name='eliminar_usuario'),
+    
+    path('base_venta/', views.base_venta, name='base_venta'),
+    path('crear_venta/', views.crear_venta, name='crear_venta'),
+    path('lista_ventas/', views.lista_ventas, name='lista_ventas'),
+    path('editar_venta/', views.editar_venta, name='editar_venta'),
+    path('eliminar_venta/', views.eliminar_venta, name='eliminar_venta'),
+    
     path('ardecors/', views.ardecors, name='ardecors'),
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('logout/', views.logout_view, name='logout'),

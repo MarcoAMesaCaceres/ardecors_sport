@@ -137,10 +137,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'libreria' / 'static',
     BASE_DIR / 'articles' / 'static',
-    BASE_DIR / 'configuraciones' / 'static',
+    BASE_DIR / 'tareas' / 'static',
     BASE_DIR / 'detalles_compra' / 'static',
     BASE_DIR / 'detalles_venta' / 'static',
-    BASE_DIR / 'ordenes_compras' / 'static',
+    BASE_DIR / 'compras' / 'static',
     BASE_DIR / 'proveedores' / 'static',
     BASE_DIR / 'usuarios' / 'static',
     BASE_DIR / 'ventas' / 'static',

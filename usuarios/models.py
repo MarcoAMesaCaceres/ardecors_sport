@@ -1,6 +1,5 @@
 from django.db import models
 
-# Tabla de Productos
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=255)

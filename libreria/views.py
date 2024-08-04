@@ -73,6 +73,29 @@ def editar_compras(request):
     return render(request, 'editar_compras.html')
 def eliminar_compras(request):
     return render(request, 'eliminar_compras.html')
+
+def base_usuario(request):
+    return render(request, 'base_usuario.html')
+def crear_usuario(request):
+    return render(request, 'crear_usuario.html')
+def lista_usuarios(request):
+    return render(request, 'lista_usuarios.html')
+def editar_usuario(request):
+    return render(request, 'editar_usuario.html')
+def eliminar_usuario(request):
+    return render(request, 'eliminar_usuario.html')
+
+def base_venta(request):
+    return render(request, 'base_venta.html')
+def crear_venta(request):
+    return render(request, 'crear_venta.html')
+def lista_ventas(request):
+    return render(request, 'lista_ventas.html')
+def editar_venta(request):
+    return render(request, 'editar_venta.html')
+def eliminar_venta(request):
+    return render(request, 'eliminar_venta.html')
+
 def logout_view(request):
     logout(request)
     return redirect('ardecors')
