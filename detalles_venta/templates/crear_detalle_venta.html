@@ -1,53 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles de Venta</title>
-    <link rel="stylesheet" href="{% static 'css/detalles_venta.css' %}">
-    <script src="{% static 'js/detalles_venta.js' %}" defer></script>
-</head>
-<body>
-    <div class="detalles-venta-container">
-        <h1>Detalles de Venta</h1>
+{% extends 'base_detalle_venta.html' %}
 
-            <h1>Crear Detalle de Venta</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Guardar</button>
-            </form>
+{% block title %}Crear Detalles Ventas{% endblock %}
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for detalle in detalles_venta %}
-                    <tr>
-                        <td>{{ detalle.producto.nombre }}</td>
-                        <td>{{ detalle.cantidad }}</td>
-                        <td>${{ detalle.precio }}</td>
-                        <td>${{ detalle.cantidad|floatformat:2|multiply:detalle.precio|floatformat:2 }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="4">No hay detalles de venta disponibles.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="total-container">
-                Total: <span>${{ total_venta|floatformat:2 }}</span>
-            </div>
-            <a href="{% url 'alguna_url' %}" class="btn">Volver</a>
-        </div>
-    </body>
-    </html>
+{% block content %}
+<h1>Crear Detalle Venta</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field.errors }}
+        {{ field }}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'lista_detalles_venta' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
 

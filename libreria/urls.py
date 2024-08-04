@@ -11,11 +11,11 @@ urlpatterns = [
     path('registro/', views.registro, name='registro'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     
+    path('base_articles/', views.base_articles, name='base_articles'),
     path('eliminar_articles/', views.eliminar_articles, name='eliminar_articles'),
     path('editar_articles/', views.editar_articles, name='editar_articles'),
     path('crear_articles/', views.crear_articles, name='crear_articles'),
     path('lista_articles/', views.lista_articles, name='_articles'),
-    path('base_articles/', views.base_articles, name='base_articles'),
     
     path('base_tareas/', views.base_tareas, name='base_tareas'),
     path('crear_tareas/', views.crear_tareas, name='crear_tareas'),
@@ -29,6 +29,12 @@ urlpatterns = [
     path('editar_compras/', views.editar_compras, name='editar_compras'),
     path('eliminar_compras/', views.eliminar_compras, name='eliminar_compras'),
     
+    path('base_detalle_compra/', views.base_detalle_compra, name='base_detalle_compra'),
+    path('crear_detalle_compra/', views.crear_detalle_compra, name='crear_detalle_compra'),
+    path('lista_detalles_compra/', views.lista_detalles_compra, name='lista_detalles_compra'),
+    path('editar_detalle_compra/', views.editar_detalle_compra, name='editar_detalle_compra'),
+    path('eliminar_detalle_compra/', views.eliminar_detalle_compra, name='eliminar_detalle_compra'),
+    
     path('base_usuario/', views.base_usuario, name='base_usuario'),
     path('crear_usuario/', views.crear_usuario, name='crear_usuario'),
     path('lista_usuarios/', views.lista_usuarios, name='lista_usuarios'),
@@ -40,6 +46,18 @@ urlpatterns = [
     path('lista_ventas/', views.lista_ventas, name='lista_ventas'),
     path('editar_venta/', views.editar_venta, name='editar_venta'),
     path('eliminar_venta/', views.eliminar_venta, name='eliminar_venta'),
+    
+    path('base_detalle_venta/', views.base_detalle_venta, name='base_detalle_venta'),
+    path('crear_detalle_venta/', views.crear_detalle_venta, name='crear_detalle_venta'),
+    path('lista_detalles_venta/', views.lista_detalles_venta, name='lista_detalles_venta'),
+    path('editar_detalle_venta/', views.editar_detalle_venta, name='editar_detalle_venta'),
+    path('eliminar_detalle_venta/', views.eliminar_detalle_venta, name='eliminar_detalle_venta'),
+    
+    path('base_proveedor/', views.base_proveedor, name='base_proveedor'),
+    path('crear_proveedor/', views.crear_proveedor, name='crear_proveedor'),
+    path('lista_proveedores/', views.lista_proveedores, name='lista_proveedores'),
+    path('editar_proveedor/', views.editar_proveedor, name='editar_proveedora'),
+    path('eliminar_proveedor/', views.eliminar_proveedor, name='eliminar_proveedor'),
     
     path('ardecors/', views.ardecors, name='ardecors'),
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),

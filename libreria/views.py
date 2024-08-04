@@ -52,6 +52,7 @@ def eliminar_articles(request):
     return render(request, 'eliminar_articles.html')
 def base_articles(request):
     return render(request, 'base_articles.html')
+
 def base_tareas(request):
     return render(request, 'base_tareas.html')
 def crear_tareas(request):
@@ -74,6 +75,17 @@ def editar_compras(request):
 def eliminar_compras(request):
     return render(request, 'eliminar_compras.html')
 
+def base_detalle_compra(request):
+    return render(request, 'base_detalle_compra.html')
+def crear_detalle_compra(request):
+    return render(request, 'crear_detalle_compra.html')
+def lista_detalles_compra(request):
+    return render(request, 'lista_detalle_compra.html')
+def editar_detalle_compra(request):
+    return render(request, 'editar_detalles_compra.html')
+def eliminar_detalle_compra(request):
+    return render(request, 'eliminar_detalle_compra.html')
+
 def base_usuario(request):
     return render(request, 'base_usuario.html')
 def crear_usuario(request):
@@ -95,6 +107,28 @@ def editar_venta(request):
     return render(request, 'editar_venta.html')
 def eliminar_venta(request):
     return render(request, 'eliminar_venta.html')
+
+def base_detalle_venta(request):
+    return render(request, 'base_detalle_venta.html')
+def crear_detalle_venta(request):
+    return render(request, 'crear_detalle_venta.html')
+def lista_detalles_venta(request):
+    return render(request, 'lista_detalles_venta.html')
+def editar_detalle_venta(request):
+    return render(request, 'editar_detalle_venta.html')
+def eliminar_detalle_venta(request):
+    return render(request, 'eliminar_detalle_venta.html')
+
+def base_proveedor(request):
+    return render(request, 'base_proveedor.html')
+def crear_proveedor(request):
+    return render(request, 'crear_proveedor.html')
+def lista_proveedores(request):
+    return render(request, 'lista_proveedores.html')
+def editar_proveedor(request):
+    return render(request, 'editar_proveedor.html')
+def eliminar_proveedor(request):
+    return render(request, 'eliminar_proveedor.html')
 
 def logout_view(request):
     logout(request)

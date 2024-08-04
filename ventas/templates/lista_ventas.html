@@ -4,7 +4,7 @@
 <h1>Lista de Ventas</h1>
 
 <a href="{% url 'crear_venta' %}" class="btn btn-primary mb-3">Crear Nueva Venta</a>
-
+<a href="{% url 'lista_detalles_venta' %}" class="btn btn-primary mb-3">lista Detalles ventas</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -32,4 +32,5 @@
         {% endfor %}
     </tbody>
 </table>
+<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>   
 {% endblock %}

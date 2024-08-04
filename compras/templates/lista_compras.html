@@ -4,8 +4,8 @@
 
 {% block content %}
 <h1>Lista de Compras</h1>
-<a href="{% url 'crear_compra' %}" class="btn btn-primary mb-3">Crear Nueva Compra</a>
-
+<a href="{% url 'crear_compras' %}" class="btn btn-primary mb-3">Crear Nueva Compra</a>
+<a href="{% url 'lista_detalles_compra' %}" class="btn btn-primary mb-3">lista Detalles Compras</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -36,4 +36,5 @@
         {% endfor %}
     </tbody>
 </table>
+<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>   
 {% endblock %}

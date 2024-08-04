@@ -11,22 +11,25 @@ def crear_detalle_compra(request):
         form = DetalleCompraForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('lista_detalles_compra')
     else:
         form = DetalleCompraForm()
-    return render(request, 'crear_detalle_compra.html', {'form': form})
+    return render(request, 'crear_dettalle_compra.html', {'form': form})
 
-def editar_detalle_compra(request):
+
+def editar_detalle_compra(request, pk):
+    detalles = get_object_or_404(detalles, pk=pk)
     if request.method == 'POST':
-        form = DetalleCompraForm(request.POST)
+        form = DetalleCompraForm(request.POST, instance=detalles)
         if form.is_valid():
             form.save()
+            return redirect('lista_compras')
     else:
-        form = DetalleCompraForm()
-    return render(request, 'crear_detalle_compra.html', {'form': form})
+        form = DetalleCompraForm(instance=detalles)
+    return render(request, 'editar_compras.html', {'form': form, 'detalles': detalles})
 
 def eliminar_detalle_compra(request, pk):
-    detalle = get_object_or_404(DetalleCompra, pk=pk)
+    detalles = get_object_or_404(detalles, pk=pk)
     if request.method == 'POST':
-        detalle.delete()
-        return redirect('lista_detalles_compra')
-    return render(request, 'eliminar_detalles_compra.html', {'detalle': detalle})
+        detalles.delete()
+        return redirect('lista_detalles_compra.html', {'detalles': detalles})

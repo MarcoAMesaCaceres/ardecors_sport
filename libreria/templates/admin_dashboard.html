@@ -6,10 +6,11 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
     <script src="{% static 'js/admin_dashboard.js' %}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Panel de Administración</h1>
+        <h1>Panel de Administración - Ardecors</h1>
         <nav>
             <ul>
             </ul>
@@ -29,11 +30,11 @@
             <!-- Contenido de ventas -->
         </section>
         <section>
-            <h2><li><a href="">Compras</a></li></h2>
+            <h2><li><a href="{% url 'lista_compras' %}">Compras</a></li></h2>
             <!-- Contenido de detalles de ventas -->
         </section>
         <section>
-            <h2><li><a href="">Proveedores</a></li></h2>
+            <h2><li><a href="{% url 'lista_proveedores' %}">Proveedores</a></li></h2>
             <!-- Contenido de detalles de órdenes de compra -->
         </section>
         <section>

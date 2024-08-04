@@ -1,55 +1,19 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proveedores</title>
-    <link rel="stylesheet" href="{% static 'css/proveedores.css' %}">
-    <script src="{% static 'js/proveedores.js' %}" defer></script>
-</head>
-<body>
-    <div class="proveedores-container">
-        <h1>Lista de Proveedores</h1>
+{% extends 'base_proveedor.html' %}
 
-            <h1>Crear Proveedor</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Guardar</button>
-            </form>
+{% block title %}Crear Proveedores{% endblock %}
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Contacto</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for proveedor in proveedores %}
-                <tr>
-                    <td>{{ proveedor.id }}</td>
-                    <td>{{ proveedor.nombre }}</td>
-                    <td>{{ proveedor.contacto }}</td>
-                    <td>{{ proveedor.telefono }}</td>
-                    <td>{{ proveedor.email }}</td>
-                    <td>{{ proveedor.direccion }}</td>
-                    <td><a href="{% url 'editar_proveedor' proveedor.id %}">Editar</a></td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="7">No hay proveedores disponibles.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'nuevo_proveedor' %}" class="btn">Nuevo Proveedor</a>
+{% block content %}
+<h1>Crear Proveedor</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field.errors }}
+        {{ field }}
     </div>
-</body>
-</html>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
