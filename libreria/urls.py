@@ -65,7 +65,8 @@ urlpatterns = [
 
     path('backup/', views.backup_database, name='backup_database'),
     path('backup/list/', views.backup_list, name='backup_list'),
-    path('restore/', views.restore_database_view, name='restore_database'),
-    path('restore/execute/', views.restore_database, name='restore_database'),
+    path('backup/restore/', views.restore_database, name='restore_database'),
+    path('backup/download/<str:filename>/', views.download_backup, name='download_backup'),
+    path('backup/delete/<str:filename>/', views.delete_backup, name='delete_backup'),
 ]
 
