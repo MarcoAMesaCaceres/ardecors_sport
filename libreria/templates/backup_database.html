@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Respaldo de Base de Datos</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <script src="{% static 'js/admin_dashboard.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Respaldo de Base de Datos</h1>
+    </header>
+    <main>
+        <section>
+            <p>{{ message }}</p>
+            <a href="{% url 'admin_dashboard' %}">Volver al Dashboard</a>
+        </section>
+    </main>
+    <footer>
+        <p>Ardecors Sport</p>
+    </footer>
+</body>
+</html>

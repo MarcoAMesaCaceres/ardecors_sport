@@ -62,4 +62,6 @@ urlpatterns = [
     path('ardecors/', views.ardecors, name='ardecors'),
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('logout/', views.logout_view, name='logout'),
+
+    path('backup/', views.backup_database_view, name='backup_database'),
 ]

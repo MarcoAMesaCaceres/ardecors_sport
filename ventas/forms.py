@@ -5,3 +5,6 @@ class VentaForm(forms.ModelForm):
     class Meta:
         model = Venta
         fields = ['fecha', 'total']
+        widgets = {
+            'fecha': forms.DateInput(attrs={'type': 'date'}),
+        }
