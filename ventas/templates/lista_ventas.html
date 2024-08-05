@@ -1,15 +1,21 @@
 {% extends 'base_venta.html' %}
 
 {% block content %}
+
 <h1>Lista de Ventas</h1>
 
 <a href="{% url 'crear_venta' %}" class="btn btn-primary mb-3">Crear Nueva Venta</a>
-<a href="{% url 'lista_detalles_venta' %}" class="btn btn-primary mb-3">lista Detalles ventas</a>
-<table class="table table-striped">
+<a href="{% url 'lista_detalles_venta' %}" class="btn btn-primary mb-3">Lista Detalles ventas</a>
+
+<table class="table">
     <thead>
         <tr>
             <th>ID</th>
             <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
             <th>Total</th>
             <th>Acciones</th>
         </tr>
@@ -18,7 +24,11 @@
         {% for venta in ventas %}
         <tr>
             <td>{{ venta.id }}</td>
-            <td>{{ venta.fecha }}</td>
+            <td>{{ venta.fecha|date:"d/m/Y" }}</td>
+            <td>{{ venta.cliente }}</td>
+            <td>{{ venta.producto.nombre|default:"No especificado" }}</td>
+            <td>{{ venta.cantidad }}</td>
+            <td>${{ venta.precio_unitario|floatformat:2 }}</td>
             <td>${{ venta.total|floatformat:2 }}</td>
             <td>
                 <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
@@ -27,10 +37,12 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan="4">No hay ventas registradas.</td>
+            <td colspan="8">No hay ventas registradas.</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>   
+
+<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
+
 {% endblock %}
