@@ -139,24 +139,30 @@ def logout_view(request):
     logout(request)
     return redirect('ardecors')
 
+def backup_databases(request):
+    return render(request, 'backup_databases.html')
+
 def backup_database_view(request):
     backup_dir = os.path.join(settings.BASE_DIR, 'backups')
     os.makedirs(backup_dir, exist_ok=True)
-
+    
     backup_file = os.path.join(
         backup_dir, f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.sql"
     )
-
+    
     db_name = settings.DATABASES['default']['NAME']
     db_user = settings.DATABASES['default']['USER']
     db_password = settings.DATABASES['default']['PASSWORD']
     db_host = settings.DATABASES['default']['HOST']
     db_port = settings.DATABASES['default']['PORT']
-
+    
     dump_command = (
         f"mysqldump --user={db_user} --password={db_password} --host={db_host} --port={db_port} {db_name} > {backup_file}"
     )
-
+    
     os.system(dump_command)
-
-    return HttpResponse(f'Respaldo creado exitosamente en {backup_file}')
+    
+    success_message = f'Respaldo creado exitosamente en {backup_file}'
+    
+    # Render the success message on the 'backup databases' page
+    return render(request, 'backup_databases.html', {'message': success_message})

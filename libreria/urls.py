@@ -63,5 +63,7 @@ urlpatterns = [
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('logout/', views.logout_view, name='logout'),
 
-    path('backup/', views.backup_database_view, name='backup_database'),
+    path('backup/', views.backup_database_view, name='backup_database_view'),
+    path('backup_databases/', views.backup_databases, name='backup_databases'),
 ]
+
