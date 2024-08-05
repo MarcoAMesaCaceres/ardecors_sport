@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Venta
 from .forms import VentaForm
+def detalle_venta(request, venta_id):
+    venta = get_object_or_404(Venta, pk=venta_id)
+    return render(request, 'detalle_venta.html', {'venta': venta})
 
 def lista_ventas(request):
     ventas = Venta.objects.all()

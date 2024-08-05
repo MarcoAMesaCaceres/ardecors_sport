@@ -14,7 +14,7 @@ def crear_compras(request):
             return redirect('lista_compras')
     else:
         form = ComprasForm()
-    return render(request, 'crear_acompras.html', {'form': form})
+    return render(request, 'crear_compras.html', {'form': form})
 
 def editar_compras(request, pk):
     compras = get_object_or_404(Compras, pk=pk)
