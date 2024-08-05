@@ -6,12 +6,6 @@ class VentaForm(forms.ModelForm):
     
     class Meta:
         model = Venta
-<<<<<<< HEAD
-        fields = ['fecha', 'total']
-        widgets = {
-            'fecha': forms.DateInput(attrs={'type': 'date'}),
-        }
-=======
         fields = ['fecha', 'cliente', 'producto', 'cantidad', 'precio_unitario']
         widgets = {
             'cliente': forms.TextInput(attrs={'placeholder': 'Nombre del cliente'}),
@@ -35,4 +29,4 @@ class VentaForm(forms.ModelForm):
         if commit:
             venta.save()
         return venta
->>>>>>> 0a34752b090361f8739dbee642db00051a5ec43b
+
