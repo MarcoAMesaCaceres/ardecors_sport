@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargar Respaldo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="my-4">
+            <h1 class="text-center">Descargar Respaldo</h1>
+        </header>
+        
+        <main>
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <p>El archivo se está descargando. Si la descarga no comienza automáticamente, <a href="{{ download_url }}" class="btn btn-primary">haga clic aquí</a>.</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="mt-4 text-center">
+            <a href="{% url 'backup_list' %}" class="btn btn-primary">Volver a la Lista de Respaldos</a>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

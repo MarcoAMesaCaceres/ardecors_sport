@@ -63,7 +63,9 @@ urlpatterns = [
     path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
     path('logout/', views.logout_view, name='logout'),
 
-    path('backup/', views.backup_database_view, name='backup_database_view'),
-    path('backup_databases/', views.backup_databases, name='backup_databases'),
+    path('backup/', views.backup_database, name='backup_database'),
+    path('backup/list/', views.backup_list, name='backup_list'),
+    path('restore/', views.restore_database_view, name='restore_database'),
+    path('restore/execute/', views.restore_database, name='restore_database'),
 ]
 
