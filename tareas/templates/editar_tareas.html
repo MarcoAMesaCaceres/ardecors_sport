@@ -1,10 +1,10 @@
 {% extends 'base_tareas.html' %}
 
-{% block title %}Editar Tareas{% endblock %}
+{% block title %}Editar Tarea{% endblock %}
 
 {% block content %}
 <h1>Editar Tarea</h1>
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     {% for field in form %}
     <div class="mb-3">

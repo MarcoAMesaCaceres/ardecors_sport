@@ -36,6 +36,7 @@
                                     <td>
                                         <a href="{% url 'download_backup' backup.filename %}" class="btn btn-info btn-sm">Descargar</a>
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ backup.filename }}')">Eliminar</button>
+                                        <button class="btn btn-warning btn-sm" onclick="confirmRestore('{{ backup.filename }}')">Restaurar</button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -81,6 +82,12 @@
         function confirmDelete(backup) {
             if (confirm('¿Está seguro de que desea eliminar el archivo ' + backup + '?')) {
                 window.location.href = '{% url 'delete_backup' 'backup' %}'.replace('backup', encodeURIComponent(backup));
+            }
+        }
+
+        function confirmRestore(backup) {
+            if (confirm('¿Está seguro de que desea restaurar la base de datos desde ' + backup + '?\nADVERTENCIA: Se perderán los datos actuales existentes.')) {
+                window.location.href = '{% url 'restore_database' %}?file=' + encodeURIComponent(backup);
             }
         }
     </script>

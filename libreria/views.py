@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 
+
 def ardecors(request):
     return render(request, 'ardecors.html')
 
@@ -142,6 +143,11 @@ def eliminar_proveedor(request):
 def logout_view(request):
     logout(request)
     return redirect('ardecors')
+
+
+def backup_databases(request):
+    return render(request, 'backup_databases.html')
+
 
 @login_required
 def backup_database(request):

@@ -1,6 +1,6 @@
 {% extends 'base_tareas.html' %}
 
-{% block title %}Lista de tareas{% endblock %}
+{% block title %}Lista de Tareas{% endblock %}
 
 {% block content %}
 <h1>Lista de Tareas</h1>
@@ -34,7 +34,6 @@
         </tr>
         {% endfor %}
     </tbody>
-    
 </table>
-<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>    
+<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>
 {% endblock %}
