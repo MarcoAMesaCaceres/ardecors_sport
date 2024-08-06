@@ -81,13 +81,13 @@
     <script>
         function confirmDelete(backup) {
             if (confirm('¿Está seguro de que desea eliminar el archivo ' + backup + '?')) {
-                window.location.href = '{% url 'delete_backup' 'backup' %}'.replace('backup', encodeURIComponent(backup));
+                window.location.href = "{% url 'delete_backup' 'backup' %}".replace('backup', encodeURIComponent(backup));
             }
         }
 
         function confirmRestore(backup) {
             if (confirm('¿Está seguro de que desea restaurar la base de datos desde ' + backup + '?\nADVERTENCIA: Se perderán los datos actuales existentes.')) {
-                window.location.href = '{% url 'restore_database' %}?file=' + encodeURIComponent(backup);
+                window.location.href = "{% url 'restore_database' %}?file=" + encodeURIComponent(backup);
             }
         }
     </script>

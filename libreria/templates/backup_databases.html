@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body text-center">
-                            <button class="btn btn-primary btn-lg btn-custom" onclick="location.href='{% url 'backup_database' %}'">Hacer Respaldo</button>
+                            <a href="{% url 'backup_database' %}" class="btn btn-primary">Hacer Respaldo</a>
                             {% if message %}
                                 <div class="alert alert-info" role="alert">
                                     {{ message }}
