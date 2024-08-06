@@ -154,3 +154,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'iniciar_sesion'  # Nombre de URL para la página de inicio de sesión
 LOGIN_REDIRECT_URL = 'admin_dashboard'  # Nombre de URL para el panel de administración
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'restablecercontrasenaardecorss@gmail.com'
+EMAIL_HOST_PASSWORD = 'kvja wwug bqup rmsy'
+
+
+

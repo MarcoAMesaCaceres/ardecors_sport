@@ -21,28 +21,6 @@ def sobre(request):
 def contacto(request):
     return render(request, 'contacto.html', {'contato': contacto})
 
-def iniciar_sesion(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect(reverse('admin_dashboard'))
-        else:
-            return render(request, 'iniciar_sesion.html', {'error': 'Credenciales incorrectas'})
-    return render(request, 'iniciar_sesion.html')
-
-def registro(request):
-    if request.method == 'POST':
-        form = RegistroForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('ardecors')
-    else:
-        form = RegistroForm()
-    return render(request, 'iniciar_sesion.html', {'form': form})
 
 @login_required
 def admin_dashboard(request):
@@ -91,16 +69,6 @@ def editar_detalle_compra(request):
 def eliminar_detalle_compra(request):
     return render(request, 'eliminar_detalle_compra.html')
 
-def base_usuario(request):
-    return render(request, 'base_usuario.html')
-def crear_usuario(request):
-    return render(request, 'crear_usuario.html')
-def lista_usuarios(request):
-    return render(request, 'lista_usuarios.html')
-def editar_usuario(request):
-    return render(request, 'editar_usuario.html')
-def eliminar_usuario(request):
-    return render(request, 'eliminar_usuario.html')
 
 def base_venta(request):
     return render(request, 'base_venta.html')
@@ -134,6 +102,23 @@ def editar_proveedor(request):
     return render(request, 'editar_proveedor.html')
 def eliminar_proveedor(request):
     return render(request, 'eliminar_proveedor.html')
+
+def login(request):
+    return render(request, 'login.html')
+def register(request):
+    return render(request, 'register.html')
+def password_reset_email(request):
+    return render(request, 'password_reset_email.html')
+def password_reset_complete(request):
+    return render(request, 'password_reset_complete.html')
+def password_reset_confirm(request):
+    return render(request, 'password_reset_confirm.html')
+def password_reset_done(request):
+    return render(request, 'password_reset_done.html')
+def password_reset(request):
+    return render(request, 'password_reset.html')
+def base_usuario(request):
+    return render(request, 'base_usuario.html')
 
 def logout_view(request):
     logout(request)

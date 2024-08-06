@@ -7,8 +7,7 @@ urlpatterns = [
     path('productos/', views.productos, name='productos'),
     path('sobre/', views.sobre, name='sobre'),
     path('contacto/', views.contacto, name='contacto'),
-    path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
-    path('registro/', views.registro, name='registro'),
+   
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     
     path('base_articles/', views.base_articles, name='base_articles'),
@@ -35,11 +34,7 @@ urlpatterns = [
     path('editar_detalle_compra/', views.editar_detalle_compra, name='editar_detalle_compra'),
     path('eliminar_detalle_compra/', views.eliminar_detalle_compra, name='eliminar_detalle_compra'),
     
-    path('base_usuario/', views.base_usuario, name='base_usuario'),
-    path('crear_usuario/', views.crear_usuario, name='crear_usuario'),
-    path('lista_usuarios/', views.lista_usuarios, name='lista_usuarios'),
-    path('editar_usuario/', views.editar_usuario, name='editar_usuario'),
-    path('eliminar_usuario/', views.eliminar_usuario, name='eliminar_usuario'),
+
     
     path('base_venta/', views.base_venta, name='base_venta'),
     path('crear_venta/', views.crear_venta, name='crear_venta'),
@@ -60,10 +55,19 @@ urlpatterns = [
     path('eliminar_proveedor/', views.eliminar_proveedor, name='eliminar_proveedor'),
     
     path('ardecors/', views.ardecors, name='ardecors'),
-    path('iniciar_sesion/', views.iniciar_sesion, name='iniciar_sesion'),
+
     path('logout/', views.logout_view, name='logout'),
 
     path('backup/', views.backup_database_view, name='backup_database_view'),
     path('backup_databases/', views.backup_databases, name='backup_databases'),
+    
+    path('base_usuario/', views.base_usuario, name='base_usuario'),
+    path('login/', views.login, name='login'),
+    path('password_reset_complete/', views.password_reset_complete, name='password_reset_complete'),
+    path('password_reset_confirm/', views.password_reset_confirm, name='password_reset_confirm'),
+    path('password_reset_done/', views.password_reset_done, name='password_reset_done'),
+    path('password_reset_email/', views.password_reset_email, name='password_reset_email'),
+    path('password_reset/', views.password_reset, name='password_reset'),
+    path('register/', views.register, name='register'),
 ]
 

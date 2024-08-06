@@ -1,37 +1,26 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from .models import Usuario
-from .forms import UsuarioForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import LoginView, PasswordResetView
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from .forms import LoginForm, RegisterForm, CustomPasswordResetForm
 
-def lista_usuarios(request):
-    usuarios = Usuario.objects.all()
-    return render(request, 'lista_usuarios.html', {'usuarios': usuarios})
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'login.html'
 
-def editar_usuario(request, pk):
-    usuario = get_object_or_404(Usuario, pk=pk)
+def register(request):
     if request.method == 'POST':
-        form = UsuarioForm(request.POST, instance=usuario)
+        form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('lista_usuarios')
+            user = form.save()
+            login(request, user)
+            return redirect('login')  # Cambia 'home' por la URL a la que quieres redirigir después del registro
     else:
-        form = UsuarioForm(instance=usuario)
-    return render(request, 'editar_usuario.html', {'form': form, 'usuario': usuario})
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
 
-
-def crear_usuario(request):
-    if request.method == 'POST':
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_usuarios')
-    else:
-        form = UsuarioForm()
-    return render(request, 'crear_usuario.html', {'form': form})
-    
-
-def eliminar_usuario(request, pk):
-    usuario = get_object_or_404(Usuario, pk=pk)
-    if request.method == 'POST':
-        usuario.delete()
-        return redirect('lista_usuarios')
-    return render(request, 'eliminar_usuario.html', {'usuario': usuario})
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_email.html'
+    success_url = reverse_lazy('password_reset_done')
