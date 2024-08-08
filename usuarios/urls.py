@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from usuarios.views import CustomLoginView, CustomPasswordResetView
 from .views import register
 urlpatterns = [
-
+    
     path('login/', CustomLoginView.as_view(), name='login'),
     path('register/', register, name='register'),
     path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
