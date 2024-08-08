@@ -60,14 +60,5 @@ urlpatterns = [
 
     path('backup/', views.backup_database_view, name='backup_database_view'),
     path('backup_databases/', views.backup_databases, name='backup_databases'),
-    
-    path('base_usuario/', views.base_usuario, name='base_usuario'),
-    path('login/', views.login, name='login'),
-    path('password_reset_complete/', views.password_reset_complete, name='password_reset_complete'),
-    path('password_reset_confirm/', views.password_reset_confirm, name='password_reset_confirm'),
-    path('password_reset_done/', views.password_reset_done, name='password_reset_done'),
-    path('password_reset_email/', views.password_reset_email, name='password_reset_email'),
-    path('password_reset/', views.password_reset, name='password_reset'),
-    path('register/', views.register, name='register'),
 ]
 

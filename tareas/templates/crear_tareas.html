@@ -1,10 +1,10 @@
 {% extends 'base_tareas.html' %}
 
-{% block title %}Crear Configuración{% endblock %}
+{% block title %}Crear Tarea{% endblock %}
 
 {% block content %}
 <h1>Crear tarea</h1>
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     {% for field in form %}
     <div class="mb-3">

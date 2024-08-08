@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Respaldo y Restauración de Base de Datos</title>
-    <link href="{% static 'css/backup_database.css' %}" rel="stylesheet">
+    <title>Restaurar Base de Datos</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header class="my-4">
-            <h1 class="text-center">Respaldo y Restauración de Base de Datos</h1>
+            <h1 class="text-center">Restaurar Base de Datos</h1>
         </header>
         
         <main>
@@ -19,28 +19,24 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body text-center">
-                            <a href="{% url 'backup_database' %}" class="btn btn-primary">Hacer Respaldo</a>
-                            {% if message %}
-                                <div class="alert alert-info" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% endif %}
-                            <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary btn-lg btn-custom">Volver al Dashboard</a>
+                            <p>¿Está seguro de que desea restaurar la base de datos desde el archivo <strong>{{ file }}</strong>?</p>
+                            <form method="GET" action="{% url 'restore_database' %}">
+                                <input type="hidden" name="file" value="{{ file }}">
+                                <button type="submit" class="btn btn-danger btn-lg">Restaurar</button>
+                                <a href="{% url 'backup_list' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
         </main>
         
         <footer class="mt-4 text-center">
-            <p>Ardecors Sport</p>
+            <a href="{% url 'backup_list' %}" class="btn btn-primary">Volver a la Lista de Respaldos</a>
         </footer>
     </div>
 
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>
