@@ -35,8 +35,9 @@
                                     <td>{{ backup.size }}</td>
                                     <td>
                                         <a href="{% url 'download_backup' backup.filename %}" class="btn btn-info btn-sm">Descargar</a>
-                                        <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ backup.filename }}')">Eliminar</button>
-                                        <button class="btn btn-warning btn-sm" onclick="confirmRestore('{{ backup.filename }}')">Restaurar</button>
+                                        <a href="{% url 'delete_backup' backup.filename %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                        <a href="{% url 'restore_database' %}?file={{ backup.filename }}" class="btn btn-warning btn-sm">Restaurar</a>
+                                        
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -74,7 +75,7 @@
         </main>
         
         <footer class="mt-4 text-center">
-            <a href="{% url 'backup_database' %}" class="btn btn-primary">Volver a la Página de Respaldo</a>
+            <a href="{% url 'backup_databases' %}" class="btn btn-primary">Volver a la Página de Respaldo</a>
         </footer>
     </div>
 

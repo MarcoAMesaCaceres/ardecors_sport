@@ -58,7 +58,22 @@ urlpatterns = [
 
     path('logout/', views.logout_view, name='logout'),
 
-    path('backup/', views.backup_database_view, name='backup_database_view'),
+    
     path('backup_databases/', views.backup_databases, name='backup_databases'),
+    
+    # Vista para crear un respaldo de la base de datos
+    path('backup/create/', views.backup_database, name='backup_database'),
+    
+    # Vista para listar todos los respaldos disponibles
+    path('backup/list/', views.backup_list, name='backup_list'),
+    
+    # Vista para restaurar la base de datos desde un respaldo específico
+    path('backup/restore/', views.restore_database, name='restore_database'),
+    
+    # Vista para descargar un archivo de respaldo
+    path('backup/download/<str:filename>/', views.download_backup, name='download_backup'),
+    
+    # Vista para eliminar un archivo de respaldo
+    path('backup/delete/<str:filename>/', views.delete_backup, name='delete_backup'),
 ]
 
