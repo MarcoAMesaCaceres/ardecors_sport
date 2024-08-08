@@ -1,8 +1,26 @@
-from django.contrib.auth import login
+from django.contrib.auth import  authenticate,login
 from django.contrib.auth.views import LoginView, PasswordResetView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.contrib import messages
 from .forms import LoginForm, RegisterForm, CustomPasswordResetForm
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('admin_dashboard')  # o el nombre de tu vista de destino
+            else:
+                messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
 
 class CustomLoginView(LoginView):
     form_class = LoginForm
@@ -24,3 +42,4 @@ class CustomPasswordResetView(PasswordResetView):
     template_name = 'password_reset.html'
     email_template_name = 'password_reset_email.html'
     success_url = reverse_lazy('password_reset_done')
+    

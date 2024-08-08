@@ -153,7 +153,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'iniciar_sesion'  # Nombre de URL para la página de inicio de sesión
+LOGIN_URL = 'login'  # Nombre de URL para la página de inicio de sesión
 LOGIN_REDIRECT_URL = 'admin_dashboard'  # Nombre de URL para el panel de administración
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

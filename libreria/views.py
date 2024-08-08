@@ -193,6 +193,17 @@ def backup_list(request):
     
     return render(request, 'backup_list.html', {'page_obj': page_obj})
 
+login_required
+def delete_backup(request, filename):
+    if request.method == 'POST':
+        file_path = os.path.join(settings.BASE_DIR, 'backups', filename)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            messages.success(request, f"Respaldo {filename} eliminado exitosamente")
+        else:
+            messages.error(request, f"El archivo {filename} no existe")
+    return redirect('backup_list')
+
 @login_required
 def restore_database(request):
     if request.method == 'GET':
@@ -230,7 +241,6 @@ def restore_database(request):
     
     return redirect('backup_list')
 
-@login_required
 def download_backup(request, filename):
     file_path = os.path.join(settings.BASE_DIR, 'backups', filename)
     if os.path.exists(file_path):
@@ -240,13 +250,3 @@ def download_backup(request, filename):
             return response
     raise Http404
 
-@login_required
-def delete_backup(request, filename):
-    if request.method == 'POST':
-        file_path = os.path.join(settings.BASE_DIR, 'backups', filename)
-        if os.path.exists(file_path):
-            os.remove(file_path)
-            messages.success(request, f"Respaldo {filename} eliminado exitosamente")
-        else:
-            messages.error(request, f"El archivo {filename} no existe")
-    return redirect('backup_list')
