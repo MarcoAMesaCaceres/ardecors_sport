@@ -54,3 +54,116 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+
+
+
+.accesibilidad {
+    position: fixed;
+    z-index: 3;
+    right: 0;
+    top: 219px;
+
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.accesibilidad__inicio {
+    background-color: #fbad20;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.accesibilidad__buttons {
+    background-color: var(--alternate-background);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: column;
+    border-radius: 20px;
+    transition: transform 0.25s ease-in-out;
+    position: fixed;
+    transform: translateX(100%);
+}
+
+.accesibilidad__buttons.visible {
+    transform: translateX(0); 
+}
+
+.accesibilidad__boton {
+    background-color: var(--alternate-background);
+    cursor: pointer;
+    border: none;
+}
+
+.accesibilidad__boton--text {
+    color: var(--color-info);
+}
+
+.accesibilidad__boton--img{
+    width: 50px;
+}
+
+
+
+
+
+
+
+
+/* .accessibility__container{
+    display: flex;
+    align-items: center;
+}
+
+.accessibility__button{
+    background-color: #fbad20;
+    border: none;
+    border-radius: 12px 0 0 12px;
+    cursor: pointer;
+    display: flex;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.accessibility__text{
+    position: fixed;
+    background-color: var(--alternate-background);
+    color: var(--color-info);
+    border-radius: 6px 0 0 6px;
+    max-width: 0px;
+    text-align: center;
+    transition: max-width 0.5s ease-in-out;
+    overflow: hidden;
+    right: 1.5rem;
+    padding: 8px 0px;
+    white-space: nowrap;
+    width: 200px;
+    z-index: -1;
+}
+
+.accessibility__icon{
+    width: 42px;
+    height: 42px;
+}
+
+.accessibility__button:hover{
+    background-color: var(--primary);
+    transition: background-color 0.25s ease-in-out;
+}
+
+.accessibility__button:hover ~ .accessibility__text{
+    padding: 8px 5px;
+    max-width: 200px;
+    transition: max-width 0.5s ease-in-out;
+} */
+
+.high-contrast {
+    background-color: #000;
+    color: #fff;
+}
