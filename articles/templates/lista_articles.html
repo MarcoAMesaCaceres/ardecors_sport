@@ -1,11 +1,17 @@
 {% extends 'base_articles.html' %}
-
 {% block title %}Lista de Artículos{% endblock %}
-
 {% block content %}
+
 <h1>Lista de Artículos</h1>
+
 <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
-<table class="table table-striped">
+
+<form method="get" class="mb-3">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+<table class="table">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -34,5 +40,7 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>   
+
+<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
+
 {% endblock %}

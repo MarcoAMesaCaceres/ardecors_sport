@@ -11,3 +11,7 @@ class ArticleForm(forms.ModelForm):
             'precio': forms.NumberInput(attrs={'class': 'form-control'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+class ArticleSearchForm(forms.Form):
+    search_query = forms.CharField(required=False, label='Buscar', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    min_price = forms.DecimalField(required=False, label='Precio mínimo', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    max_price = forms.DecimalField(required=False, label='Precio máximo', widget=forms.NumberInput(attrs={'class': 'form-control'}))
