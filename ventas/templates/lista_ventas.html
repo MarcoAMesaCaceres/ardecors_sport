@@ -21,6 +21,9 @@
 <a href="{% url 'crear_venta' %}" class="btn btn-primary mb-3">Crear Nueva Venta</a>
 <a href="{% url 'lista_detalles_venta' %}" class="btn btn-primary mb-3">Lista Detalles ventas</a>
 
+<!-- Botón para imprimir la lista de ventas -->
+<button onclick="Venta()" class="btn btn-secondary mb-3">Imprimir Lista de Ventas</button>
+
 <table id="ventas-table" class="display"></table>
 <table class="table">
     <thead>
@@ -72,4 +75,12 @@
     });
     </script>
     
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function Venta() {
+        window.print();
+    }
+</script>
 {% endblock %}
