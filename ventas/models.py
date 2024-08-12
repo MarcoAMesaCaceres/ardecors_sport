@@ -3,6 +3,7 @@ from articles.models import Article
 from django.utils import timezone
 
 class Venta(models.Model):
+    id = models.AutoField(primary_key=True)
     fecha = models.DateField(default=timezone.now)
     cliente = models.CharField(max_length=100, default='Cliente no especificado')
     producto = models.ForeignKey(Article, on_delete=models.CASCADE, null=True, blank=True)
