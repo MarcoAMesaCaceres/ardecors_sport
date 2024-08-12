@@ -316,5 +316,26 @@ body {
   }
   
   
+
   
   
+  #accessibility-tools {
+    margin: 20px;
+}
+
+#accessibility-tools button {
+    padding: 10px;
+    margin-right: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#accessibility-tools button:hover {
+    background-color: #e0e0e0;
+}
+
+.high-contrast {
+    background-color: #000;
+    color: #fff;
+}
