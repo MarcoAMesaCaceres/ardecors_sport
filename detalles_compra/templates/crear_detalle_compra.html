@@ -1,19 +1,21 @@
 {% extends 'base_detalle_compra.html' %}
-
-{% block title %}Crear Detalle Compras{% endblock %}
-
+{% block title %}Crear Detalle Compra{% endblock %}
 {% block content %}
-<h1>Crear  detalle compra</h1>
+<h1>Crear detalle de compra</h1>
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
     <div class="mb-3">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-        {{ field.errors }}
+        {{ field.label_tag }}
         {{ field }}
+        {% if field.errors %}
+        <div class="alert alert-danger">
+            {{ field.errors }}
+        </div>
+        {% endif %}
     </div>
     {% endfor %}
     <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="{% url 'lista_detalles_compra' %}" class="btn btn-secondary">Cancelar</a>
+    <a href="{% url 'lista_detalles_compra' compra_id %}" class="btn btn-secondary">Volver a la Compra</a>
 </form>
 {% endblock %}

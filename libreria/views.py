@@ -68,7 +68,7 @@ def base_detalle_compra(request):
 def crear_detalle_compra(request):
     return render(request, 'crear_detalle_compra.html')
 def lista_detalles_compra(request):
-    return render(request, 'lista_detalle_compra.html')
+    return render(request, 'lista_detalles_compra.html')
 def editar_detalle_compra(request):
     return render(request, 'editar_detalles_compra.html')
 def eliminar_detalle_compra(request):

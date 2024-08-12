@@ -10,8 +10,8 @@ def crear_compras(request):
     if request.method == 'POST':
         form = ComprasForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('lista_compras')
+            compra = form.save()
+            return redirect('crear_detalle_compra', compra_id=compra.id)
     else:
         form = ComprasForm()
     return render(request, 'crear_compras.html', {'form': form})
