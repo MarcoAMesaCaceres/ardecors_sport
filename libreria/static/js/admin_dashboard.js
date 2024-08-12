@@ -34,6 +34,9 @@ document.addEventListener('click', (event) => {
 toggleContrastButton.addEventListener('click', () => {
   const isContrastEnabled = rootElement.classList.toggle('contrast');
   applyImageContrast();
+  localStorage.setItem('contrastSetting', isContrastEnabled);
+  console.log('Contraste activado:', isContrastEnabled);
+
   // Guarda la preferencia del contraste en el almacenamiento local
   localStorage.setItem('contrastSetting', isContrastEnabled);
   new Notification('La función se encuentra en desarrollo :D');

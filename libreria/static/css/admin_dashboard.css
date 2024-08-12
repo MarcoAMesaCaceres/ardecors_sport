@@ -163,7 +163,11 @@ footer {
     transition: max-width 0.5s ease-in-out;
 } */
 
-.high-contrast {
+.contrast {
     background-color: #000;
     color: #fff;
-}
+  }
+  
+  .contrast img {
+    filter: grayscale(100%);
+  }
