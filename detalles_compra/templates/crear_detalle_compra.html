@@ -1,13 +1,14 @@
 {% extends 'base_detalle_compra.html' %}
 {% block title %}Crear Detalle Compra{% endblock %}
 {% block content %}
-<h1>Crear detalle de compra</h1>
+
+<h1>Crear detalle de compra para Compra #{{ compra.id }}</h1>
+
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
     <div class="mb-3">
-        {{ field.label_tag }}
-        {{ field }}
+        {{ field.label_tag }} {{ field }}
         {% if field.errors %}
         <div class="alert alert-danger">
             {{ field.errors }}
@@ -15,7 +16,9 @@
         {% endif %}
     </div>
     {% endfor %}
+
     <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="{% url 'lista_detalles_compra' compra_id %}" class="btn btn-secondary">Volver a la Compra</a>
+    <a href="{% url 'lista_detalles_compra' compra_id=compra.id %}" class="btn btn-secondary">Volver a la Compra</a>
 </form>
+
 {% endblock %}

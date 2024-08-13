@@ -1,9 +1,15 @@
 {% extends 'base_compras.html' %}
 {% block title %}Lista de Compras{% endblock %}
 {% block content %}
-<h1>Lista de Compras</h1>
-<a href="{% url 'crear_compras' %}" class="btn btn-primary mb-3">Crear Nueva Compra</a>
 
+<h1>Lista de Compras</h1>
+
+<form method="get" class="mb-3">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+<a href="{% url 'crear_compras' %}" class="btn btn-primary mb-3">Crear Nueva Compra</a>
 
 <table class="table">
     <thead>
@@ -16,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for compra in compras %}
+        {% for compra in compras %}
         <tr>
             <td>{{ compra.fecha|date:"d/m/Y" }}</td>
             <td>{{ compra.proveedor }}</td>
@@ -25,14 +31,14 @@
             <td>
                 <a href="{% url 'editar_compras' compra.pk %}" class="btn btn-sm btn-warning">Editar</a>
                 <a href="{% url 'eliminar_compras' compra.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
-                
+                <a href="{% url 'lista_detalles_compra' compra.pk %}" class="btn btn-sm btn-info">Ver</a>
             </td>
         </tr>
-    {% empty %}
+        {% empty %}
         <tr>
             <td colspan="5">No hay compras disponibles.</td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
 

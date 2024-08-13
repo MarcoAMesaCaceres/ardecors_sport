@@ -1,19 +1,28 @@
 {% extends 'base_venta.html' %}
-
 {% block title %}Crear Venta{% endblock %}
-
 {% block content %}
+
 <h1>Crear Venta</h1>
+
 <form method="post">
     {% csrf_token %}
+    
+    <h2>Datos de la Venta</h2>
+    
     {% for field in form %}
     <div class="mb-3">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-        {{ field.errors }}
+        {{ field.label_tag }}
         {{ field }}
+        {% if field.errors %}
+        <div class="text-danger">
+            {{ field.errors }}
+        </div>
+        {% endif %}
     </div>
     {% endfor %}
+
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+
 {% endblock %}

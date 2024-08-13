@@ -3,9 +3,15 @@ from .forms import DetalleCompraForm
 from .models import DetalleCompra
 from compras.models import Compras  # Añade esta importación
 
-def lista_detalles_compra(request):
-    detalles = DetalleCompra.objects.all()
-    return render(request, 'lista_detalles_compra.html', {'detalles': detalles})
+
+def lista_detalles_compra(request, compra_id=None):
+    if compra_id:
+        compra = get_object_or_404(Compras, id=compra_id)
+        detalles = DetalleCompra.objects.filter(compra_id=compra_id)
+    else:
+        compra = None
+        detalles = DetalleCompra.objects.all()
+    return render(request, 'lista_detalles_compra.html', {'detalles': detalles, 'compra': compra})
 
 def crear_detalle_compra(request, compra_id):
     compra = get_object_or_404(Compras, id=compra_id)
@@ -19,7 +25,6 @@ def crear_detalle_compra(request, compra_id):
     else:
         form = DetalleCompraForm(initial={'compra': compra})
     return render(request, 'crear_detalle_compra.html', {'form': form, 'compra': compra})
-
 
 def editar_detalle_compra(request, pk):
     detalle = get_object_or_404(DetalleCompra, pk=pk)

@@ -17,7 +17,7 @@
                         <form method="get" action="{% url 'restore_database' %}">
                             <input type="hidden" name="file" value="{{ file }}">
                             <button type="submit" class="btn btn-success btn-lg">Restaurar</button>
-                            <a href="{% url 'backup_list' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                            <a href="{% url 'backup_databases' %}" class="btn btn-secondary btn-lg">Cancelar</a>
                         </form>
                     </div>
                 </div>
@@ -25,5 +25,5 @@
         </div>
     </div>
 
-    <a href="{% url 'backup_list' %}" class="btn btn-primary">Volver a la Lista de Respaldos</a>
+   
 </div>

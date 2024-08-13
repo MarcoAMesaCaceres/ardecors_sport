@@ -1,20 +1,12 @@
 {% extends 'base_detalle_compra.html' %}
-{% block title %}Detalles de Compra{% endblock %}
+{% block title %}Lista de Detalles de Compra{% endblock %}
 {% block content %}
-<h1>Detalles de Compra</h1>
+<h1>Lista de Detalles de Compra</h1>
 
-<div class="card mb-3">
-    <div class="card-body">
-        <h5 class="card-title">Información de la Compra</h5>
-        <p><strong>Fecha:</strong> {{ compra.fecha|date:"d/m/Y" }}</p>
-        <p><strong>Proveedor:</strong> {{ compra.proveedor }}</p>
-        <p><strong>Total:</strong> ${{ compra.total|floatformat:2 }}</p>
-    </div>
-</div>
-
-<table class="table table-striped">
+<table class="table">
     <thead>
         <tr>
+            <th>Fecha</th>
             <th>Producto</th>
             <th>Cantidad</th>
             <th>Precio Unitario</th>
@@ -23,25 +15,31 @@
         </tr>
     </thead>
     <tbody>
-        {% for detalle in compra.detalles.all %}
+    {% for detalle in detalles %}
         <tr>
+            <td>{{ detalle.fecha|date:"d/m/Y" }}</td>
             <td>{{ detalle.producto }}</td>
             <td>{{ detalle.cantidad }}</td>
-            <td>${{ detalle.precio_unitario|floatformat:2 }}</td>
-            <td>${{ detalle.total|floatformat:2 }}</td>
+            <td>{{ detalle.precio_unitario }}</td>
+            <td>{{ detalle.total }}</td>
             <td>
-                <a href="{% url 'editar_detalle_compra' detalle.id %}" class="btn btn-sm btn-warning">Editar</a>
-                <a href="{% url 'eliminar_detalle_compra' detalle.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                <a href="{% url 'editar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
             </td>
         </tr>
-        {% empty %}
+    {% empty %}
         <tr>
-            <td colspan="5">No hay detalles de compra disponibles.</td>
+            <td colspan="6">No hay detalles de compra disponibles.</td>
         </tr>
-        {% endfor %}
+    {% endfor %}
     </tbody>
 </table>
 
-<a href="{% url 'crear_detalle_compra' compra.id %}" class="btn btn-primary">Agregar Detalle</a>
+{% if compra %}
+    <a href="{% url 'crear_detalle_compra' compra.id %}" class="btn btn-primary">Agregar Detalle</a>
+{% else %}
+    <p>Seleccione una compra para agregar detalles.</p>
+{% endif %}
+
 <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Volver a la Lista de Compras</a>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from articles.models import Article
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)
@@ -11,7 +12,16 @@ class Venta(models.Model):
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    def clean(self):
+        if self.cantidad <= 0:
+            raise ValidationError('La cantidad debe ser mayor que cero.')
+        if self.precio_unitario <= 0:
+            raise ValidationError('El precio unitario debe ser mayor que cero.')
+        if self.fecha > timezone.now().date():
+            raise ValidationError('La fecha de venta no puede ser futura.')
+
     def save(self, *args, **kwargs):
+        self.full_clean()
         self.total = self.cantidad * self.precio_unitario
         super(Venta, self).save(*args, **kwargs)
 

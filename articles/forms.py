@@ -21,8 +21,8 @@ class ArticleForm(forms.ModelForm):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get('descripcion')
-        if descripcion and any(char.isdigit() for char in descripcion):
-            raise ValidationError("La descripción no puede contener números.")
+        if descripcion and len(descripcion) < 10:
+            raise ValidationError("La descripción debe tener al menos 10 caracteres.")
         return descripcion
 
     def clean_precio(self):

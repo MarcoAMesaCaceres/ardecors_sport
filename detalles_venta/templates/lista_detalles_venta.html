@@ -1,11 +1,29 @@
 {% extends 'base_detalle_venta.html' %}
 
 {% block content %}
+<head>
+    <!-- CSS de DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
+    <!-- JS de DataTables -->
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+</head>
+
 <h1>Lista de Detalles de Ventas</h1>
 
-<a href="{% url 'crear_detalle_venta' %}" class="btn btn-primary mb-3">Crear Nuevo Detalle de Venta</a>
 
-<table class="table table-striped">
+<!-- Botón para imprimir la lista de detalles de ventas -->
+<button onclick="DetalleVenta()" class="btn btn-secondary mb-3">Imprimir Lista de Detalles de Ventas</button>
+
+
+<table id="detalles-ventas-table" class="display table table-striped">
     <thead>
         <tr>
             <th>ID</th>
@@ -37,4 +55,20 @@
     </tbody>
 </table>
 <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Volver a la Lista de Ventas</a>
+
+<script>
+    $(document).ready(function() {
+        $('#detalles-ventas-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+
+    function DetalleVenta() {
+        window.print();
+    }
+</script>
+
 {% endblock %}

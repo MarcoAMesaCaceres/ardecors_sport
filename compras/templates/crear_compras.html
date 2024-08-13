@@ -1,13 +1,14 @@
 {% extends 'base_compras.html' %}
 {% block title %}Crear Compra{% endblock %}
 {% block content %}
+
 <h1>Crear Compra</h1>
+
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
     <div class="mb-3">
-        {{ field.label_tag }}
-        {{ field }}
+        {{ field.label_tag }} {{ field }}
         {% if field.errors %}
         <div class="alert alert-danger">
             {{ field.errors }}
@@ -15,7 +16,9 @@
         {% endif %}
     </div>
     {% endfor %}
+
     <button type="submit" class="btn btn-primary">Guardar y Agregar Detalles</button>
     <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+
 {% endblock %}

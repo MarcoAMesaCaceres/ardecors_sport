@@ -5,4 +5,4 @@ class DetalleVentaForm(forms.ModelForm):
     class Meta:
         model = DetalleVenta
         fields = ['articulo', 'cantidad', 'precio_unitario', 'total']
-        
+        exclude = ['venta']
