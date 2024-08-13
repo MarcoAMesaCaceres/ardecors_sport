@@ -54,3 +54,4 @@ def exportar_pdf(request):
     return FileResponse(result, as_attachment=True, filename='ventas.pdf')
 
 
+
