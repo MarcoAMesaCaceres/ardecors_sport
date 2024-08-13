@@ -75,12 +75,17 @@
     });
     </script>
     
+    {% block extra_js %}
+    <script>
+        function Venta() {
+            window.print();
+        }
+    </script>
+    {% endblock %}
+
+
+
+
+
 {% endblock %}
 
-{% block extra_js %}
-<script>
-    function Venta() {
-        window.print();
-    }
-</script>
-{% endblock %}
