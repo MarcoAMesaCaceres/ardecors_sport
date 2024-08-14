@@ -47,11 +47,9 @@
         <tr>
             <th>ID</th>
             <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
+            <th>Cliente</th>>
             <th>Total</th>
+            <th>Productol</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -68,6 +66,7 @@
             <td>
                 <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
                 <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                <a href="{% url 'lista_detalles_venta' venta.id %}" class="btn btn-sm btn-info">Ver</a>
             </td>
         </tr>
         {% empty %}
@@ -100,6 +99,7 @@
 <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
 <a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
 <a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
 <script>
     $(document).ready(function() {
         $('#ventas-table').DataTable({

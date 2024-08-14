@@ -20,6 +20,7 @@
 
 
 <!-- Botón para imprimir la lista de detalles de ventas -->
+<a href="{% url 'crear_detalle_venta' venta.id %}" class="btn btn-primary">Agregar Detalle</a>
 <button onclick="DetalleVenta()" class="btn btn-secondary mb-3">Imprimir Lista de Detalles de Ventas</button>
 
 
@@ -55,6 +56,8 @@
     </tbody>
 </table>
 <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Volver a la Lista de Ventas</a>
+<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
+<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a> 
 
 <script>
     $(document).ready(function() {
@@ -70,5 +73,12 @@
         window.print();
     }
 </script>
+{% block extra_js %}
+    <script>
+        function DetalleVenta() {
+            window.print();
+        }
+    </script>
+    {% endblock %}
 
 {% endblock %}

@@ -6,4 +6,6 @@ urlpatterns = [
     path('crear/', views.crear_compras, name='crear_compras'),
     path('editar/<int:pk>/', views.editar_compras, name='editar_compras'),
     path('eliminar/<int:pk>/', views.eliminar_compras, name='eliminar_compras'),
+    path('compras/exportar_pdf/', views.exportar_pdf, name='exportar_pdf'),
+    path('compras/exportar_excel/', views.exportar_excel, name='exportar_excel'),
 ]

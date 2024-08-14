@@ -3,6 +3,9 @@
 {% block content %}
 <h1>Lista de Detalles de Compra</h1>
 
+<!-- Botón para imprimir detalles compras -->
+<button onclick="Detalles_Compra()" class="btn btn-primary mb-3">Imprimir Detalle de la Compra</button>
+
 <table class="table">
     <thead>
         <tr>
@@ -42,4 +45,26 @@
 {% endif %}
 
 <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Volver a la Lista de Compras</a>
+<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
+<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
+<script>
+    $(document).ready(function() {
+        $('#ventas-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+    </script>
+
+{% block extra_js %}
+    <script>
+        function Detalles_Compra() {
+            window.print();
+        }
+    </script>
+    {% endblock %}
+
 {% endblock %}

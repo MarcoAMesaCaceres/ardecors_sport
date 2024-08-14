@@ -1,9 +1,13 @@
+
 {% extends 'base_proveedor.html' %}
 
 {% block content %}
 <h1>Lista de Proveedores</h1>
 
 <a href="{% url 'crear_proveedor' %}" class="btn btn-primary mb-3">Crear Nuevo Proveedor</a>
+
+<!-- Botón para imprimir la lista de Proveedore -->
+<button onclick="Proveedores()" class="btn btn-primary mb-3">Imprimir Proveedores</button>
 
 <table class="table table-striped">
     <thead>
@@ -36,5 +40,28 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>   
+<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a> 
+<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
+<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
+<script>
+    $(document).ready(function() {
+        $('#ventas-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+    </script>
+
+
+{% block extra_js %}
+    <script>
+        function Proveedores() {
+            window.print();
+        }
+    </script>
+    {% endblock %}
+
 {% endblock %}

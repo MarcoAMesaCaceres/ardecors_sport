@@ -2,15 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from .models import Venta
-from detalles_venta.models import DetalleVenta
-from .forms import VentaForm
-from detalles_venta.forms import DetalleVentaForm
-from io import BytesIO
-import openpyxl
-from openpyxl.utils import get_column_letter
-from django.http import FileResponse
-from django.template.loader import get_template
-from xhtml2pdf import pisa
+from .forms import VentaForm, VentaSearchForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory
@@ -18,40 +10,55 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from io import BytesIO
+import openpyxl
+from openpyxl.utils import get_column_letter
+from django.http import FileResponse
+from reportlab.lib.pagesizes import letter
+
 
 
 def lista_ventas(request):
-    ventas = Venta.objects.all().order_by('-fecha')
+    ventas = Venta.objects.all()
+    form = VentaSearchForm(request.GET)
     
-    # Búsqueda
-    query = request.GET.get('q')
-    if query:
-        ventas = ventas.filter(
-            Q(cliente__icontains=query) |
-            Q(producto__nombre__icontains=query) |
-            Q(id__icontains=query)
-        )
+    if form.is_valid():
+        search_query = form.cleaned_data.get('search_query')
+        min_total = form.cleaned_data.get('min_total')
+        max_total = form.cleaned_data.get('max_total')
+        fecha_inicio = form.cleaned_data.get('fecha_inicio')
+        fecha_fin = form.cleaned_data.get('fecha_fin')
+        
+        if search_query:
+            ventas = ventas.filter(
+                Q(cliente__icontains=search_query) | 
+                Q(articulo__nombre__icontains=search_query)
+            )
+        
+        if min_total:
+            ventas = ventas.filter(total__gte=min_total)
+        
+        if max_total:
+            ventas = ventas.filter(total__lte=max_total)
+        
+        if fecha_inicio:
+            ventas = ventas.filter(fecha__gte=fecha_inicio)
+        
+        if fecha_fin:
+            ventas = ventas.filter(fecha__lte=fecha_fin)
     
-    # Filtrado
-    fecha_desde = request.GET.get('fecha_desde')
-    fecha_hasta = request.GET.get('fecha_hasta')
-    if fecha_desde:
-        ventas = ventas.filter(fecha__gte=fecha_desde)
-    if fecha_hasta:
-        ventas = ventas.filter(fecha__lte=fecha_hasta)
-    
-    # Paginación
-    paginator = Paginator(ventas, 10)  # 10 ventas por página
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'ventas': page_obj,
-        'query': query,
-        'fecha_desde': fecha_desde,
-        'fecha_hasta': fecha_hasta,
-    }
-    return render(request, 'lista_ventas.html', context)
+    return render(request, 'lista_ventas.html', {'ventas': ventas, 'form': form})
+
+def crear_venta(request):
+    if request.method == 'POST':
+        form = VentaForm(request.POST)
+        if form.is_valid():
+            venta = form.save()
+            # Redirigir a la página de crear detalle de venta
+            return redirect('crear_detalle_venta', venta_id=venta.id)
+    else:
+        form = VentaForm()
+    return render(request, 'crear_venta.html', {'form': form})
 
 def editar_venta(request, pk):
     venta = get_object_or_404(Venta, pk=pk)
