@@ -15,37 +15,34 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
-
-
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 def lista_ventas(request):
     ventas = Venta.objects.all()
     form = VentaSearchForm(request.GET)
     
     if form.is_valid():
-        search_query = form.cleaned_data.get('search_query')
-        min_total = form.cleaned_data.get('min_total')
-        max_total = form.cleaned_data.get('max_total')
+        form = VentaSearchForm(request.GET)
+    ventas = Venta.objects.all()
+
+    if form.is_valid():
+        cliente = form.cleaned_data.get('cliente')
         fecha_inicio = form.cleaned_data.get('fecha_inicio')
         fecha_fin = form.cleaned_data.get('fecha_fin')
-        
-        if search_query:
-            ventas = ventas.filter(
-                Q(cliente__icontains=search_query) | 
-                Q(articulo__nombre__icontains=search_query)
-            )
-        
-        if min_total:
-            ventas = ventas.filter(total__gte=min_total)
-        
-        if max_total:
-            ventas = ventas.filter(total__lte=max_total)
-        
+        total_min = form.cleaned_data.get('total_min')
+        total_max = form.cleaned_data.get('total_max')
+
+        if cliente:
+            ventas = ventas.filter(cliente__icontains=cliente)
         if fecha_inicio:
             ventas = ventas.filter(fecha__gte=fecha_inicio)
-        
         if fecha_fin:
             ventas = ventas.filter(fecha__lte=fecha_fin)
+        if total_min:
+            ventas = ventas.filter(total__gte=total_min)
+        if total_max:
+            ventas = ventas.filter(total__lte=total_max)
     
     return render(request, 'lista_ventas.html', {'ventas': ventas, 'form': form})
 
@@ -53,9 +50,19 @@ def crear_venta(request):
     if request.method == 'POST':
         form = VentaForm(request.POST)
         if form.is_valid():
-            venta = form.save()
-            # Redirigir a la página de crear detalle de venta
-            return redirect('crear_detalle_venta', venta_id=venta.id)
+            try:
+                venta = form.save()
+                messages.success(request, 'Venta creada exitosamente.')
+                return redirect('crear_detalle_venta', venta_id=venta.id)
+            except ValidationError as e:
+                for field, errors in e.message_dict.items():
+                    for error in errors:
+                        form.add_error(field, error)
+        
+        if form.errors:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
         form = VentaForm()
     return render(request, 'crear_venta.html', {'form': form})
@@ -66,7 +73,10 @@ def editar_venta(request, pk):
         form = VentaForm(request.POST, instance=venta)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Venta actualizada exitosamente.')
             return redirect('lista_ventas')
+        else:
+            messages.error(request, 'Por favor, corrija los errores en el formulario.')
     else:
         form = VentaForm(instance=venta)
     return render(request, 'editar_venta.html', {'form': form, 'venta': venta})
@@ -85,6 +95,7 @@ def eliminar_venta(request, pk):
     venta = get_object_or_404(Venta, pk=pk)
     if request.method == 'POST':
         venta.delete()
+        messages.success(request, 'Venta eliminada exitosamente.')
         return redirect('lista_ventas')
     return render(request, 'eliminar_venta.html', {'venta': venta})
 def exportar_excel(request):

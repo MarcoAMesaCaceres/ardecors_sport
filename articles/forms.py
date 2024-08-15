@@ -15,10 +15,9 @@ class ArticleForm(forms.ModelForm):
 
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
-        if not nombre.replace(' ', '').isalpha():
-            raise ValidationError("El nombre solo puede contener letras y espacios.")
+        if not nombre.replace(' ', '').isalnum():  # Verifica si es alfanumérico (letras y números)
+            raise ValidationError("El nombre solo puede contener letras, números y espacios.")
         return nombre
-
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get('descripcion')
         if descripcion and len(descripcion) < 10:

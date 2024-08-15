@@ -163,5 +163,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'restablecercontrasenaardecorss@gmail.com'
 EMAIL_HOST_PASSWORD = 'kvja wwug bqup rmsy'
 
-
-
+TIME_ZONE = 'America/Bogota'
+USE_TZ = True

@@ -1,6 +1,7 @@
 {% extends 'base_detalle_venta.html' %}
 
 {% block content %}
+
 <head>
     <!-- CSS de DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -16,69 +17,54 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 </head>
 
-<h1>Lista de Detalles de Ventas</h1>
 
+<div class="container mt-4">
+    <h1 class="mb-4">Detalles de Venta - Venta #{{ venta.id }}</h1>
+    
+    <div class="mb-3">
+        <a href="{% url 'crear_detalle_venta' venta.id %}" class="btn btn-primary">Agregar Detalle</a>
+    </div>
 
-<!-- Botón para imprimir la lista de detalles de ventas -->
-<a href="{% url 'crear_detalle_venta' venta.id %}" class="btn btn-primary">Agregar Detalle</a>
-<button onclick="DetalleVenta()" class="btn btn-secondary mb-3">Imprimir Lista de Detalles de Ventas</button>
+    {% if detalles %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Artículo</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles %}
+                    <tr>
+                        <td>{{ detalle.id }}</td>
+                        <td>{{ detalle.articulo.nombre }}</td>
+                        <td>{{ detalle.cantidad }}</td>
+                        <td>${{ detalle.precio_unitario|floatformat:2 }}</td>
+                        <td>${{ detalle.total|floatformat:2 }}</td>
+                        <td>
+                            <a href="{% url 'editar_detalle_venta' detalle.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <a href="{% url 'eliminar_detalle_venta' detalle.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay detalles de venta registrados para esta venta.</p>
+    {% endif %}
 
+    <div class="mt-3">
+        <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Volver a la Lista de Ventas</a>
+    </div>
 
-<table id="detalles-ventas-table" class="display table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Artículo</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Total</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for detalle in detalles_venta %}
-        <tr>
-            <td>{{ detalle.id }}</td>
-            <td>{{ detalle.articulo.nombre }}</td>
-            <td>{{ detalle.cantidad }}</td>
-            <td>${{ detalle.precio_unitario|floatformat:2 }}</td>
-            <td>${{ detalle.total|floatformat:2 }}</td>
-            <td>
-                <a href="{% url 'editar_detalle_venta' detalle.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
-                <a href="{% url 'eliminar_detalle_venta' detalle.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="6">No hay detalles de venta registrados.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Volver a la Lista de Ventas</a>
-<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
-<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a> 
-
-<script>
-    $(document).ready(function() {
-        $('#detalles-ventas-table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
-
-    function DetalleVenta() {
-        window.print();
-    }
-</script>
-{% block extra_js %}
-    <script>
-        function DetalleVenta() {
-            window.print();
-        }
-    </script>
-    {% endblock %}
+    <div class="mt-3">
+        <a href="{% url 'exportar_pdf' %}" class="btn btn-info">Exportar a PDF</a>
+        <a href="{% url 'exportar_excel' %}" class="btn btn-success">Exportar a Excel</a>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import DetalleVenta, Venta
-from .forms import DetalleVentaForm
+
 from django.contrib import messages
 from io import BytesIO
 
@@ -13,38 +13,73 @@ from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
-
-
+from django.core.exceptions import ValidationError
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Venta, DetalleVenta
+from .forms import  DetalleVentaSearchForm
+from ventas.forms import VentaSearchForm
 
 def lista_detalles_venta(request, venta_id):
     venta = get_object_or_404(Venta, pk=venta_id)
+    form = DetalleVentaSearchForm(request.GET)
     detalles = DetalleVenta.objects.filter(venta=venta)
-    return render(request, 'lista_detalles_venta.html', {'venta': venta, 'detalles': detalles})
+
+    if form.is_valid():
+        articulo = form.cleaned_data.get('articulo')
+        cantidad_min = form.cleaned_data.get('cantidad_min')
+        cantidad_max = form.cleaned_data.get('cantidad_max')
+        precio_unitario_min = form.cleaned_data.get('precio_unitario_min')
+        precio_unitario_max = form.cleaned_data.get('precio_unitario_max')
+
+        if articulo:
+            detalles = detalles.filter(articulo__nombre__icontains=articulo)
+        if cantidad_min:
+            detalles = detalles.filter(cantidad__gte=cantidad_min)
+        if cantidad_max:
+            detalles = detalles.filter(cantidad__lte=cantidad_max)
+        if precio_unitario_min:
+            detalles = detalles.filter(precio_unitario__gte=precio_unitario_min)
+        if precio_unitario_max:
+            detalles = detalles.filter(precio_unitario__lte=precio_unitario_max)
+    
+    return render(request, 'lista_detalles_venta.html', {'form': form, 'detalles': detalles, 'venta': venta})
 
 def crear_detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, pk=venta_id)
     if request.method == 'POST':
-        form = DetalleVentaForm(request.POST)
+        form = DetalleVentaSearchForm(request.POST)
         if form.is_valid():
-            detalle = form.save(commit=False)
-            detalle.venta = venta
-            detalle.save()
-            messages.success(request, 'Detalle de venta agregado exitosamente.')
-            return redirect('lista_detalles_venta', venta_id=venta.id)
+            try:
+                detalle = form.save(commit=False)
+                detalle.venta = venta
+                detalle.full_clean()
+                detalle.save()
+                messages.success(request, 'Detalle de venta agregado exitosamente.')
+                return redirect('lista_detalles_venta', venta_id=venta.id)
+            except ValidationError as e:
+                for field, errors in e.message_dict.items():
+                    for error in errors:
+                        form.add_error(field, error)
     else:
-        form = DetalleVentaForm()
+        form = DetalleVentaSearchForm()
     return render(request, 'crear_detalle_venta.html', {'form': form, 'venta': venta})
 
 def editar_detalle_venta(request, pk):
     detalle = get_object_or_404(DetalleVenta, pk=pk)
     if request.method == 'POST':
-        form = DetalleVentaForm(request.POST, instance=detalle)
+        form = DetalleVentaSearchForm(request.POST, instance=detalle)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Detalle de venta actualizado exitosamente.')
-            return redirect('lista_detalles_venta', venta_id=detalle.venta.id)
+            try:
+                form.save()
+                messages.success(request, 'Detalle de venta actualizado exitosamente.')
+                return redirect('lista_detalles_venta', venta_id=detalle.venta.id)
+            except DetalleVentaSearchForm as e:
+                for field, errors in e.message_dict.items():
+                    for error in errors:
+                        form.add_error(field, error)
     else:
-        form = DetalleVentaForm(instance=detalle)
+        form = DetalleVentaSearchForm(instance=detalle)
     return render(request, 'editar_detalle_venta.html', {'form': form, 'detalle': detalle})
 
 def eliminar_detalle_venta(request, pk):

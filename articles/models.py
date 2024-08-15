@@ -6,11 +6,12 @@ class Article(models.Model):
         max_length=255,
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z\s]+$',
-                message='El nombre solo puede contener letras y espacios.'
+                regex=r'^[a-zA-Z0-9\s]+$',  # Permite letras, números y espacios
+                message='El nombre solo puede contener letras, números y espacios.'
             )
         ]
     )
+    
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(
         max_digits=10,
