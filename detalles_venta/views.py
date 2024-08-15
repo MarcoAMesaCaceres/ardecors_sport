@@ -22,6 +22,7 @@ from .forms import DetalleVentaForm
 from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
+import xlsxwriter
 
 
 def lista_detalles_venta(request, venta_id):
@@ -139,32 +140,53 @@ def exportar_pdf(request):
     return FileResponse(buffer, as_attachment=True, filename='ventas.pdf')
 
 def exportar_excel(request):
-    # Crear un libro de trabajo de Excel
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "Ventas"
+    # Crear un buffer de bytes para el archivo Excel
+    buffer = BytesIO()
 
-    # Escribir encabezados
-    ws['A1'] = 'ID'
-    ws['B1'] = 'Fecha'
-    ws['C1'] = 'Cliente'
-    ws['D1'] = 'Total'
-    ws['E1'] = 'Cantidad'
+    # Crear un nuevo libro de trabajo de Excel y agregar una hoja
+    workbook = xlsxwriter.Workbook(buffer)
+    worksheet = workbook.add_worksheet()
 
-    # Escribir datos de ventas
-    row_num = 2
-    for venta in Venta.objects.all():
-        detalles = DetalleVenta.objects.filter(venta=venta)  # Suponiendo que `venta` es una FK en `DetalleVenta`
-        for detalle in detalles:
-            ws[f'A{row_num}'] = venta.id
-            ws[f'B{row_num}'] = venta.fecha
-            ws[f'C{row_num}'] = venta.cliente
-            ws[f'D{row_num}'] = venta.total
-            ws[f'E{row_num}'] = detalle.cantidad  # Aquí se accede a la cantidad desde `DetalleVenta`
-            row_num += 1
+    # Definir estilos
+    titulo_estilo = workbook.add_format({
+        'bold': True,
+        'font_size': 14,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': '#4F81BD',
+        'font_color': 'white'
+    })
 
-    # Configurar la respuesta HTTP para devolver el archivo Excel
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    dato_estilo = workbook.add_format({
+        'align': 'center',
+        'valign': 'vcenter'
+    })
+
+    # Escribir los encabezados
+    encabezados = ['ID', 'Cliente', 'Fecha', 'Total']
+    for col, encabezado in enumerate(encabezados):
+        worksheet.write(0, col, encabezado, titulo_estilo)
+
+    # Obtener los datos de las ventas
+    detalles_venta = DetalleVenta.objects.all()
+
+    # Escribir los datos en el Excel
+    for row, detalle in enumerate(detalles_venta, start=1):
+        worksheet.write(row, 0, detalle.id, dato_estilo)
+        worksheet.write(row, 1, detalle.cliente, dato_estilo)
+        worksheet.write(row, 2, detalle.fecha.strftime('%Y-%m-%d'), dato_estilo)
+        worksheet.write(row, 3, detalle.total, dato_estilo)
+
+    # Ajustar el ancho de las columnas
+    for i, _ in enumerate(encabezados):
+        worksheet.set_column(i, i, 15)
+
+    # Cerrar el libro de trabajo
+    workbook.close()
+
+    # Preparar la respuesta HTTP
+    buffer.seek(0)
+    response = HttpResponse(buffer.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
-    wb.save(response)
+
     return response

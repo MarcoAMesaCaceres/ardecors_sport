@@ -11,12 +11,13 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from io import BytesIO
-import openpyxl
+import xlsxwriter
 from openpyxl.utils import get_column_letter
 from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+
 
 def lista_ventas(request):
     ventas = Venta.objects.all()
@@ -149,36 +150,54 @@ def exportar_pdf(request):
     return FileResponse(buffer, as_attachment=True, filename='ventas.pdf')
 
 def exportar_excel(request):
+    # Crear un buffer de bytes para el archivo Excel
+    buffer = BytesIO()
+
+    # Crear un nuevo libro de trabajo de Excel y agregar una hoja
+    workbook = xlsxwriter.Workbook(buffer)
+    worksheet = workbook.add_worksheet()
+
+    # Definir estilos
+    titulo_estilo = workbook.add_format({
+        'bold': True,
+        'font_size': 14,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': '#4F81BD',
+        'font_color': 'white'
+    })
+
+    dato_estilo = workbook.add_format({
+        'align': 'center',
+        'valign': 'vcenter'
+    })
+
+    # Escribir los encabezados
+    encabezados = ['ID', 'Cliente', 'Fecha', 'Total', 'Artículo']
+    for col, encabezado in enumerate(encabezados):
+        worksheet.write(0, col, encabezado, titulo_estilo)
+
+    # Obtener los datos de las ventas
     ventas = Venta.objects.all()
-    
-    # Crear libro y hoja de Excel
-    wb = openpyxl.Workbook()
-    ws = wb.active
-    ws.title = 'Ventas'
 
-    # Agregar encabezados
-    headers = ['ID', 'Fecha', 'Cliente', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
-    for col_num, header in enumerate(headers, 1):
-        col_letter = get_column_letter(col_num)
-        ws[f'{col_letter}1'] = header
+    # Escribir los datos en el Excel
+    for row, venta in enumerate(ventas, start=1):
+        worksheet.write(row, 0, venta.id, dato_estilo)
+        worksheet.write(row, 1, venta.cliente, dato_estilo)
+        worksheet.write(row, 2, venta.fecha.strftime('%Y-%m-%d'), dato_estilo)
+        worksheet.write(row, 3, float(venta.total), dato_estilo)
+        worksheet.write(row, 4, venta.articulo.name if venta.articulo else 'N/A', dato_estilo)
 
-    # Agregar filas de ventas
-    for row_num, venta in enumerate(ventas, 2):
-        ws[f'A{row_num}'] = venta.id
-        ws[f'B{row_num}'] = venta.fecha.strftime('%d/%m/%Y')
-        ws[f'C{row_num}'] = venta.cliente
-        ws[f'D{row_num}'] = venta.articulo.nombre if hasattr(venta, 'producto') and venta.articulo else 'No especificado'
-        row_num += 1
-        ws[f'E{row_num}'] = venta.cantidad
-        ws[f'F{row_num}'] = venta.precio_unitario
-        ws[f'G{row_num}'] = venta.total
+    # Ajustar el ancho de las columnas
+    for i, _ in enumerate(encabezados):
+        worksheet.set_column(i, i, 15)
 
-    # Crear respuesta HTTP para descargar el archivo
-    response = HttpResponse(
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    )
+    # Cerrar el libro de trabajo
+    workbook.close()
+
+    # Preparar la respuesta HTTP
+    buffer.seek(0)
+    response = HttpResponse(buffer.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
-    
 
-
-
+    return response

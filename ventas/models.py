@@ -3,9 +3,6 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from articles.models import Article
 
-class articulo(models.Model):
-    nombre = models.CharField(max_length=255)
-
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)
     fecha = models.DateField()
