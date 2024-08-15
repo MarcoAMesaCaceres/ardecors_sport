@@ -1,92 +1,93 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Ardecors</title>
     <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/accesibilidad.css' %}">
-    <script src="{% static 'js/admin_dashboard.js' %}" defer></script>
-    <script src="{% static 'js/accesibilidad.js' %}" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <header>
-        <h1>Panel de Administración - Ardecors</h1>
-        <nav>
-            <ul>
-            </ul>
-        </nav>
-    </header>
-    <div class="accesibilidad">
-        <button class="accesibilidad__inicio" id="toggle-inicio">
-            <img src="{% static 'img/icons/accesibilidad-mano.svg' %}" alt width="55px" style="filter: none;">
-        </button>
-        <div class="accesibilidad__buttons hidden visible" id="toggle-buttons">
-            <div class="accesibilidad__container">
-                <button class="accesibilidad__boton" id="toggle-contrast">
-                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-contraste.svg' %}" alt width="55px">
-                    <h6 class="accesibilidad__boton--text">Contraste</h6>
-                </button>
-            </div>
-            <div class="accesibilidad__container">
-                <button class="accesibilidad__boton" id="toggle-zoom-in">
-                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-aumento.svg' %}" alt width="55px" style="filter: none;">
-                    <h6 class="accesibilidad__boton--text">
-                        Aumentar
-                        <br>
-                        letra
-                    </h6>
-                </button>
-            </div>
-            <div class="accesibilidad__container">
-                <button class="accesibilidad__boton" id="toggle-zoom-out">
-                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-disminuir.svg' %}" alt width="55px" style="filter: none;">
-                    <h6 class="accesibilidad__boton--text">
-                        Disminuir
-                        <br>
-                        letra
-                    </h6>
-                </button>
-            </div>
+    <div class="sidebar">
+        <div class="logo_details">
+            <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">Ardecors</div>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Buscar...">
+                <span class="tooltip">Buscar</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_articles' %}">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Productos</span>
+                </a>
+                <span class="tooltip">Productos</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_ventas' %}">
+                    <i class='bx bx-cart'></i>
+                    <span class="link_name">Ventas</span>
+                </a>
+                <span class="tooltip">Ventas</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_compras' %}">
+                    <i class='bx bx-shopping-bag'></i>
+                    <span class="link_name">Compras</span>
+                </a>
+                <span class="tooltip">Compras</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_proveedores' %}">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">Proveedores</span>
+                </a>
+                <span class="tooltip">Proveedores</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_tareas' %}">
+                    <i class='bx bx-task'></i>
+                    <span class="link_name">Tareas</span>
+                </a>
+                <span class="tooltip">Tareas</span>
+            </li>
+            <li>
+                <a href="{% url 'ardecors' %}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Volver al Inicio</span>
+                </a>
+                <span class="tooltip">Volver al Inicio</span>
+            </li>
+            <li>
+                <a href="{% url 'backup_databases' %}">
+                    <i class='bx bx-data'></i>
+                    <span class="link_name">Base de Datos</span>
+                </a>
+                <span class="tooltip">Base de Datos</span>
+            </li>
+            <li class="profile">
+                <div class="profile_details">
+                    <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
+                    <div class="profile_content">
+                        <div class="name">Usuario</div>
+                        <div class="designation">Admin</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
     </div>
-    <main>
-        <section>
-            <h2><li><a href="{% url 'lista_articles' %}">Productos</a></li></h2>
-            <!-- Contenido de órdenes de compra -->
-        </section>
-        <section>
-            <h2><li><a href="{% url 'lista_ventas' %}">Ventas</a></li></h2>
-            <!-- Contenido de ventas -->
-        </section>
-        <section>
-            <h2><li><a href="{% url 'lista_compras' %}">Compras</a></li></h2>
-            <!-- Contenido de detalles de ventas -->
-        </section>
-        <section>
-            <h2><li><a href="{% url 'lista_proveedores' %}">Proveedores</a></li></h2>
-            <!-- Contenido de detalles de órdenes de compra -->
-        </section>
-        <section>
-            <h2><li><a href="{% url 'lista_tareas' %}">Tareas</a></li></h2>
-            <!-- Contenido de proveedores -->
-        </section>
-        <section>
-            <h2><li><a href="{% url 'ardecors' %}"> Volver al Inicio</a></li></h2>
-            <!-- Contenido de productos -->
-        </section>
-        <section>
-            <h2><li><a href="">Cerrar Sesión</a></li></h2>
-            <!-- Contenido de configuraciones -->
-        </section>
-        <section>
-            <h2><li><a href="{% url 'backup_databases' %}">Base de Datos</a></li></h2>
-            
-        </section>
-    </main>
-    <footer>
-        <p>Ardecors Sport</p>
-    </footer>
+    <section class="home-section">
+        <div class="text">Panel de Administración - Ardecors</div>
+        <!-- Your main content goes here -->
+    </section>
+
+    <script src="{% static 'js/admin_dashboard.js' %}"></script>
 </body>
 </html>

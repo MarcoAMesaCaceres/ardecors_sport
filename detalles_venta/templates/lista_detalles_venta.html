@@ -17,9 +17,32 @@
 <div class="container mt-4">
     <h1 class="mb-4">Detalles de Venta - Venta #{{ venta.id }}</h1>
 
-    <form method="get" class="mb-3">
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Buscar</button>
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-2">
+                {{ form.articulo.label_tag }}
+                {{ form.articulo }}
+            </div>
+            <div class="col-md-2">
+                {{ form.cantidad_min.label_tag }}
+                {{ form.cantidad_min }}
+            </div>
+            <div class="col-md-2">
+                {{ form.cantidad_max.label_tag }}
+                {{ form.cantidad_max }}
+            </div>
+            <div class="col-md-2">
+                {{ form.precio_unitario_min.label_tag }}
+                {{ form.precio_unitario_min }}
+            </div>
+            <div class="col-md-2">
+                {{ form.precio_unitario_max.label_tag }}
+                {{ form.precio_unitario_max }}
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
     </form>
 
     <div class="mb-3">
@@ -27,7 +50,7 @@
     </div>
 
     {% if detalles %}
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -67,4 +90,5 @@
         <a href="{% url 'exportar_excel' %}" class="btn btn-success">Exportar a Excel</a>
     </div>
 </div>
+
 {% endblock %}

@@ -98,37 +98,6 @@ def eliminar_venta(request, pk):
         messages.success(request, 'Venta eliminada exitosamente.')
         return redirect('lista_ventas')
     return render(request, 'eliminar_venta.html', {'venta': venta})
-def exportar_excel(request):
-    ventas = Venta.objects.all()
-    
-    # Crear libro y hoja de Excel
-    wb = openpyxl.Workbook()
-    ws = wb.active
-    ws.title = 'Ventas'
-
-    # Agregar encabezados
-    headers = ['ID', 'Fecha', 'Cliente', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
-    for col_num, header in enumerate(headers, 1):
-        col_letter = get_column_letter(col_num)
-        ws[f'{col_letter}1'] = header
-
-    # Agregar filas de ventas
-    for row_num, venta in enumerate(ventas, 2):
-        ws[f'A{row_num}'] = venta.id
-        ws[f'B{row_num}'] = venta.fecha.strftime('%d/%m/%Y')
-        ws[f'C{row_num}'] = venta.cliente
-        ws[f'D{row_num}'] = venta.producto.nombre if venta.producto else 'No especificado'
-        ws[f'E{row_num}'] = venta.cantidad
-        ws[f'F{row_num}'] = venta.precio_unitario
-        ws[f'G{row_num}'] = venta.total
-
-    # Crear respuesta HTTP para descargar el archivo
-    response = HttpResponse(
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    )
-    response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
-    wb.save(response)
-    return response
 
 def exportar_pdf(request):
     # Crear un buffer de bytes para el PDF
@@ -179,7 +148,37 @@ def exportar_pdf(request):
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='ventas.pdf')
 
+def exportar_excel(request):
+    ventas = Venta.objects.all()
+    
+    # Crear libro y hoja de Excel
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = 'Ventas'
 
+    # Agregar encabezados
+    headers = ['ID', 'Fecha', 'Cliente', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
+    for col_num, header in enumerate(headers, 1):
+        col_letter = get_column_letter(col_num)
+        ws[f'{col_letter}1'] = header
+
+    # Agregar filas de ventas
+    for row_num, venta in enumerate(ventas, 2):
+        ws[f'A{row_num}'] = venta.id
+        ws[f'B{row_num}'] = venta.fecha.strftime('%d/%m/%Y')
+        ws[f'C{row_num}'] = venta.cliente
+        ws[f'D{row_num}'] = venta.articulo.nombre if hasattr(venta, 'producto') and venta.articulo else 'No especificado'
+        row_num += 1
+        ws[f'E{row_num}'] = venta.cantidad
+        ws[f'F{row_num}'] = venta.precio_unitario
+        ws[f'G{row_num}'] = venta.total
+
+    # Crear respuesta HTTP para descargar el archivo
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+    response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
+    
 
 
 

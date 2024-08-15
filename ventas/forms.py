@@ -1,5 +1,6 @@
 from django import forms
 from .models import Venta
+from .models import Article
 from django.utils import timezone
 
 class VentaForm(forms.ModelForm):
@@ -43,21 +44,29 @@ class VentaForm(forms.ModelForm):
 
 
 class VentaSearchForm(forms.Form):
-    cliente = forms.CharField(required=False, label='Cliente')
-    fecha_inicio = forms.DateField(required=False, label='Fecha inicio', widget=forms.DateInput(attrs={'type': 'date'}))
-    fecha_fin = forms.DateField(required=False, label='Fecha fin', widget=forms.DateInput(attrs={'type': 'date'}))
-    total_min = forms.DecimalField(required=False, label='Total mínimo')
-    total_max = forms.DecimalField(required=False, label='Total máximo')
-    
-    def clean(self):
-        cleaned_data = super().clean()
-        fecha_inicio = cleaned_data.get('fecha_inicio')
-        fecha_fin = cleaned_data.get('fecha_fin')
-        total_min = cleaned_data.get('total_min')
-        total_max = cleaned_data.get('total_max')
-
-        if fecha_inicio and fecha_fin and fecha_inicio > fecha_fin:
-            raise forms.ValidationError("La fecha de inicio no puede ser posterior a la fecha de fin.")
-
-        if total_min and total_max and total_min > total_max:
-            raise forms.ValidationError("El total mínimo no puede ser mayor que el total máximo.")
+    cliente = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del cliente'})
+    )
+    fecha_inicio = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
+    )
+    fecha_fin = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
+    )
+    total_min = forms.DecimalField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Total mínimo', 'step': '0.01'})
+    )
+    total_max = forms.DecimalField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Total máximo', 'step': '0.01'})
+    )
+    articulo = forms.ModelChoiceField(
+        queryset=Article.objects.all(),
+        required=False,
+        empty_label="Todos los artículos",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )

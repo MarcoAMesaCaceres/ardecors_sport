@@ -90,23 +90,21 @@ def exportar_excel(request):
         col_letter = get_column_letter(col_num)
         ws[f'{col_letter}1'] = header
 
-    # Agregar filas de ventas
-    for row_num, venta in enumerate(compras, 2):
-        ws[f'A{row_num}'] = venta.id
-        ws[f'B{row_num}'] = venta.fecha.strftime('%d/%m/%Y')
-        ws[f'C{row_num}'] = venta.cliente
-        ws[f'D{row_num}'] = venta.producto.nombre if venta.producto else 'No especificado'
-        ws[f'E{row_num}'] = venta.cantidad
-        ws[f'F{row_num}'] = venta.precio_unitario
-        ws[f'G{row_num}'] = venta.total
+    # Agregar filas de compras
+    for row_num, compra in enumerate(compras, 2):
+        ws[f'A{row_num}'] = compra.id
+        ws[f'B{row_num}'] = compra.fecha.strftime('%d/%m/%Y')
+        ws[f'C{row_num}'] = compra.proveedor.nombre if compra.proveedor else 'No especificado'
+        ws[f'D{row_num}'] = compra.producto
+        ws[f'E{row_num}'] = 'No aplica'  # Asume que no se tiene cantidad en el modelo
+        ws[f'F{row_num}'] = 'No aplica'  # Asume que no se tiene precio_unitario en el modelo
+        ws[f'G{row_num}'] = compra.total
 
     # Crear respuesta HTTP para descargar el archivo
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
-    response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
-    wb.save(response)
-    return response
+    response['Content-Disposition'] = 'attachment; filename=compras.xlsx'
 
 def exportar_pdf(request):
     # Crear un buffer de bytes para el PDF
@@ -116,13 +114,13 @@ def exportar_pdf(request):
     doc = SimpleDocTemplate(buffer, pagesize=letter)
     elements = []
 
-    # Obtener los datos de las ventas
+    # Obtener los datos de las compras
     compras = Compras.objects.all()
 
     # Crear los datos para la tabla
-    data = [['ID', 'proveedor', 'Fecha', 'Total']]  # Encabezados
-    for venta in compras:
-        data.append([str(compras.id), compras.proveedor, str(compras.fecha), str(compras.total)])
+    data = [['ID', 'Proveedor', 'Fecha', 'Total']]  # Encabezados
+    for compra in compras:
+        data.append([str(compra.id), compra.proveedor.nombre if compra.proveedor else 'No especificado', str(compra.fecha), str(compra.total)])
 
     # Crear la tabla
     table = Table(data)
@@ -156,4 +154,3 @@ def exportar_pdf(request):
     # present the option to save the file.
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='compras.pdf')
-

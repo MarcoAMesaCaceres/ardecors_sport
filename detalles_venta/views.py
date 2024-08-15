@@ -18,7 +18,11 @@ from django.shortcuts import render
 from django.db.models import Q
 from .models import Venta, DetalleVenta
 from .forms import  DetalleVentaSearchForm
-from ventas.forms import VentaSearchForm
+from .forms import DetalleVentaForm
+from django.http import HttpResponse
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+
 
 def lista_detalles_venta(request, venta_id):
     venta = get_object_or_404(Venta, pk=venta_id)
@@ -33,14 +37,14 @@ def lista_detalles_venta(request, venta_id):
         precio_unitario_max = form.cleaned_data.get('precio_unitario_max')
 
         if articulo:
-            detalles = detalles.filter(articulo__nombre__icontains=articulo)
-        if cantidad_min:
+            detalles = detalles.filter(articulo=articulo)
+        if cantidad_min is not None:
             detalles = detalles.filter(cantidad__gte=cantidad_min)
-        if cantidad_max:
+        if cantidad_max is not None:
             detalles = detalles.filter(cantidad__lte=cantidad_max)
-        if precio_unitario_min:
+        if precio_unitario_min is not None:
             detalles = detalles.filter(precio_unitario__gte=precio_unitario_min)
-        if precio_unitario_max:
+        if precio_unitario_max is not None:
             detalles = detalles.filter(precio_unitario__lte=precio_unitario_max)
     
     return render(request, 'lista_detalles_venta.html', {'form': form, 'detalles': detalles, 'venta': venta})
@@ -48,21 +52,15 @@ def lista_detalles_venta(request, venta_id):
 def crear_detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, pk=venta_id)
     if request.method == 'POST':
-        form = DetalleVentaSearchForm(request.POST)
+        form = DetalleVentaForm(request.POST)
         if form.is_valid():
-            try:
-                detalle = form.save(commit=False)
-                detalle.venta = venta
-                detalle.full_clean()
-                detalle.save()
-                messages.success(request, 'Detalle de venta agregado exitosamente.')
-                return redirect('lista_detalles_venta', venta_id=venta.id)
-            except ValidationError as e:
-                for field, errors in e.message_dict.items():
-                    for error in errors:
-                        form.add_error(field, error)
+            detalle = form.save(commit=False)
+            detalle.venta = venta
+            detalle.save()
+            messages.success(request, 'Detalle de venta agregado exitosamente.')
+            return redirect('lista_detalles_venta', venta_id=venta.id)
     else:
-        form = DetalleVentaSearchForm()
+        form = DetalleVentaForm()
     return render(request, 'crear_detalle_venta.html', {'form': form, 'venta': venta})
 
 def editar_detalle_venta(request, pk):
@@ -141,34 +139,32 @@ def exportar_pdf(request):
     return FileResponse(buffer, as_attachment=True, filename='ventas.pdf')
 
 def exportar_excel(request):
-    detalleVenta = DetalleVenta.objects.all()
-    
-    # Crear libro y hoja de Excel
-    wb = openpyxl.Workbook()
+    # Crear un libro de trabajo de Excel
+    wb = Workbook()
     ws = wb.active
-    ws.title = 'detalleVenta'
+    ws.title = "Ventas"
 
-    # Agregar encabezados
-    headers = ['ID', 'Fecha', 'Cliente', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
-    for col_num, header in enumerate(headers, 1):
-        col_letter = get_column_letter(col_num)
-        ws[f'{col_letter}1'] = header
+    # Escribir encabezados
+    ws['A1'] = 'ID'
+    ws['B1'] = 'Fecha'
+    ws['C1'] = 'Cliente'
+    ws['D1'] = 'Total'
+    ws['E1'] = 'Cantidad'
 
-    # Agregar filas de ventas
-    for row_num, venta in enumerate(detalleVenta, 2):
-        ws[f'A{row_num}'] = detalleVenta.id
-        ws[f'B{row_num}'] = detalleVenta.fecha.strftime('%d/%m/%Y')
-        ws[f'C{row_num}'] = detalleVenta.cliente
-        ws[f'D{row_num}'] = detalleVenta.producto.nombre if detalleVenta.producto else 'No especificado'
-        ws[f'E{row_num}'] = detalleVenta.cantidad
-        ws[f'F{row_num}'] = detalleVenta.precio_unitario
-        ws[f'G{row_num}'] = detalleVenta.total
+    # Escribir datos de ventas
+    row_num = 2
+    for venta in Venta.objects.all():
+        detalles = DetalleVenta.objects.filter(venta=venta)  # Suponiendo que `venta` es una FK en `DetalleVenta`
+        for detalle in detalles:
+            ws[f'A{row_num}'] = venta.id
+            ws[f'B{row_num}'] = venta.fecha
+            ws[f'C{row_num}'] = venta.cliente
+            ws[f'D{row_num}'] = venta.total
+            ws[f'E{row_num}'] = detalle.cantidad  # Aquí se accede a la cantidad desde `DetalleVenta`
+            row_num += 1
 
-    # Crear respuesta HTTP para descargar el archivo
-    response = HttpResponse(
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    )
+    # Configurar la respuesta HTTP para devolver el archivo Excel
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
     wb.save(response)
     return response
-

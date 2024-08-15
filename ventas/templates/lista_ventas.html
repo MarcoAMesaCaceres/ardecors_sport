@@ -1,7 +1,5 @@
 {% extends 'base_venta.html' %}
-
 {% block content %}
-
 <head>
     <!-- CSS de DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -17,50 +15,47 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 </head>
 <div class="container mt-4">
-    <h2 class="mb-4">Buscar Detalles de Venta</h2>
-    
+    <h1 class="mb-4">Lista de Ventas</h1>
+
     <form method="get" class="mb-4">
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                {{ form.as_p }}
+        <div class="row">
+            <div class="col-md-2">
+                {{ form.cliente.label_tag }}
+                {{ form.cliente }}
             </div>
-            <div class="col-auto">
+            <div class="col-md-2">
+                {{ form.fecha_inicio.label_tag }}
+                {{ form.fecha_inicio }}
+            </div>
+            <div class="col-md-2">
+                {{ form.fecha_fin.label_tag }}
+                {{ form.fecha_fin }}
+            </div>
+            <div class="col-md-2">
+                {{ form.total_min.label_tag }}
+                {{ form.total_min }}
+            </div>
+            <div class="col-md-2">
+                {{ form.total_max.label_tag }}
+                {{ form.total_max }}
+            </div>
+            <div class="col-md-2">
+                {{ form.articulo.label_tag }}
+                {{ form.articulo }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </div>
         </div>
     </form>
 
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Resultados:</h3>
-        </div>
-        <div class="card-body">
-            {% if detalles %}
-                <ul class="list-group">
-                    {% for detalle in detalles %}
-                        <li class="list-group-item">{{ detalle }}</li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p class="text-muted">No se encontraron resultados.</p>
-            {% endif %}
-        </div>
+    <div class="mb-3">
+        <a href="{% url 'crear_venta' %}" class="btn btn-primary">Crear Nueva Venta</a>
+        <a href="{% url 'exportar_pdf' %}" class="btn btn-info">Exportar a PDF</a>
+        <a href="{% url 'exportar_excel' %}" class="btn btn-success">Exportar a Excel</a>
     </div>
-</div>
-<div class="container mt-4">
-    <h1 class="mb-4">Lista de Ventas</h1>
-
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <a href="{% url 'crear_venta' %}" class="btn btn-primary">Crear Nueva Venta</a>
-            <a href="{% url 'exportar_pdf' %}" class="btn btn-info">Exportar a PDF</a>
-            <a href="{% url 'exportar_excel' %}" class="btn btn-success">Exportar a Excel</a>
-        </div>
-        <div class="col-md-4">
-           
-        </div>
-    </div>
-
 
     {% if ventas %}
         <table class="table table-striped">
@@ -69,63 +64,35 @@
                     <th>ID</th>
                     <th>Fecha</th>
                     <th>Cliente</th>
-                    <th>ArtÃ­culo</th>
+                    <th>Artículo</th>
                     <th>Total</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for venta in ventas %}
-                    <tr>
-                        <td>{{ venta.id }}</td>
-                        <td>{{ venta.fecha|date:"d/m/Y" }}</td>
-                        <td>{{ venta.cliente }}</td>
-                        <td>{{ venta.articulo.nombre|default:"No especificado" }}</td>
-                        <td>${{ venta.total|floatformat:2 }}</td>
-                        <td>
-                            <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
-                            <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
-                            <a href="{% url 'lista_detalles_venta' venta.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ venta.id }}</td>
+                    <td>{{ venta.fecha|date:"d/m/Y" }}</td>
+                    <td>{{ venta.cliente }}</td>
+                    <td>{{ venta.articulo.nombre|default:"No especificado" }}</td>
+                    <td>${{ venta.total|floatformat:2 }}</td>
+                    <td>
+                        <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                        <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        <a href="{% url 'lista_detalles_venta' venta.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-        {% if ventas.has_other_pages %}
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    {% if ventas.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ ventas.previous_page_number }}">Anterior</a>
-                        </li>
-                    {% endif %}
-
-                    {% for i in ventas.paginator.page_range %}
-                        {% if ventas.number == i %}
-                            <li class="page-item active">
-                                <span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if ventas.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ ventas.next_page_number }}">Siguiente</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
     {% else %}
         <p>No hay ventas registradas.</p>
     {% endif %}
 
-    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Volver al Panel de Administracion</a>
+    <div class="mt-3">
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Volver al Panel de Administración</a>
+    </div>
 </div>
 
 {% endblock %}
