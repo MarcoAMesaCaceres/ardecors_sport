@@ -4,7 +4,7 @@ from .models import DetalleVenta
 class DetalleVentaSearchForm(forms.ModelForm):
     class Meta:
         model = DetalleVenta
-        fields = ['articulo', 'cantidad', 'precio_unitario']
+        fields = ['venta','articulo', 'cantidad', 'precio_unitario']
         widgets = {
             'articulo': forms.Select(attrs={'class': 'form-control'}),
             'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'min': '1'}),
