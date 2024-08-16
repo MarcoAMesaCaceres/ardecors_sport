@@ -1,5 +1,10 @@
+
 {% extends 'base_venta.html' %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
 <head>
     <!-- CSS de DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -14,6 +19,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 </head>
+<div class="home-section">
 <div class="container mt-4">
     <h1 class="mb-4">Lista de Ventas</h1>
 
@@ -94,5 +100,6 @@
         <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Volver al Panel de Administración</a>
     </div>
 </div>
-
+</div>
+</div>
 {% endblock %}

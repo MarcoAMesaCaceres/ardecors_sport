@@ -1,6 +1,11 @@
 {% extends 'base_compras.html' %}
+{% load static %}
 {% block title %}Eliminar Compra{% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Eliminar Compra</h1>
 <p>¿Estás seguro de que deseas eliminar la compra "Orden {{ compra.id }}"?</p>
 <form method="post">
@@ -8,4 +13,5 @@
     <button type="submit" class="btn btn-danger">Sí, eliminar</button>
     <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+</div>
 {% endblock %}

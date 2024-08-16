@@ -1,8 +1,12 @@
 {% extends 'base_detalle_venta.html' %}
-
+% load static %}
 {% block title %}Editar  Detalles Ventas{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Editar Detalles Ventas</h1>
 <form method="post">
     {% csrf_token %}
@@ -16,4 +20,5 @@
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     <a href="{% url 'lista_detalles_venta' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+</div>
 {% endblock %}

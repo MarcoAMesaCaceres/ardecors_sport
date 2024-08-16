@@ -1,7 +1,11 @@
 {% extends 'base_venta.html' %}
+{% load static %}
 {% block title %}Crear Venta{% endblock %}
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Crear Venta</h1>
 
 <form method="post">
@@ -24,5 +28,6 @@
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Cancelar</a>
 </form>
-
+ </div>
+</div>
 {% endblock %}

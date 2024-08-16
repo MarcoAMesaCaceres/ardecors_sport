@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm, CustomPasswordResetForm
+from django.contrib.auth import login as auth_login
 
 def login(request):
     if request.method == 'POST':
@@ -31,8 +32,8 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            return redirect('login')  # Cambia 'home' por la URL a la que quieres redirigir después del registro
+            auth_login(request, user)
+            return redirect('login')
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})

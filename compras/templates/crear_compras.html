@@ -1,7 +1,11 @@
 {% extends 'base_compras.html' %}
+{% load static %}
 {% block title %}Crear Compra{% endblock %}
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Crear Compra</h1>
 
 <form method="post">
@@ -20,5 +24,5 @@
     <button type="submit" class="btn btn-primary">Guardar y Agregar Detalles</button>
     <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Cancelar</a>
 </form>
-
+</div>
 {% endblock %}

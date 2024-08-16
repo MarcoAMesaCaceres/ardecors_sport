@@ -1,6 +1,11 @@
 {% extends 'base_detalle_compra.html' %}
+{% load static %}
 {% block title %}Lista de Detalles de Compra{% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Lista de Detalles de Compra</h1>
 
 <!-- Botón para imprimir detalles compras -->
@@ -65,6 +70,7 @@
             window.print();
         }
     </script>
+</div>
     {% endblock %}
 
 {% endblock %}

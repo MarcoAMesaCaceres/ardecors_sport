@@ -1,8 +1,15 @@
 {% extends 'base_articles.html' %}
+{% load static %}
 
-{% block title %}Eliminar Artículo{% endblock %}
+
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block title %}Eliminar Artículo{% endblock %}
 
 {% block content %}
+{% include 'admin_dashboard.html' %}
+<div class="home-section">
 <h1>Eliminar Artículo</h1>
 <p>¿Estás seguro de que deseas eliminar el artículo "{{ article.nombre }}"?</p>
 <form method="post">
@@ -10,4 +17,5 @@
     <button type="submit" class="btn btn-danger">Sí, eliminar</button>
     <a href="{% url 'lista_articles' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+<div/>
 {% endblock %}

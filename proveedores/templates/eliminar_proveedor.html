@@ -1,8 +1,12 @@
 {% extends 'base_proveedor.html' %}
-
+{% load static %}
 {% block title %}Eliminar proveedor{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Eliminar venta</h1>
 <p>¿Estás seguro de que deseas eliminar el proveedor "{{ venta.nombre }}"?</p>
 <form method="post">
@@ -10,5 +14,6 @@
     <button type="submit" class="btn btn-danger">Sí, eliminar</button>
     <a href="{% url 'lista_proveedores' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+</div>
 {% endblock %}
 </html> 

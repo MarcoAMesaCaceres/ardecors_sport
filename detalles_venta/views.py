@@ -67,20 +67,19 @@ def crear_detalle_venta(request, venta_id):
 def editar_detalle_venta(request, pk):
     detalle = get_object_or_404(DetalleVenta, pk=pk)
     if request.method == 'POST':
-        form = DetalleVentaSearchForm(request.POST, instance=detalle)
+        form = DetalleVentaForm(request.POST, instance=detalle)
         if form.is_valid():
             try:
                 form.save()
                 messages.success(request, 'Detalle de venta actualizado exitosamente.')
                 return redirect('lista_detalles_venta', venta_id=detalle.venta.id)
-            except DetalleVentaSearchForm as e:
+            except ValidationError as e:
                 for field, errors in e.message_dict.items():
                     for error in errors:
                         form.add_error(field, error)
     else:
-        form = DetalleVentaSearchForm(instance=detalle)
+        form = DetalleVentaForm(instance=detalle)
     return render(request, 'editar_detalle_venta.html', {'form': form, 'detalle': detalle})
-
 def eliminar_detalle_venta(request, pk):
     detalle = get_object_or_404(DetalleVenta, pk=pk)
     venta_id = detalle.venta.id

@@ -2,9 +2,9 @@
 
 :root{
   --color-default:#0E2C40;
-  --color-second:#0067ac;
+  
   --color-white:#fff;
-  --color-body:#e4e9f7;
+
   --color-light:#e0e0e0;
 }
 
@@ -16,13 +16,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body{
-  min-height: 100vh;
-}
+
 
 .sidebar{
   min-height: 100vh;
-  width: 78px;
+  width: 120px;
   padding: 6px 14px;
   z-index: 99;
   background-color: var(--color-default);
@@ -78,13 +76,14 @@ body{
   text-align: right;
 }
 
-.sidebar i{
-  color:var(--color-white);
+.sidebar i {
+  color: var(--color-white);
   height: 60px;
   line-height: 60px;
   min-width: 50px;
   font-size: 25px;
   text-align: center;
+  display: block; /* Asegura que los iconos siempre sean visibles */
 }
 
 .sidebar .nav-list{
@@ -146,16 +145,6 @@ body{
 .sidebar.open input{
   width: 100%;
   padding: 0 20px 0 50px;
-}
-
-.sidebar .bx-search{
-  position: absolute;
-  top:50%;
-  left:0;
-  transform: translateY(-50%);
-  font-size: 22px;
-  background-color: var(--color-second);
-  color: var(--color-white);
 }
 
 .sidebar li a{

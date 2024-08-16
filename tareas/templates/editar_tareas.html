@@ -1,8 +1,12 @@
 {% extends 'base_tareas.html' %}
-
+{% load static %}
 {% block title %}Editar Tarea{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+    {% include 'admin_dashboard.html' %}
+    <div class="home-section">
 <h1>Editar Tarea</h1>
 <form method="post" novalidate>
     {% csrf_token %}
@@ -16,4 +20,6 @@
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     <a href="{% url 'lista_tareas' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+ </div>
+</div>
 {% endblock %}
