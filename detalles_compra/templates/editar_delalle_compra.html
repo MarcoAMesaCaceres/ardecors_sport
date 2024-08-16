@@ -6,22 +6,23 @@
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     {% include 'admin_dashboard.html' %}
     <div class="home-section">
-<h1>Editar Detalle Compra</h1>
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="mb-3">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {{ field }}
-        {% if field.errors %}
-        <div class="alert alert-danger">
-            {{ field.errors }}
-        </div>
-        {% endif %}
+        <h2>Editar Detalle Compra</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{% url 'lista_detalles_compra' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
     </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    <a href="{% url 'lista_detalles_compra' %}" class="btn btn-secondary">Cancelar</a>
-</form>
 </div>
 {% endblock %}

@@ -42,18 +42,19 @@ def editar_detalle_compra(request, pk):
     if request.method == 'POST':
         form = DetalleCompraForm(request.POST, instance=detalle)
         if form.is_valid():
-            form.save()
-            return redirect('lista_detalles_compra')
+            detalle = form.save()
+            return redirect('lista_detalles_compra', compra_id=detalle.compra.id)
     else:
         form = DetalleCompraForm(instance=detalle)
     return render(request, 'editar_detalle_compra.html', {'form': form, 'detalle': detalle})
 
 def eliminar_detalle_compra(request, pk):
-    detalle = get_object_or_404(DetalleCompra, pk=pk)  # Cambia 'detalles' a 'DetalleCompra'
+    detalle = get_object_or_404(DetalleCompra, pk=pk)
     if request.method == 'POST':
         detalle.delete()
-        return redirect('lista_detalles_compra')  # Elimina '.html' y el diccionario
-    
+        return redirect('lista_detalles_compra')
+    return render(request, 'eliminar_detalle_compra.html', {'detalle': detalle})
+
 def exportar_excel(request):
     detalleCompra = DetalleCompra.objects.all()
     
