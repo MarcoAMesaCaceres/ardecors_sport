@@ -204,6 +204,17 @@ def delete_backup(request, filename):
             messages.error(request, f"El archivo {filename} no existe")
     return redirect('backup_list')
 
+login_required
+def delete_backup(request, filename):
+    if request.method == 'POST':
+        file_path = os.path.join(settings.BASE_DIR, 'backups', filename)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            messages.success(request, f"Respaldo {filename} eliminado exitosamente")
+        else:
+            messages.error(request, f"El archivo {filename} no existe")
+    return redirect('backup_list')
+
 @login_required
 def restore_database(request):
     if request.method == 'GET':
@@ -249,4 +260,3 @@ def download_backup(request, filename):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
-
