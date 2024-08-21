@@ -1,49 +1,44 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contacto</title>
-        <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'img/logoardecors.png' %}" alt="logo">
+            <div class="button-container">
+                <button class="button button-blue"><a href="{% url 'login' %}">Login</a></button>
+                <button class="button button-yellow"><a href="{% url 'ardecors' %}">Inicio</a></button>
+                <button class="button button-yellow"><a href="{% url 'productos' %}">productos</a></button>
+                <button class="button button-green"><a href="{% url 'sobre' %}">Sobre Nosotros</a></button>
+            </div>
+        </div>
+    </header>
+    <section id="contacto">
+        <h1>Contacto</h1>
+        <p>Si deseas ponerte en contacto con nosotros, puedes utilizar los siguientes medios:</p>
+        <ul>
+            <li>Teléfono: +57 3124933921</li>
+            <li>Correo electrónico: <a href="mailto:ardecors.69@gmail.com?subject=Consulta%20desde%20la%20web&body=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20productos.">ardecors.69@gmail.com</a></li>
 
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <img src="{% static 'img/logoardecors.png' %}" alt="logo">
+            <li>Dirección: Calle 3a # 3-21 MONGUI-BOYACA<a target="_blank" href="https://www.google.com/maps/place/Ardecors+sports/@5.7218778,-72.8498611,15z/data=!4m6!3m5!1s0x8e6a49b9f4c4b665:0xffb662829448ab59!8m2!3d5.7218778!4d-72.8498611!16s%2Fg%2F11t2ycysp5?entry=ttu">Cómo llegar a nuestro local</a></li>
+        </ul>
+        <p>También puedes completar el siguiente formulario y nos pondremos en contacto contigo:</p>
 
-                <div class="button-container">
-                    <button class="button button-blue"><a
-                            href="{% url 'login' %}">Login</a></button>
-                    <button class="button button-yellow"><a
-                            href="{% url 'ardecors' %}">Inicio</a></button>
-                    <button class="button button-yellow"><a
-                            href="{% url 'productos' %}">productos</a></button>
-                    <button class="button button-green"><a
-                            href="{% url 'sobre' %}">Sobre
-                            Nosotros</a></button>
-            
-            </nav>
-        </header>
-        <section id="contacto">
-            <h1>Contacto</h1>
-            <p>Si deseas ponerte en contacto con nosotros, puedes utilizar los
-                siguientes medios:</p>
-            <ul>
-                <li>Teléfono: +57 3124933921</li>
-                <li>Correo electrónico: <a
-                        href="ardecors.69@gmail.com">ardecors.69@gmail.com</a></li>
-                <li>Dirección: Calle 3a # 3-21 MONGUI-BOYACA<a target="_blank"
-                        href="https://www.google.com/maps/place/Ardecors+sports/@5.7218778,-72.8498611,15z/data=!4m6!3m5!1s0x8e6a49b9f4c4b665:0xffb662829448ab59!8m2!3d5.7218778!4d-72.8498611!16s%2Fg%2F11t2ycysp5?entry=ttu">Como
-                        llegar a nuestro local</a></li>
-            </ul>
-            <p>También puedes completar el siguiente formulario y nos pondremos
-                en contacto contigo:</p>
-
-        </section>
-        <footer>
-            <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
-        </footer>
-    </body>
+        <!-- Mapa de Google Maps -->
+        <div style="width: 100%; height: 400px;">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.0194122585647!2d-72.85204914933637!3d5.723138595664334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a49b9f4c4b665%3A0xffb662829448ab59!2sArdecors%20sports!5e0!3m2!1ses-419!2sco!4v1692541093097!5m2!1ses-419!2sco"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+    <footer>
+        <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+    </footer>
+</body>
 </html>

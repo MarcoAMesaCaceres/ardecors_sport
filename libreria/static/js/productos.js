@@ -42,16 +42,37 @@ function ready(){
     document.getElementsByClassName('btn-pagar')[0].addEventListener('click',pagarClicked)
 }
 //Eliminamos todos los elementos del carrito y lo ocultamos
-function pagarClicked(){
-    alert("Gracias por la compra");
-    //Elimino todos los elmentos del carrito
-    var carritoItems = document.getElementsByClassName('carrito-items')[0];
-    while (carritoItems.hasChildNodes()){
-        carritoItems.removeChild(carritoItems.firstChild)
+function pagarClicked() {
+    // Obtener el total del carrito
+    var total = document.getElementsByClassName('carrito-precio-total')[0].innerText;
+
+    // Inicializar el mensaje
+    var mensaje = "HOLA¡ Me interesa este artículo  de ardecors. El total de mi compra es: " + total + "\n\nArtículos en el carrito:\n";
+
+    // Obtener todos los elementos del carrito
+    var carritoItems = document.getElementsByClassName('carrito-item');
+
+    // Recorrer cada artículo y agregar la información al mensaje
+    for (var i = 0; i < carritoItems.length; i++) {
+        var item = carritoItems[i];
+        var titulo = item.getElementsByClassName('carrito-item-titulo')[0].innerText;
+        var cantidad = item.getElementsByClassName('carrito-item-cantidad')[0].value;
+        var imagenSrc = item.getElementsByTagName('img')[0].src;
+
+        // Agregar la información del artículo al mensaje
+        mensaje += `\n- ${titulo} (Cantidad: ${cantidad})\nVer imagen: ${imagenSrc}`;
     }
-    actualizarTotalCarrito();
-    ocultarCarrito();
+
+    // Construir el enlace de WhatsApp
+    var numeroWhatsApp = "3508765092"; // Número de WhatsApp sin el signo "+"
+    var enlace = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
+
+    // Redirigir al enlace de WhatsApp
+    window.location.href = enlace;
 }
+
+
+
 //Funciòn que controla el boton clickeado de agregar al carrito
 function agregarAlCarritoClicked(event){
     var button = event.target;
