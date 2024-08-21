@@ -6,10 +6,6 @@
     
 {% block content %}
 <h1>Ayuda</h1>
-
-
-
-    
 <ul>
     {% for articulo in articulos %}
     <li><a href="{% url 'detalle_ayuda' articulo.pk %}">{{ articulo.titulo }}</a></li>
