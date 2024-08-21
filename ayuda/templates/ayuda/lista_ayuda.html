@@ -1,0 +1,24 @@
+
+{% extends "base_ayuda.html" %}
+{% load static %}
+    <script src="{% static 'js/ayuda.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/ayuda.css' %}">
+    
+{% block content %}
+<h1>Ayuda</h1>
+
+
+
+    
+<ul>
+    {% for articulo in articulos %}
+    <li><a href="{% url 'detalle_ayuda' articulo.pk %}">{{ articulo.titulo }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+        
+    
+
+    

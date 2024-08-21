@@ -53,6 +53,9 @@ urlpatterns = [
     path('lista_proveedores/', views.lista_proveedores, name='lista_proveedores'),
     path('editar_proveedor/', views.editar_proveedor, name='editar_proveedora'),
     path('eliminar_proveedor/', views.eliminar_proveedor, name='eliminar_proveedor'),
+    path('lista_ayuda/', views.lista_ayuda, name='lista_ayuda'),
+    path('detalle_ayuda/', views.detalle_ayuda, name='detalle_ayuda'),
+    path('base_ayuda/', views.base_ayuda, name='besa_ayuda'),
     
     path('ardecors/', views.ardecors, name='ardecors'),
 

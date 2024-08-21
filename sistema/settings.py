@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'compras',
     'tareas',
     'detalles_compra',
-    'detalles_venta',    
+    'detalles_venta', 
+    'ayuda'   
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+import os
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
@@ -145,6 +147,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'proveedores' / 'static',
     BASE_DIR / 'usuarios' / 'static',
     BASE_DIR / 'ventas' / 'static',
+    BASE_DIR / 'ayuda' / 'static',
+    os.path.join(BASE_DIR, "static"),
 ]
 
 

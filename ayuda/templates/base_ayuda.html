@@ -1,0 +1,64 @@
+{% extends "base_ayuda.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Ayuda</h1>
+    <div class="questions-list">
+        <ul>
+            {% for articulo in articulos %}
+            <li><a href="{% url 'detalle_ayuda' articulo.pk %}">{{ articulo.titulo }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+<!--{% block js %}
+<script src="{% static 'js/ayuda.js' %}"></script>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/ayuda.css' %}">
+{% endblock %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestion de ayuda{% endblock %}</title>
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/ayuda.css' %}">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                
+                Añadir el enlace al PDF 
+                
+                <li><a href="{% url 'descargar_manual' %}">Descargar Manual de Usuario</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        Aquí se mostrará el contenido específico de cada página
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; Ardecors.</p>
+    </footer>
+
+    {% block js %}
+    <script src="{% static 'js/ayuda.js' %}"></script>
+    {% endblock %}
+</body>
+</html>
+-->

@@ -61,6 +61,13 @@
                 <span class="tooltip">Volver al Inicio</span>
             </li>
             <li>
+                <a href="{% url 'lista_ayuda' %}">
+                    <i class='bx bx-help-circle'></i>
+                    <span class="link_name">Ayuda</span>
+                </a>
+                <span class="tooltip">Ayuda</span>
+            </li>
+            <li>
                 <a href="{% url 'backup_databases' %}">
                     <i class='bx bx-data'></i>
                     <span class="link_name">Base de Datos</span>
@@ -87,7 +94,7 @@
         </ul>
     </div>
     
-   
+    
 
     <script src="{% static 'js/admin_dashboard.js' %}"></script>
 </body>

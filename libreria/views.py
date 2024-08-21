@@ -73,6 +73,12 @@ def editar_detalle_compra(request):
     return render(request, 'editar_detalles_compra.html')
 def eliminar_detalle_compra(request):
     return render(request, 'eliminar_detalle_compra.html')
+def lista_ayuda(request):
+    return render(request, 'lista_ayuda.html')
+def detalle_ayuda(request):
+    return render(request, 'detalle_ayuda.html')
+def base_ayuda(request):
+    return render(request, 'base_ayuda.html')
 
 
 def base_venta(request):
