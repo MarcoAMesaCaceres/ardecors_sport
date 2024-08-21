@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- ... (código del head sin cambios) ... -->
+    <style>
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            list-style: none;
+            background-color: #e9ecef;
+            border-radius: 0.25rem;
+        }
+        .breadcrumb-item {
+            display: flex;
+        }
+        .breadcrumb-item + .breadcrumb-item {
+            padding-left: 0.5rem;
+        }
+        .breadcrumb-item + .breadcrumb-item::before {
+            display: inline-block;
+            padding-right: 0.5rem;
+            color: #6c757d;
+            content: "/";
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary py-4">
+        <!-- ... (código del header sin cambios) ... -->
+    </header>
+
+    <main class="py-5">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Inicio</a></li>
+                    {% block breadcrumbs %}
+                    <!-- Aquí se agregarán los breadcrumbs específicos de cada página -->
+                    {% endblock %}
+                </ol>
+            </nav>
+
+            {% block content %}
+            <!-- Aquí se mostrará el contenido específico de cada página -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-3 mt-auto">
+        <!-- ... (código del footer sin cambios) ... -->
+    </footer>
+
+    <!-- ... (scripts sin cambios) ... -->
+</body>
+</html>

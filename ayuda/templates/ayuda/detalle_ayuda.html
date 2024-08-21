@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/ayuda.css' %}">
 
 {% block content %}
+{% include 'navbar.html' %}
 <h1>{{ articulo.titulo }}</h1>
 
 <p>{{ articulo.contenido }}</p>

@@ -24,9 +24,6 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://chatgpt.es/">Chatgpt.es</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'manual_usuario' %}" target="_blank">Manual de Usuario</a>
                         </li>
                         <li class="nav-item">
@@ -40,7 +37,10 @@
 
     <main class="py-5">
         <div class="container">
+            
             {% block content %}
+
+            {% include 'navbar.html' %}
             <!-- Aquí se mostrará el contenido específico de cada página -->
             {% endblock %}
         </div>

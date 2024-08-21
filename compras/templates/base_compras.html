@@ -26,6 +26,9 @@
     </nav>
 
     <div class="container mt-4">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Compras</li>
+
         {% block content %}
         <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'css/articles.css' %}">

@@ -1,8 +1,11 @@
 
 {% load static %}
+
+
 <script src="{% static 'js/manual.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/manual.css' %}">
 {% block content %}
+{% include 'navbar.html' %}
 <div class="container">
     
     <h1>Manual de Usuario: Sistema de Gestión de Inventarios Ardecors</h1>
