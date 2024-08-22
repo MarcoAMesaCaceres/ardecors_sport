@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     
 <head>
+    <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">________Panel de Administración - Lista de Articulos o Productos</a></li>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Gestión de articulos{% endblock %}</title>
@@ -29,8 +30,8 @@
     </nav>
 
     <div class="container mt-4">
-        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Articulos</li>
+        
+        
         {% block content %}
         
         {% endblock %}

@@ -1,42 +1,46 @@
-{% extends "base_usuario.html" %}
+
 {% load static %}
 
 {% block title %}Iniciar sesión{% endblock %}
 
 {% block content %}
-
-
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2>Iniciar sesión</h2>
-        {% if form.non_field_errors %}
-            <div class="alert alert-danger">
-                {% for error in form.non_field_errors %}
-                    {{ error }}
-                {% endfor %}
-            </div>
-        {% endif %}
+<link rel="stylesheet" href="{% static 'css/usuarios.css' %}">
+<div class="container" id="container">
+    <div class="form-container sign-in">
         <form method="post">
             {% csrf_token %}
-            {% for field in form %}
-                <div class="mb-3">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="alert alert-danger">
-                            {{ field.errors }}
-                        </div>
-                    {% endif %}
+            <h1>Iniciar Sesión</h1>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
                 </div>
+            {% endif %}
+            {% for field in form %}
+                {{ field }}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            <a href="{% url 'password_reset' %}">¿Olvidaste tu Contraseña?</a>
+            <button type="submit">Iniciar Sesion</button>
         </form>
-        <p class="mt-3">
-            <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
-        </p>
-        <p>
-            ¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>
-        </p>
+    </div>
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-right">
+                <h1>¡Bienvenido a Ardecors!</h1>
+                <p>Regístrese con sus datos personales para utilizar todas las funciones del Panel de Administración</p>
+                <a href="{% url 'register' %}" class="btn hidden">Registrarse</a>
+            </div>  
+        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/usuarios.js' %}"></script>
 {% endblock %}
