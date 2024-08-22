@@ -1,15 +1,17 @@
-const container = document.getElementById('container');
-const registerBtn = document.querySelector('.toggle-right .btn');
-const loginBtn = document.querySelector('.toggle-left .btn');
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('container');
+    const registerBtn = document.getElementById('register');
+    const loginBtn = document.getElementById('login');
 
-if (registerBtn) {
-    registerBtn.addEventListener('click', () => {
-        container.classList.add("active");
-    });
-}
+    if (registerBtn) {
+        registerBtn.addEventListener('click', () => {
+            container.classList.add("active");
+        });
+    }
 
-if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
-        container.classList.remove("active");
-    });
-}
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove("active");
+        });
+    }
+});

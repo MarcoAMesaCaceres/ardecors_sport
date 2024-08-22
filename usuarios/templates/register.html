@@ -1,38 +1,34 @@
-
+{% extends 'base_usuario.html' %}
 {% load static %}
 
-{% block title %}Registro{% endblock %}
+{% block title %}Crear Cuenta - Ardecors{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/usuarios.css' %}">
-<div class="container" id="container">
+<div id="container" class="container">
     <div class="form-container sign-up">
         <form method="post">
             {% csrf_token %}
             <h1>Crear Cuenta</h1>
-            {% for field in form %}
-                {{ field }}
-                {% if field.errors %}
-                    <div class="alert alert-danger">
-                        {{ field.errors }}
-                    </div>
-                {% endif %}
-            {% endfor %}
+            {% if form %}
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.password1 }}
+                {{ form.password2 }}
+            {% else %}
+                <p>El formulario no se ha cargado correctamente.</p>
+            {% endif %}
             <button type="submit">Registrarse</button>
         </form>
     </div>
+
     <div class="toggle-container">
         <div class="toggle">
-            <div class="toggle-panel toggle-left">
+            <div class="toggle-panel toggle-right">
                 <h1>¡Bienvenido de nuevo!</h1>
-                <p>Introduzca sus datos personales para utilizar todas las funciones del Panel de Administracion</p>
-                <a href="{% url 'login' %}" class="btn hidden">Iniciar sesion</a>
+                <p>Introduzca sus datos personales para utilizar todas las funciones del Panel de Administración</p>
+                <a href="{% url 'login' %}" class="hidden">Iniciar sesión</a>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script src="{% static 'js/usuarios.js' %}"></script>
 {% endblock %}

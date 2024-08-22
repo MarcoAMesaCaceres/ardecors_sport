@@ -8,4 +8,6 @@ urlpatterns = [
     path('eliminar/<int:pk>/', views.eliminar_venta, name='eliminar_venta'),
     path('ventas/exportar_pdf/', views.exportar_pdf, name='exportar_pdf'),
     path('ventas/exportar_excel/', views.exportar_excel, name='exportar_excel'),
+    path('exportar-pdf/', views.exportar_pdf, name='exportar_pdf'),
+    path('exportar-excel/', views.exportar_excel, name='exportar_excel'),
 ]

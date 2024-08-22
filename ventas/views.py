@@ -1,23 +1,25 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
-from django.template.loader import render_to_string
 from .models import Venta
 from .forms import VentaForm, VentaSearchForm
-from django.db.models import Q
-from django.core.paginator import Paginator
-from django.forms import inlineformset_factory
-from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from io import BytesIO
-import xlsxwriter
-from openpyxl.utils import get_column_letter
 from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Paragraph, Spacer
+from django.views.decorators.http import require_GET
+from reportlab.lib.units import inch
+import xlsxwriter
+import io
+import os
+from django.conf import settings
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 def lista_ventas(request):
     ventas = Venta.objects.all()
@@ -107,14 +109,27 @@ def exportar_pdf(request):
     # Crear el documento PDF
     doc = SimpleDocTemplate(buffer, pagesize=letter)
     elements = []
+    
+    # Agregar el logo con la ruta absoluta
+    logo_path = os.path.join(settings.BASE_DIR, 'static', 'Image', 'ardecorslogo.png')
+    logo = Image(logo_path, width=2*inch, height=2*inch)
+    elements.append(logo)
+    elements.append(Spacer(1, 12))
+    
+    # Agregar el título
+    styles = getSampleStyleSheet()
+    elements.append(Paragraph("Empresa de balones Ardecors", styles['Title']))
+    elements.append(Spacer(1, 12))
+    elements.append(Paragraph("Lista de Ventas", styles['Heading1']))
+    elements.append(Spacer(1, 12))
 
     # Obtener los datos de las ventas
     ventas = Venta.objects.all()
 
-    # Crear los datos para la tabla
-    data = [['ID', 'Cliente', 'Fecha', 'Total']]  # Encabezados
+    # Crear los datos para la tabla en el orden correcto
+    data = [['ID', 'Fecha', 'Cliente', 'Artículo', 'Total']]  # Encabezados
     for venta in ventas:
-        data.append([str(venta.id), venta.cliente, str(venta.fecha), str(venta.total)])
+        data.append([str(venta.id), str(venta.fecha), venta.cliente, venta.articulo, str(venta.total)])
 
     # Crear la tabla
     table = Table(data)
@@ -148,56 +163,40 @@ def exportar_pdf(request):
     # present the option to save the file.
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='ventas.pdf')
-
+@require_GET
 def exportar_excel(request):
-    # Crear un buffer de bytes para el archivo Excel
-    buffer = BytesIO()
-
-    # Crear un nuevo libro de trabajo de Excel y agregar una hoja
-    workbook = xlsxwriter.Workbook(buffer)
+    # Crea un archivo de Excel en memoria
+    output = io.BytesIO()
+    workbook = xlsxwriter.Workbook(output)
     worksheet = workbook.add_worksheet()
 
-    # Definir estilos
-    titulo_estilo = workbook.add_format({
-        'bold': True,
-        'font_size': 14,
-        'align': 'center',
-        'valign': 'vcenter',
-        'bg_color': '#4F81BD',
-        'font_color': 'white'
-    })
+    # Agrega el encabezado
+    bold = workbook.add_format({'bold': True})
+    worksheet.merge_range('A1:G1', 'Empresa de balones Ardecors', bold)
 
-    dato_estilo = workbook.add_format({
-        'align': 'center',
-        'valign': 'vcenter'
-    })
+    # Agrega los títulos de las columnas
+    columns = ['ID', 'Fecha', 'Cliente', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
+    for col, title in enumerate(columns):
+        worksheet.write(1, col, title, bold)
 
-    # Escribir los encabezados
-    encabezados = ['ID', 'Cliente', 'Fecha', 'Total', 'Artículo']
-    for col, encabezado in enumerate(encabezados):
-        worksheet.write(0, col, encabezado, titulo_estilo)
+    # Obtén los datos de tus ventas
+    ventas = Venta.objects.all()  # Ajusta esto según tu modelo y consulta
 
-    # Obtener los datos de las ventas
-    ventas = Venta.objects.all()
+    # Escribe los datos
+    for row, venta in enumerate(ventas, start=2):
+        worksheet.write(row, 0, venta.id)
+        worksheet.write(row, 1, venta.fecha.strftime('%d/%m/%Y'))
+        worksheet.write(row, 2, venta.cliente)
+        worksheet.write(row, 3, venta.producto.nombre if venta.producto else 'No especificado')
+        worksheet.write(row, 4, venta.cantidad)
+        worksheet.write(row, 5, venta.precio_unitario)
+        worksheet.write(row, 6, venta.total)
 
-    # Escribir los datos en el Excel
-    for row, venta in enumerate(ventas, start=1):
-        worksheet.write(row, 0, venta.id, dato_estilo)
-        worksheet.write(row, 1, venta.cliente, dato_estilo)
-        worksheet.write(row, 2, venta.fecha.strftime('%Y-%m-%d'), dato_estilo)
-        worksheet.write(row, 3, float(venta.total), dato_estilo)
-        worksheet.write(row, 4, venta.articulo.name if venta.articulo else 'N/A', dato_estilo)
-
-    # Ajustar el ancho de las columnas
-    for i, _ in enumerate(encabezados):
-        worksheet.set_column(i, i, 15)
-
-    # Cerrar el libro de trabajo
     workbook.close()
 
-    # Preparar la respuesta HTTP
-    buffer.seek(0)
-    response = HttpResponse(buffer.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
-
+    # Prepara la respuesta
+    output.seek(0)
+    response = HttpResponse(output.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename="ventas_ardecors.xlsx"'
+    
     return response
