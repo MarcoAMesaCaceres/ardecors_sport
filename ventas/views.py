@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
+from reportlab.lib.utils import ImageReader
 from .models import Venta
 from .forms import VentaForm, VentaSearchForm
 from reportlab.lib.pagesizes import letter
@@ -20,6 +21,7 @@ import os
 from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.templatetags.static import static
 
 def lista_ventas(request):
     ventas = Venta.objects.all()
@@ -103,6 +105,7 @@ def eliminar_venta(request, pk):
     return render(request, 'eliminar_venta.html', {'venta': venta})
 
 def exportar_pdf(request):
+    styles = getSampleStyleSheet()
     # Crear un buffer de bytes para el PDF
     buffer = BytesIO()
 
@@ -110,17 +113,43 @@ def exportar_pdf(request):
     doc = SimpleDocTemplate(buffer, pagesize=letter)
     elements = []
     
+    # Definir una función para agregar el pie de página
+    def agregar_pie_pagina(canvas, doc):
+        canvas.saveState()
+        canvas.setFont('Helvetica', 10)
+        canvas.drawString(inch, 0.75 * inch, "Ardecors 2024")
+        canvas.restoreState()
+
+    doc = SimpleDocTemplate(buffer, pagesize=letter, 
+                            rightMargin=inch, leftMargin=inch, 
+                            topMargin=inch, bottomMargin=inch)
+    doc.build_on_single_page = False
+    elements = []
+
+
     # Agregar el logo con la ruta absoluta
-    logo_path = os.path.join(settings.BASE_DIR, 'static', 'Image', 'ardecorslogo.png')
-    logo = Image(logo_path, width=2*inch, height=2*inch)
-    elements.append(logo)
-    elements.append(Spacer(1, 12))
+    logo_path = os.path.join(settings.STATICFILES_DIRS[0], 'D:/ardecors_django/sistema/ventas/static/Image/logo.png')
     
-    # Agregar el título
-    styles = getSampleStyleSheet()
-    elements.append(Paragraph("Empresa de balones Ardecors", styles['Title']))
-    elements.append(Spacer(1, 12))
-    elements.append(Paragraph("Lista de Ventas", styles['Heading1']))
+    
+    if os.path.exists(logo_path):
+        logo = Image(logo_path, width=1.5*inch, height=1.5*inch)
+    else:
+        logo = Paragraph("Ardecors - Sport", styles['Normal'])
+        
+    title = Paragraph("Ardecors Sport", styles['Title'])
+    title_spacer = Spacer(1, 12)
+    subtitle = Paragraph("Lista de Ventas", styles['Heading1'])
+
+    header_table = Table([[logo, title]], colWidths=[2 * inch, 4 * inch])
+    header_table.setStyle(TableStyle([
+        ('VALIGN', (0, 0), (0, 0), 'TOP'),
+        ('VALIGN', (1, 0), (1, 0), 'MIDDLE'),
+        ('ALIGN', (1, 0), (1, 0), 'CENTER')
+    ]))
+
+    elements.append(header_table)
+    elements.append(title_spacer)
+    elements.append(subtitle)
     elements.append(Spacer(1, 12))
 
     # Obtener los datos de las ventas
