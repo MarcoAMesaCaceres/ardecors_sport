@@ -116,6 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CUSTOM_TRANSLATIONS = {
+    ('Username'): 'Usuario',
+    ('Password'): 'Contraseña',
+    ('Email'): 'Correo electrónico',
+    ('Password'): 'Contraseña',
+    ('Password confirmation'): 'Confirmar contraseña',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

@@ -1,3 +1,4 @@
+/* Estilos existentes */
 .navbar-nav {
     margin: 0 auto;
     display: flex;
@@ -13,9 +14,48 @@
     text-align: center;
 }
 
-/* Nuevo estilo para centrar el contenido del encabezado */
 .navbar > .container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Nuevos estilos para responsividad */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.9em;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    .form-inline {
+        flex-direction: column;
+    }
+
+    .form-inline .form-control {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .table-responsive {
+        font-size: 0.8em;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7em;
+    }
+}
+
+/* Estilos generales */
+.content {
+    padding: 20px;
+}
+
+.table-responsive {
+    margin-top: 20px;
 }
