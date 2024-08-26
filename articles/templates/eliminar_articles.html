@@ -11,6 +11,7 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class="home-section">
+    <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración-Eliminar Articulos</a></li>
 <h1>Eliminar Artículo</h1>
 <p>¿Estás seguro de que deseas eliminar el artículo "{{ article.nombre }}"?</p>
 <form method="post">

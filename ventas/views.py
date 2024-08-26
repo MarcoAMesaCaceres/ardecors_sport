@@ -189,22 +189,22 @@ def exportar_pdf(request):
 
 @require_GET
 def exportar_excel(request):
-    # Crea un archivo de Excel en memoria jajajajaj
+    # Crea un archivo de Excel en memoria
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output)
     worksheet = workbook.add_worksheet()
 
     # Agrega el encabezado
     bold = workbook.add_format({'bold': True})
-    worksheet.merge_range('A1:G1', 'Empresa de balones Ardecors', bold)
+    worksheet.merge_range('A1:E1', 'Empresa de balones Ardecors', bold)
 
     # Agrega los títulos de las columnas
-    columns = ['ID', 'Fecha', 'Cliente', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
+    columns = ['ID', 'Fecha', 'Cliente', 'Artículo', 'Total']
     for col, title in enumerate(columns):
         worksheet.write(1, col, title, bold)
 
     # Obtén los datos de tus ventas
-    ventas = Venta.objects.all()  # Ajusta esto según tu modelo y consulta
+    ventas = Venta.objects.all()
 
     # Escribe los datos
     for row, venta in enumerate(ventas, start=2):
@@ -212,15 +212,14 @@ def exportar_excel(request):
         worksheet.write(row, 1, venta.fecha.strftime('%d/%m/%Y'))
         worksheet.write(row, 2, venta.cliente)
         worksheet.write(row, 3, venta.producto.nombre if venta.producto else 'No especificado')
-        worksheet.write(row, 4, venta.cantidad)
-        worksheet.write(row, 5, venta.precio_unitario)
-        worksheet.write(row, 6, venta.total)
+        worksheet.write(row, 4, venta.total)
 
     workbook.close()
 
     # Prepara la respuesta
     output.seek(0)
     response = HttpResponse(output.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename="ventas_ardecors.xlsx"'
+    filename = f'ventas_ardecors_{request.user.username}.xlsx'
+    response['Content-Disposition'] = f'attachment; filename={filename}'
     
     return response
