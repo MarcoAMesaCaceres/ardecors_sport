@@ -22,6 +22,7 @@ from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.templatetags.static import static
+from reportlab.lib.enums import TA_LEFT
 
 def lista_ventas(request):
     ventas = Venta.objects.all()
@@ -109,15 +110,11 @@ def exportar_pdf(request):
     # Crear un buffer de bytes para el PDF
     buffer = BytesIO()
 
-    # Crear el documento PDF
-    doc = SimpleDocTemplate(buffer, pagesize=letter)
-    elements = []
-    
     # Definir una función para agregar el pie de página
     def agregar_pie_pagina(canvas, doc):
         canvas.saveState()
         canvas.setFont('Helvetica', 10)
-        canvas.drawString(inch, 0.75 * inch, "Ardecors 2024")
+        canvas.drawString(inch, 0.75 * inch, "Fabrica de Balones,  Ardecors Sport, Monguí(Boyacá), Guillermo Ladino, No celular 3124933921.")
         canvas.restoreState()
 
     doc = SimpleDocTemplate(buffer, pagesize=letter, 
@@ -126,19 +123,24 @@ def exportar_pdf(request):
     doc.build_on_single_page = False
     elements = []
 
-
-    # Agregar el logo con la ruta absoluta
+    # Ruta del logo
     logo_path = os.path.join(settings.STATICFILES_DIRS[0], 'D:/ardecors_django/sistema/ventas/static/Image/logo.png')
-    
-    
+
+    # Crear la tabla para el logo y el título
     if os.path.exists(logo_path):
-        logo = Image(logo_path, width=1.5*inch, height=1.5*inch)
+        logo = Image(logo_path, width=1.0*inch, height=1.0*inch)
     else:
         logo = Paragraph("Ardecors - Sport", styles['Normal'])
         
+    title_style = styles['Title']
+    title_style.alignment = TA_LEFT
+    
     title = Paragraph("Ardecors Sport", styles['Title'])
+    
     title_spacer = Spacer(1, 12)
+    
     subtitle = Paragraph("Lista de Ventas", styles['Heading1'])
+    
 
     header_table = Table([[logo, title]], colWidths=[2 * inch, 4 * inch])
     header_table.setStyle(TableStyle([
@@ -154,16 +156,11 @@ def exportar_pdf(request):
 
     # Obtener los datos de las ventas
     ventas = Venta.objects.all()
-
-    # Crear los datos para la tabla en el orden correcto
     data = [['ID', 'Fecha', 'Cliente', 'Artículo', 'Total']]  # Encabezados
     for venta in ventas:
         data.append([str(venta.id), str(venta.fecha), venta.cliente, venta.articulo, str(venta.total)])
 
-    # Crear la tabla
     table = Table(data)
-    
-    # Estilo de la tabla
     style = TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -173,7 +170,6 @@ def exportar_pdf(request):
         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
         ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
         ('FONTSIZE', (0, 1), (-1, -1), 12),
         ('TOPPADDING', (0, 1), (-1, -1), 6),
@@ -182,19 +178,18 @@ def exportar_pdf(request):
     ])
     table.setStyle(style)
 
-    # Agregar la tabla al documento
     elements.append(table)
 
-    # Construir el PDF
-    doc.build(elements)
+    # Construir el PDF con el pie de página
+    doc.build(elements, onFirstPage=agregar_pie_pagina, onLaterPages=agregar_pie_pagina)
 
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='ventas.pdf')
+
+
 @require_GET
 def exportar_excel(request):
-    # Crea un archivo de Excel en memoria
+    # Crea un archivo de Excel en memoria jajajajaj
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output)
     worksheet = workbook.add_worksheet()

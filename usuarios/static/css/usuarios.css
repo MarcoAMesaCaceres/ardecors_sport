@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #ffffff 0%, #6655ff 100%);
+    background: linear-gradient(to right, #ffffff 1%, #332e63 95%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -9,12 +9,12 @@ body {
 
 .container {
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
+    border-radius: 60px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 100%;
-    max-width: 400px;
-    padding: 40px;
+    max-width: 500px;
+    padding: 60px;
 }
 
 /* Estilos para el formulario */
@@ -47,7 +47,7 @@ input[type="email"] {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 18px;
     transition: border-color 0.3s ease;
 }
 
@@ -56,12 +56,12 @@ input[type="password"]:focus,
 input[type="email"]:focus {
     border-color: #ffffff;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(89, 63, 255, 0.2);
+    box-shadow: 0 0 0 2px #332e63;
 }
 
 /* Estilos para el botón */
 button[type="submit"] {
-    background: linear-gradient(to right, #ffffff, #4012e6);
+    background: linear-gradient(to right, #ffffff,#332e63);
     color: white;
     border: none;
     padding: 12px;
