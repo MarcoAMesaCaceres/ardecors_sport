@@ -116,8 +116,18 @@ def eliminar_proveedor(request):
 
 def login(request):
     return render(request, 'login.html')
+def user_edit(request):
+    return render(request, 'user_edit.html')
+def user_delete(request):
+    return render(request, 'user_delete.html')
+def user_list(request):
+    return render(request, 'user_list.html')
+def login(request):
+    return render(request, 'login.html')
 def register(request):
     return render(request, 'register.html')
+
+
 def password_reset_email(request):
     return render(request, 'password_reset_email.html')
 def password_reset_complete(request):

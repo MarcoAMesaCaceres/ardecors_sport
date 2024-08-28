@@ -6,6 +6,14 @@
 <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     {% include 'navbar.html' %}
+
+    <!-- Aquí colocamos el breadcrumb -->
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Editar detalles compra</a></li>
+    </ul>
+
+
+
     <div class="home-section">
         <h2>Editar Detalle Compra</h2>
         <form method="post">

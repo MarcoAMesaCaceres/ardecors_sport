@@ -5,6 +5,13 @@
 <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     {% include 'navbar.html' %}
+
+    <!-- Aquí colocamos el breadcrumb -->
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Crear detalle venta</a></li>
+    </ul>
+
+
     <div class="home-section">
 <h1>Crear Detalle de Venta</h1>
 <h2>Venta #{{ venta.id }} - {{ venta.cliente }}</h2>

@@ -56,6 +56,10 @@ urlpatterns = [
     path('lista_ayuda/', views.lista_ayuda, name='lista_ayuda'),
     path('detalle_ayuda/', views.detalle_ayuda, name='detalle_ayuda'),
     path('base_ayuda/', views.base_ayuda, name='besa_ayuda'),
+
+    path('user_list/', views.user_list, name='user_list'),
+    path('user_edit/', views.user_edit, name='user_edit'),
+    path('user_delete/', views.user_delete, name='user_delete'),
     
     path('ardecors/', views.ardecors, name='ardecors'),
 

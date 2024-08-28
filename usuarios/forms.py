@@ -23,6 +23,14 @@ class RegisterForm(UserCreationForm):
         for field_name in self.fields:
             self.fields[field_name].widget.attrs['class'] = 'form-control'
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_active = False  # El usuario no podrá iniciar sesión hasta que sea aprobado
+        if commit:
+            user.save()
+            UserProfile.objects.create(user=user, role=self.cleaned_data.get('role'))
+        return user
+
 class CustomPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 

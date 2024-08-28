@@ -21,7 +21,13 @@
         </div>
         <ul class="nav-list">
 
-            
+            <li>
+                <a href="{% url 'user_list' %}">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
             
             <li>
                 <a href="{% url 'lista_articles' %}">
@@ -46,7 +52,7 @@
             </li>
             <li>
                 <a href="{% url 'lista_proveedores' %}">
-                    <i class='bx bx-user'></i>
+                    <i class='bx bx-package'></i>
                     <span class="link_name">Proveedores</span>
                 </a>
                 <span class="tooltip">Proveedores</span>
@@ -81,7 +87,7 @@
             </li>
             <li class="profile">
                 <div class="profile_details">
-                    <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
+                    <img src="{% static 'img/usuario.png' %}" alt="profile image">
                     <div class="profile_content">
                         <div class="name">Usuario</div>
                         <div class="designation">Admin</div>

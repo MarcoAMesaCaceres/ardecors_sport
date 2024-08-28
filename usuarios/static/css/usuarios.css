@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, #ffffff 1%, #332e63 95%);
+    background: linear-gradient(to right, #ffffff 1%, #4c3dd3 95%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -103,9 +103,37 @@ a:hover {
     color: #dc2626;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-    .container {
-        padding: 30px 20px;
-    }
+body {
+    background: linear-gradient(to right, #ffffff 1%, #4c3dd3 95%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 60px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    padding: 60px;
+    position: relative; /* Mantener el formulario centrado */
+}
+
+/* CSS personalizado para el breadcrumb */
+
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+.breadcrumb-item a:hover {
+    text-decoration: underline;
 }

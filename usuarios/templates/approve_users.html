@@ -1,0 +1,21 @@
+{% extends "base_usuario.html" %}
+{% block content %}
+<h2>Usuarios pendientes de aprobación</h2>
+{% if pending_users %}
+    <ul>
+    {% for profile in pending_users %}
+        <li>
+            {{ profile.user.username }} - {{ profile.get_role_display }}
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{ profile.id }}">
+                <button type="submit" name="action" value="approve">Aprobar</button>
+                <button type="submit" name="action" value="reject">Rechazar</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay usuarios pendientes de aprobación.</p>
+{% endif %}
+{% endblock %}
