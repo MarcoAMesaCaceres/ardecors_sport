@@ -7,8 +7,14 @@
     
 {% block content %}
 {% include 'navbar.html' %}
+
+    <!-- Aquí colocamos el breadcrumb -->
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Crear Articulos</a></li>
+    </ul>
+
 <div class="home-section">
-    <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración-Crear  Articulos</a></li>
+    
 <h1 class="mb-4">{% if producto %}Editar{% else %}Crear{% endif %} Articulos</h1>
 <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
