@@ -6,47 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Título de la página</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        /* Incluye el CSS del breadcrumb aquí */
-        .breadcrumb {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            list-style: none;
-            background-color: #e9ecef;
-            border-radius: 0.25rem;
-        }
-
-        .breadcrumb-item {
-            display: flex;
-        }
-
-        .breadcrumb-item + .breadcrumb-item {
-            padding-left: 0.5rem;
-        }
-
-        .breadcrumb-item + .breadcrumb-item::before {
-            display: inline-block;
-            padding-right: 0.5rem;
-            color: #6c757d;
-            content: "/";
-        }
-
-        /* Estilo del texto del breadcrumb */
-        .breadcrumb-item a {
-            color: #007bff; /* Azul para los enlaces */
-            text-decoration: none;
-            transition: color 0.3s ease; /* Transición suave para el cambio de color */
-        }
-
-        /* Cambio de color al pasar el mouse */
-        .breadcrumb-item a:hover {
-            color: #6f42c1; /* Violeta cuando se coloca el mouse */
-            text-decoration: underline; /* Opcional: subrayado al pasar el mouse */
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'css/breadcrumb.css' %}">
+    <script src="{% static 'js/breadcrumb.js' %}"></script>
+    
 </head>
 <body>
     <header class="bg-primary py-4">
