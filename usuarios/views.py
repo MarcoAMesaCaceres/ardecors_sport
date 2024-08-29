@@ -38,6 +38,7 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
+@user_passes_test(lambda u: u.is_staff)
 def approve_users(request):
     pending_users = UserProfile.objects.filter(is_approved=False, user__is_active=False)
     if request.method == 'POST':
@@ -50,10 +51,8 @@ def approve_users(request):
                 user_profile.user.is_active = True
                 user_profile.user.save()
                 user_profile.save()
-                messages.success(request, f'Usuario {user_profile.user.username} aprobado.')
             elif action == 'reject':
                 user_profile.user.delete()
-                messages.success(request, f'Usuario {user_profile.user.username} rechazado y eliminado.')
         return redirect('approve_users')
     return render(request, 'approve_users.html', {'pending_users': pending_users})
 
