@@ -20,10 +20,11 @@
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-
+            
             <li>
                 <a href="{% url 'user_list' %}">
                     <i class='bx bx-user'></i>
+                   
                     <span class="link_name">Usuarios</span>
                 </a>
                 <span class="tooltip">Usuarios</span>
@@ -78,13 +79,16 @@
                 </a>
                 <span class="tooltip">Ayuda</span>
             </li>
+            
             <li>
                 <a href="{% url 'backup_databases' %}">
                     <i class='bx bx-data'></i>
+                   
                     <span class="link_name">Repaldos</span>
                 </a>
                 <span class="tooltip">Respaldos</span>
             </li>
+            
             <li class="profile">
                 <div class="profile_details">
                     <img src="{% static 'img/usuario.png' %}" alt="profile image">
@@ -105,5 +109,6 @@
         </ul>
     </div>
     <script src="{% static 'js/admin_dashboard.js' %}"></script>
+    
 
-</html>
+    

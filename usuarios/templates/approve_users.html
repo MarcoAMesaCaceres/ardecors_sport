@@ -16,8 +16,11 @@
     {% endfor %}
     </ul>
 {% else %}
+
+
+
     <p>No hay usuarios pendientes de aprobación.</p>
-</br>
+
 <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
 {% endif %}
 {% endblock %}

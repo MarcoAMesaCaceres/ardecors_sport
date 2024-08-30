@@ -16,6 +16,7 @@ from django.contrib.auth.decorators import user_passes_test
 from .forms import LoginForm, RegisterForm, CustomPasswordResetForm
 from .models import UserProfile, User
 
+
 class CustomLoginView(LoginView):
     form_class = LoginForm
     template_name = 'login.html'
@@ -38,7 +39,7 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
-@user_passes_test(lambda u: u.is_staff)
+
 def approve_users(request):
     pending_users = UserProfile.objects.filter(is_approved=False, user__is_active=False)
     if request.method == 'POST':
@@ -62,12 +63,12 @@ class CustomPasswordResetView(PasswordResetView):
     email_template_name = 'password_reset_email.html'
     success_url = reverse_lazy('password_reset_done')
 
-@login_required
+
 def user_list(request):
     users = User.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
-@login_required
+
 def user_edit(request, user_id):
     user = User.objects.get(id=user_id)
     profile, created = UserProfile.objects.get_or_create(user=user)
@@ -83,11 +84,11 @@ def user_edit(request, user_id):
     
     return render(request, 'user_edit.html', {'form': form, 'user': user})
 
-@login_required
+
 def user_delete(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == 'POST':
         user.delete()
         messages.success(request, 'Usuario eliminado con éxito.')
         return redirect('user_list')
-    return render(request, 'user_confirm_delete.html', {'user': user})
+    return render(request, 'user_delete.html', {'user': user})

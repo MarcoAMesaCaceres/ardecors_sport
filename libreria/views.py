@@ -10,8 +10,7 @@ from django.conf import settings
 import subprocess
 from django.contrib import messages
 from django.core.paginator import Paginator
-
-
+from django.core.exceptions import PermissionDenied
 
 def ardecors(request):
     return render(request, 'ardecors.html')
@@ -150,7 +149,7 @@ def backup_databases(request):
     return render(request, 'backup_databases.html')
 
 
-@login_required
+
 def backup_database(request):
     try:
         # Obtener la configuración de la base de datos
@@ -185,7 +184,7 @@ def backup_database(request):
 
     return redirect('backup_list')
 
-@login_required
+
 def backup_list(request):
     backup_dir = os.path.join(settings.BASE_DIR, 'backups')
     backups = []
@@ -209,7 +208,7 @@ def backup_list(request):
     
     return render(request, 'backup_list.html', {'page_obj': page_obj})
 
-login_required
+
 def delete_backup(request, filename):
     if request.method == 'POST':
         file_path = os.path.join(settings.BASE_DIR, 'backups', filename)
@@ -220,7 +219,7 @@ def delete_backup(request, filename):
             messages.error(request, f"El archivo {filename} no existe")
     return redirect('backup_list')
 
-login_required
+
 def delete_backup(request, filename):
     if request.method == 'POST':
         file_path = os.path.join(settings.BASE_DIR, 'backups', filename)
@@ -231,7 +230,7 @@ def delete_backup(request, filename):
             messages.error(request, f"El archivo {filename} no existe")
     return redirect('backup_list')
 
-@login_required
+
 def restore_database(request):
     if request.method == 'GET':
         file = request.GET.get('file')
