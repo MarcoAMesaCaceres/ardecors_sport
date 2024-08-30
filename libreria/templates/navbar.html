@@ -20,7 +20,7 @@
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-            
+            {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
             <li>
                 <a href="{% url 'user_list' %}">
                     <i class='bx bx-user'></i>
@@ -29,7 +29,7 @@
                 </a>
                 <span class="tooltip">Usuarios</span>
             </li>
-            
+            {%endif%}
             <li>
                 <a href="{% url 'lista_articles' %}">
                     <i class='bx bx-grid-alt'></i>
@@ -79,7 +79,7 @@
                 </a>
                 <span class="tooltip">Ayuda</span>
             </li>
-            
+            {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
             <li>
                 <a href="{% url 'backup_databases' %}">
                     <i class='bx bx-data'></i>
@@ -88,7 +88,7 @@
                 </a>
                 <span class="tooltip">Respaldos</span>
             </li>
-            
+            {%endif%}
             <li class="profile">
                 <div class="profile_details">
                     <img src="{% static 'img/usuario.png' %}" alt="profile image">

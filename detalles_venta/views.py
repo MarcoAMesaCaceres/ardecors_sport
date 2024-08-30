@@ -48,7 +48,7 @@ def lista_detalles_venta(request, venta_id):
         if precio_unitario_max is not None:
             detalles = detalles.filter(precio_unitario__lte=precio_unitario_max)
     
-    return render(request, 'lista_detalles_venta.html', {'form': form, 'detalles': detalles, 'venta': venta})
+    return render(request, 'lista_detalles_venta.html', {'venta': venta, 'detalles': detalles, 'form': form})
 
 def crear_detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, pk=venta_id)

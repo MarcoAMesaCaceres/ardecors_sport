@@ -15,6 +15,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from .forms import LoginForm, RegisterForm, CustomPasswordResetForm
 from .models import UserProfile, User
+from django.contrib.auth.decorators import login_required
+from .decorators import admin_required
 
 
 class CustomLoginView(LoginView):
@@ -39,7 +41,8 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
-
+@login_required
+@admin_required
 def approve_users(request):
     pending_users = UserProfile.objects.filter(is_approved=False, user__is_active=False)
     if request.method == 'POST':
@@ -63,12 +66,14 @@ class CustomPasswordResetView(PasswordResetView):
     email_template_name = 'password_reset_email.html'
     success_url = reverse_lazy('password_reset_done')
 
-
+@login_required
+@admin_required
 def user_list(request):
     users = User.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
-
+@login_required
+@admin_required
 def user_edit(request, user_id):
     user = User.objects.get(id=user_id)
     profile, created = UserProfile.objects.get_or_create(user=user)
@@ -84,7 +89,8 @@ def user_edit(request, user_id):
     
     return render(request, 'user_edit.html', {'form': form, 'user': user})
 
-
+@login_required
+@admin_required
 def user_delete(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == 'POST':
