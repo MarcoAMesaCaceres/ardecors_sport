@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, #ffffff 1%, #3dd367 95%);
+    background: #2427d0e6;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -61,7 +61,7 @@ input[type="email"]:focus {
 
 /* Estilos para el botón */
 button[type="submit"] {
-    background: linear-gradient(to right, #ffffff,#332e63);
+    background: linear-gradient(to right, #ffffff,#1f185d);
     color: white;
     border: none;
     padding: 12px;
@@ -104,7 +104,7 @@ a:hover {
 }
 
 body {
-    background: linear-gradient(to right, #ffffff 1%, #4ed33d 95%);
+    background: linear-gradient(to right, #ffffff 1%, #141485 95%);
     min-height: 100vh;
     display: flex;
     align-items: center;
