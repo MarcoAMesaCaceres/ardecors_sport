@@ -3,7 +3,8 @@
 {% block title %}Confirmar Eliminación{% endblock %}
 <link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
-
+{% include 'navbar.html' %}
+<div class="home-section">
 <div class="container mt-4">
     <h2>Confirmar Eliminación</h2>
     <p>¿Estás seguro de que quieres eliminar al usuario "{{ user.username }}"?</p>
@@ -12,6 +13,7 @@
         <button type="submit" class="btn btn-danger">Sí, eliminar</button>
         <a href="{% url 'user_list' %}" class="btn btn-secondary">Cancelar</a>
     </form>
+</div>
 </div>
 
 {% endblock %}

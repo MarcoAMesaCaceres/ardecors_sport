@@ -1,5 +1,5 @@
 body {
-    background: #2427d0e6;
+    background: #0E2C40;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -56,12 +56,12 @@ input[type="password"]:focus,
 input[type="email"]:focus {
     border-color: #ffffff;
     outline: none;
-    box-shadow: 0 0 0 2px #332e63;
+    box-shadow: 0 0 0 2px #0e2c40;
 }
 
 /* Estilos para el botón */
 button[type="submit"] {
-    background: linear-gradient(to right, #ffffff,#1f185d);
+    background: #0E2C40;
     color: white;
     border: none;
     padding: 12px;
@@ -86,7 +86,7 @@ a {
 }
 
 a:hover {
-    color: #764ba2;
+    color: #0E2C40;
 }
 
 /* Mensajes de error */
@@ -104,7 +104,7 @@ a:hover {
 }
 
 body {
-    background: linear-gradient(to right, #ffffff 1%, #141485 95%);
+    background: #0E2C40;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -131,7 +131,7 @@ body {
     background-color: transparent;
 }
 .breadcrumb-item a {
-    color: #007bff;
+    color: #ffffff;
     text-decoration: none;
 }
 .breadcrumb-item a:hover {
