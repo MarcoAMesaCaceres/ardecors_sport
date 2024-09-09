@@ -1,35 +1,76 @@
-.ordenes-compras-container {
-    max-width: 800px;
+
+/* Estilos existentes */
+.navbar-nav {
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar-brand {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.navbar > .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Nuevos estilos para responsividad */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.9em;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    .form-inline {
+        flex-direction: column;
+    }
+
+    .form-inline .form-control {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .table-responsive {
+        font-size: 0.8em;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7em;
+    }
+}
+
+/* Estilos generales */
+.content {
     padding: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.table-responsive {
     margin-top: 20px;
 }
 
-th, td {
+footer{
+   
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+    width: 100%;
 }
 
-th {
-    background-color: #f4f4f4;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.btn:hover {
-    background-color: #45a049;
+footer h3{
+    font-size: 0.8vw;
 }
