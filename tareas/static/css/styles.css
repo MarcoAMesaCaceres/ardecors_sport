@@ -1,0 +1,56 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+.btn-primary, .btn-secondary, .btn-warning, .btn-danger {
+    margin-right: 0.5rem;
+}
+
+.table {
+    margin-top: 1rem;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.container {
+    padding-top: 2rem;
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: bold;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+/* Custom Styles */
+.custom-container {
+    margin-top: 2rem;
+}
+
+.custom-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.custom-footer {
+    margin-top: 2rem;
+    text-align: center;
+}

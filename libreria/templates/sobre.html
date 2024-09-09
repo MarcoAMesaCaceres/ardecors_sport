@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sobre Nosotros </title>
+        <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static '/js/ardecors.js' %}">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="{% static 'img/logoardecors.png' %}" alt="logo">
+
+                <div class="button-container">
+                    <button class="button button-blue"><a
+                            href="{% url 'login' %}">Login</a></button>
+                    <button class="button button-yellow"><a
+                            href="{% url 'ardecors' %}">Inicio</a></button>
+                            <button class="button button-yellow"><a
+                                href="{% url 'productos' %}">productos</a></button>
+                    <button class="button button-red"><a
+                            href="{% url 'contacto' %}">Contacto</a></button>
+                </div>
+
+            </nav>
+        </header>
+        <section id="nosotros">
+            <h1>Sobre Nosotros</h1>
+            <p>Ardecors: Una empresa dedicada a la fabricación de balones
+                deportivos con diseños innovadores y materiales de alta calidad.
+                Nuestro compromiso es lograr la mayor satisfacción de nuestros
+                clientes. Contamos con la mejor tecnología para el diseño y
+                personalización de balones, ofreciendo opciones únicas y
+                personalizadas para equipos y negocios. Además, te invitamos a
+                sumergirte en el fascinante mundo de los balones a través de
+                nuestro taller, donde podrás visitar nuestra fábrica y crear tu
+                propio balón personalizado. En Arcueros, la seguridad y salud en
+                el trabajo son fundamentales, y nos esforzamos por promover
+                ambientes seguros y saludables para todos nuestros
+                colaboradores</p>
+
+        </section>
+        <section id="valores">
+            <h1>Nuestros Valores</h1>
+            <ul>
+                <li>Diversidad: Creemos que la integración de diferentes
+                    perspectivas y experiencias enriquece nuestra cultura
+                    interna y nos impulsa hacia el crecimiento1.</li>
+                <li>Integridad: Guiamos nuestras acciones con transparencia,
+                    coherencia y responsabilidad. Mantenemos altos estándares
+                    éticos en todas nuestras operaciones</li>
+                <li>Vínculos Humanos: Fomentamos un clima colaborativo y cercano
+                    tanto dentro de la empresa como con la comunidad. Valoramos
+                    las relaciones interpersonales y el trabajo en equipo</li>
+                <li>Cultura Interna de Emprendedores: Promovemos la creatividad,
+                    la innovación y la actitud proactiva. Cada colaborador es un
+                    agente de cambio y contribuye al éxito de Ardecors</li>
+            </ul>
+        </section>
+
+        <footer>
+            <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+        </footer>
+    </body>
+</html>

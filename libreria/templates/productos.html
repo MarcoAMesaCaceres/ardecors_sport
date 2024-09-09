@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="{% static '/css/productos.css' %}">
+            <script src="{% static '/js/productos.js' %}" async></script>
+        <title>productos | </title>
+    </head>
+    <body>
+        <header>
+            <header>
+                <div class="logo">
+                    <img src="{% static 'img/logoardecors.png' %}" alt="logo">
+
+                
+                
+                        <div class="button-container">
+                            <button class="button button-blue"><a
+                            href="{% url 'login' %}">Login</a></button>
+                            <button class="button button-yellow"><a
+                                href="{% url 'ardecors' %}">Inicio</a></button>
+                            <button class="button button-green"><a href="{% url 'sobre' %}">Sobre
+                                Nosotros</a></button>
+                            <button class="button button-red"><a
+                                href="{% url 'contacto' %}">Contacto</a></button>
+                                
+                        </div>
+                
+
+                </nav>
+            </header>
+        </header>
+        <section class="contenedor">
+            <!-- Contenedor de elementos -->
+            <div class="contenedor-items">
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #4 Argentina Lionel Messi</span>
+                    <img src="{% static 'img/slider 1sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$81.000</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #4 Champions Final 2022</span>
+                    <img src="{% static 'img/slider 2sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$81.000</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Fútbol #1 Bob Esponja</span>
+                    <img src="{% static 'img/slider 3sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$43.275</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balon de Futbol #5 Mundial 2022</span>
+                    <img src="{% static 'img/slider 4sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$117.900</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Mundial 1982</span>
+                    <img src="{% static 'img/slider 5sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$111.094</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Mundial 2018 </span>
+                    <img src="{% static 'img/slider 6sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$111.094</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Mundial 1954</span>
+                    <img src="{% static 'img/slider 7sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$111.094</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Mundial 1966</span>
+                    <img src="{% static 'img/slider 8sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$111.094</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Mundial 1974 </span>
+                    <img src="{% static 'img/slider 9sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$111.094</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Copa America 2024 </span>
+                    <img src="{% static 'img/slider 10sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$85.625</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Euro Copa 2024 </span>
+                    <img src="{% static 'img/slider 11sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$85.625</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+                <div class="item">
+                    <span class="titulo-item">Balón de Futbol #5 Cristiano Ronaldo </span>
+                    <img src="{% static 'img/slider 12sf.png' %}" alt class="img-item">
+                    <span class="precio-item">$42.500</span>
+                    <button class="boton-item">Agregar al Carrito</button>
+                </div>
+            </div>
+            <!-- Carrito de Compras -->
+            <div class="carrito" id="carrito">
+                <div class="header-carrito">
+                    <h2>Tu Carrito</h2>
+                </div>
+
+                <div class="carrito-items">
+                
+                </div>
+                <div class="carrito-total">
+                    <div class="fila">
+                        <strong>Tu Total</strong>
+                        <span class="carrito-precio-total">
+                            $120.000,00
+                        </span>
+                    </div>
+                    <button class="btn-pagar">Pagar <i
+                            class="fa-solid fa-bag-shopping"></i> </button>
+                </div>
+            </div>
+        </section>
+    </body>
+    <footer>
+        <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+        </footer>
+</html>
