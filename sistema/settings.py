@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'sistema.urls'
@@ -100,21 +101,39 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+# Cerca del principio del archivo, añade:
+from django.utils.translation import gettext_lazy as _
 
+# Cambia el LANGUAGE_CODE a español:
+LANGUAGE_CODE = 'es'
+
+# Añade o modifica la siguiente configuración:
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'user_attributes': ('username', 'email'),
+            'max_similarity': 0.7,
+        },
+        'MESSAGE': _('Tu contraseña es muy similar a tu información personal.'),
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        },
+        'MESSAGE': _('Tu contraseña debe contener al menos 8 caracteres.'),
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'MESSAGE': _('Tu contraseña es demasiado común.'),
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'MESSAGE': _('Tu contraseña no puede ser completamente numérica.'),
     },
 ]
+
 
 CUSTOM_TRANSLATIONS = {
     ('Username'): 'Usuario',
@@ -127,7 +146,7 @@ CUSTOM_TRANSLATIONS = {
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+
 
 TIME_ZONE = 'UTC'
 
@@ -179,3 +198,4 @@ EMAIL_HOST_PASSWORD = 'kvja wwug bqup rmsy'
 
 TIME_ZONE = 'America/Bogota'
 USE_TZ = True
+

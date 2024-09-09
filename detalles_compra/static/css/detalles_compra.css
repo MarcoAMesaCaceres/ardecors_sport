@@ -69,17 +69,3 @@
 .detalles-compra-container .btn:hover {
     background-color: #0056b3;
 }
-
-footer{
-    background-color: #0E2C40;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    width: 100%;
-}
-
-footer h3{
-    font-size: 0.8vw;
-}
