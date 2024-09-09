@@ -1,7 +1,10 @@
 {% extends "base_usuario.html" %}
 {% load static %}
 {% block title %}Lista de Usuarios{% endblock %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/articles.css' %}">
 <link rel="icon" href="{% static 'img/logoardecors.png' %}">
+
 {% block content %}
 {% include 'navbar.html' %}
 <div class="home-section">
@@ -33,5 +36,9 @@
     </table>
     <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
 </div>
+<footer>
+    <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+</footer>
 </div>
+
 {% endblock %}
