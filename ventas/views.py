@@ -29,9 +29,15 @@ def lista_ventas(request):
     form = VentaSearchForm(request.GET)
     
     if form.is_valid():
+        form = VentaSearchForm(request.GET)
+    ventas = Venta.objects.all()
+
+    if form.is_valid():
         cliente = form.cleaned_data.get('cliente')
         fecha_inicio = form.cleaned_data.get('fecha_inicio')
         fecha_fin = form.cleaned_data.get('fecha_fin')
+        total_min = form.cleaned_data.get('total_min')
+        total_max = form.cleaned_data.get('total_max')
 
         if cliente:
             ventas = ventas.filter(cliente__icontains=cliente)
@@ -39,6 +45,10 @@ def lista_ventas(request):
             ventas = ventas.filter(fecha__gte=fecha_inicio)
         if fecha_fin:
             ventas = ventas.filter(fecha__lte=fecha_fin)
+        if total_min:
+            ventas = ventas.filter(total__gte=total_min)
+        if total_max:
+            ventas = ventas.filter(total__lte=total_max)
     
     return render(request, 'lista_ventas.html', {'ventas': ventas, 'form': form})
 
