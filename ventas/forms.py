@@ -6,12 +6,20 @@ from django.utils import timezone
 class VentaForm(forms.ModelForm):
     class Meta:
         model = Venta
-        fields = ['fecha', 'cliente', 'articulo']
+        fields = ['fecha', 'cliente', 'total', 'articulo']
         widgets = {
             'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'cliente': forms.TextInput(attrs={'class': 'form-control'}),
+            'total': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
             'articulo': forms.Select(attrs={'class': 'form-control'}),
         }
+
+    def clean_total(self):
+        total = self.cleaned_data.get('total')
+        if total is not None and total <= 0:
+            raise forms.ValidationError("El total debe ser un número positivo.")
+        return total
+
 
     def clean_cliente(self):
         cliente = self.cleaned_data.get('cliente')
@@ -34,6 +42,7 @@ class VentaForm(forms.ModelForm):
             raise forms.ValidationError("No hay stock suficiente para este artículo.")
         return cleaned_data
 
+
 class VentaSearchForm(forms.Form):
     cliente = forms.CharField(
         required=False,
@@ -46,6 +55,14 @@ class VentaSearchForm(forms.Form):
     fecha_fin = forms.DateField(
         required=False,
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
+    )
+    total_min = forms.DecimalField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Total mínimo', 'step': '0.01'})
+    )
+    total_max = forms.DecimalField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Total máximo', 'step': '0.01'})
     )
     articulo = forms.ModelChoiceField(
         queryset=Article.objects.all(),

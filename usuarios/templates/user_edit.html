@@ -1,12 +1,8 @@
 {% extends "base_usuario.html" %}
 {% load static %}
 {% block title %}Editar Usuario{% endblock %}
-<link rel="icon" href="{% static 'img/logoardecors.png' %}">
-<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-<link rel="stylesheet" href="{% static 'css/articles.css' %}">
 {% block content %}
-{% include 'navbar.html' %}
-<div class="home-section">
+
 <div class="container mt-4">
     <h2>Editar Usuario: {{ user.username }}</h2>
     <form method="post">
@@ -26,8 +22,4 @@
     </form>
 </div>
 
-</div>
-<footer>
-    <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
-</footer>
 {% endblock %}

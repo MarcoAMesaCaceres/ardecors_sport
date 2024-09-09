@@ -61,8 +61,8 @@
 }
 
 footer{
-   
-    
+    background-color: #0E2C40;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
