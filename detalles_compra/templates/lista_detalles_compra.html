@@ -1,0 +1,82 @@
+{% extends 'base_detalle_compra.html' %}
+{% load static %}
+{% block title %}Lista de Detalles de Compra{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}?v1.2">
+    {% include 'navbar.html' %}
+
+    <!-- Aquí colocamos el breadcrumb -->
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Lista detalles Compra</a></li>
+    </ul>
+
+    <div class="home-section">
+<h1>Lista de Detalles de Compra</h1>
+
+<!-- Botón para imprimir detalles compras -->
+<button onclick="Detalles_Compra()" class="btn btn-primary mb-3">Imprimir Detalle de la Compra</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for detalle in detalles %}
+        <tr>
+            <td>{{ detalle.fecha|date:"d/m/Y" }}</td>
+            <td>{{ detalle.producto }}</td>
+            <td>{{ detalle.cantidad }}</td>
+            <td>{{ detalle.precio_unitario }}</td>
+            <td>{{ detalle.total }}</td>
+            <td>
+                <a href="{% url 'editar_detalle_compra' detalle.pk %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'eliminar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="6">No hay detalles de compra disponibles.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if compra %}
+    <a href="{% url 'crear_detalle_compra' compra.id %}" class="btn btn-primary">Agregar Detalle</a>
+{% else %}
+    <p>Seleccione una compra para agregar detalles.</p>
+{% endif %}
+
+<a href="{% url 'lista_compras' %}" class="btn btn-secondary">Volver a la Lista de Compras</a>
+<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
+<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
+<script>
+    $(document).ready(function() {
+        $('#ventas-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+    </script>
+
+{% block extra_js %}
+    <script>
+        function Detalles_Compra() {
+            window.print();
+        }
+    </script>
+</div>
+    {% endblock %}
+
+{% endblock %}

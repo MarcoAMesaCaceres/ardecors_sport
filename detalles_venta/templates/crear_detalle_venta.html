@@ -1,0 +1,38 @@
+{% extends 'base_detalle_venta.html' %}
+{% load static %}
+{% block title %}Crear Detalle de Venta{% endblock %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+{% block content %}
+
+    {% include 'navbar.html' %}
+
+    <!-- Aquí colocamos el breadcrumb -->
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Crear detalle venta</a></li>
+    </ul>
+
+
+    <div class="home-section">
+<h1>Crear Detalle de Venta</h1>
+<h2>Venta #{{ venta.id }} - {{ venta.cliente }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+        <div class="text-danger">
+            {{ field.errors }}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'lista_detalles_venta' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+</div>
+{% endblock %}

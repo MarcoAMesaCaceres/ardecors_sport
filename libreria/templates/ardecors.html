@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDECORS</title>
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/js/ardecors.js' %}">
+ 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+
+    <header>
+        <div class="logo">
+        <img src="{% static 'img/logoardecors.png' %}" alt="logo"> 
+
+        <div class="button-container">
+            <button class="button button-blue"><a
+            href="{% url 'login' %}">login</a></button>
+
+            <button class="button button-yellow"><a
+                href="{% url 'productos' %}">productos</a></button>
+            <button class="button button-green"><a href="{% url 'sobre' %}">Sobre
+                Nosotros</a></button>
+            <button class="button button-red"><a
+                href="{% url 'contacto' %}">Contacto</a></button>
+        </div>
+
+        </nav>
+    </header>
+  
+    <section id="informacion">
+
+        <h1>Información de la Empresa</h1>
+        <p>Ardecors se enorgullece de ofrecer una artesanía incomparable y una dedicación inigualable a la calidad en cada balón que producimos. Somos más que una simple fábrica; somos artífices de sueños deportivos, creadores de momentos memorables en el campo. Con décadas de experiencia y una pasión inquebrantable por la excelencia, nos hemos ganado la reputación de ser la mejor fábrica de balones. Cada puntada, cada detalle, refleja nuestro compromiso con la perfección. Desde los campos de juego locales hasta los escenarios internacionales, nuestros balones son sinónimo de durabilidad, precisión y rendimiento superior. Únete a nosotros en nuestra misión de elevar el juego a nuevas alturas y descubre por qué Ardecors es la elección indiscutible para los verdaderos amantes del deporte en todo el mundo..</p>
+        <div class="slideshow">
+        <div class="slide">
+            <img src="{% static 'img/slider 1sf.png' %}" alt="Image 1">
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/slider 2sf.png' %}" alt="Image 2">
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/slider 3sf.png' %}" alt="Image 3">
+        </div>
+        
+        </div>
+        </div> 
+        
+    <section id="mision">
+        <h2>Misión</h2>
+        <h3>En ARDECORS SPORT, nos comprometemos a proporcionar balones de la más alta calidad para satisfacer las necesidades de los amantes del deporte en todo el mundo. Nuestra misión es ser reconocidos como líderes en la fabricación y distribución de balones para fútbol, micro fútbol, fútbol sala, voleibol y baloncesto, ofreciendo productos innovadores, duraderos y asequibles que potencien el rendimiento y la pasión por el juego.</h3>
+    </section>
+
+    <section id="vision">
+        <h2>Visión</h2>
+        <h3>Nuestra visión en ARDECORS SPORT es ser la marca de referencia a nivel global en el mundo de los balones deportivos, siendo reconocidos por nuestra calidad excepcional, innovación constante y compromiso con la excelencia. Nos esforzamos por ser una empresa líder que inspire a los atletas de todas las edades y niveles de habilidad a alcanzar sus metas deportivas, proporcionando herramientas confiables y de alto rendimiento que impulsen su juego al siguiente nivel.</h3>
+    </section>
+    <ul class="wrapper">
+        <li class="icon facebook">
+        <a href="https://www.facebook.com" target="_blank"><i
+            class="fab fa-facebook-f"></i></a>
+        </li>
+        <li class="icon whatsapp">
+        <a href="https://web.whatsapp.com/" target="_blank"><i
+            class="fab fa-whatsapp"></i></a>
+        </li>
+        <li class="icon tiktok">
+        <a href="https://www.tiktok.com" target="_blank"><i
+            class="fab fa-tiktok"></i></a>
+        </li>
+        <li class="icon instagram">
+        <a href="https://www.instagram.com" target="_blank"><i
+            class="fab fa-instagram"></i></a>
+        </li>
+    </ul>
+
+    <footer>
+        <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+    </footer>
+    </body>
+</html>
+<script src="main.js"></script>

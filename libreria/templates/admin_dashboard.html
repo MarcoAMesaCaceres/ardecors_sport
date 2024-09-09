@@ -1,0 +1,35 @@
+{% load static %}
+{% include 'navbar.html' %} 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/admin_dasboard.css' %}?v1.3">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    
+    
+    <section class="home-section">
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}" style="font-weight: bold;">Panel de Administración</a></li>
+        
+    <br>
+        <div class="container">
+            <div class="text"><h1>Bienvenido a Ardecors, la fábrica de balones<h1></div>
+            <p>Ardecors es una empresa dedicada a la fabricación y distribución de balones de alta calidad. Fundada en 2010, Ardecors se ha convertido en uno de los líderes en la industria de los balones deportivos, ofreciendo una amplia gama de productos para satisfacer las necesidades de nuestros clientes.</p>
+            <p>Nuestra misión es proporcionar productos de calidad, innovadores y a precios competitivos. Nos enorgullecemos de nuestro equipo de expertos en diseño y producción, quienes trabajan incansablemente para garantizar que cada balón que sale de nuestras instalaciones cumpla con los más altos estándares de calidad.</p>
+            <p>En Ardecors, nos esforzamos por mantener una relación estrecha con nuestros clientes, escuchando sus necesidades y ofreciendo soluciones a medida. Nos enorgullece ser un socio confiable para atletas, clubes deportivos y distribuidores de todo el mundo.</p>
+        </div>
+        
+    </section>
+
+    <footer>
+        <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+    </footer>
+
+</body>
+    <script src="{% static 'js/admin_dashboard.js' %}"></script>
+
+</html>

@@ -1,0 +1,46 @@
+/* Estilos generales del breadcrumb */
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    font-weight: 600; /* Hace que todo el texto del breadcrumb sea más grueso */
+}
+
+.breadcrumb-item {
+    display: flex;
+}
+
+.breadcrumb-item + .breadcrumb-item {
+    padding-left: 0.5rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: #6c757d;
+    content: "/";
+}
+
+/* Estilo del texto del breadcrumb */
+.breadcrumb-item a {
+    color: #007bff; /* Azul para los enlaces */
+    text-decoration: none;
+    transition: color 0.3s ease, font-weight 0.3s ease; /* Transición suave para el cambio de color y grosor */
+    font-weight: 700; /* Hace que los enlaces sean aún más gruesos */
+}
+
+/* Cambio de color y grosor al pasar el mouse */
+.breadcrumb-item a:hover {
+    color: #6f42c1; /* Violeta cuando se coloca el mouse */
+    text-decoration: underline; /* Opcional: subrayado al pasar el mouse */
+    font-weight: 800; /* Aumenta aún más el grosor al pasar el mouse */
+}
+
+/* Estilo para el elemento activo del breadcrumb */
+.breadcrumb-item.active {
+    font-weight: 700; /* Hace que el elemento activo sea más grueso */
+}

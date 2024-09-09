@@ -1,0 +1,79 @@
+
+{% load static %}
+
+
+<script src="{% static 'js/manual.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/manual.css' %}">
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container">
+    
+    <h1>Manual de Usuario: Sistema de Gestión de Inventarios Ardecors</h1>
+
+            <h2>1. Introducción</h2>
+        <p>Bienvenido al Sistema de Gestión de Inventarios Ardecors, una solución integral diseñada para optimizar las operaciones de la fábrica de balones. Este manual está destinado a proporcionarte una guía completa para utilizar el sistema de manera efectiva. Aquí encontrarás información detallada sobre cómo acceder al sistema, utilizar cada uno de los módulos, gestionar inventarios, órdenes de compra, usuarios y más. Cada sección está diseñada para ayudarte a familiarizarte con las funcionalidades del sistema y garantizar una experiencia de usuario fluida y eficiente.</p>
+
+        <h2>2. Requisitos del Sistema</h2>
+        <p>Antes de comenzar a utilizar el sistema, asegúrate de cumplir con los siguientes requisitos:</p>
+        <ul>
+        <li>Sistema Operativo: Compatible con Windows 10 o superior.</li>
+        <li>Navegador Web: Recomendado Google Chrome, Mozilla Firefox o Microsoft Edge en sus últimas versiones.</li>
+        <li>Conexión a Internet: Necesaria para la comunicación entre el servidor y el cliente.</li>
+        <li>Resolución de Pantalla: Al menos 1280x720 píxeles.</li>
+        <li>Software Adicional: Adobe Acrobat Reader para visualizar documentos PDF.</li>
+        </ul>
+
+        <h2>3. Acceso al Sistema</h2>
+        <h3>Ingreso al Sistema</h3>
+        <ol>
+        <li>Abre tu navegador web preferido y escribe la URL del sistema en la barra de direcciones.</li>
+        <li>Verás una pantalla de inicio de sesión donde se te solicitarán tu nombre de usuario y contraseña.</li>
+        <li>Escribe tu nombre de usuario y contraseña, y haz clic en "Iniciar sesión" para acceder al panel principal.</li>
+        </ol>
+        <h3>Registro de Usuarios</h3>
+        <ol>
+        <li>En la pantalla de inicio de sesión, haz clic en "Registrar".</li>
+        <li>Completa el formulario de registro con tu nombre completo, correo electrónico y contraseña.</li>
+        <li>Haz clic en "Registrar" y luego activa tu cuenta mediante el enlace enviado a tu correo electrónico.</li>
+        </ol>
+
+        <h2>4. Módulos del Sistema</h2>
+        <h3>Gestión de Inventarios</h3>
+        <ol>
+        <li>Acceso al Módulo: Desde el panel principal, selecciona "Inventarios".</li>
+        <li>Listado de Elementos: Verás un listado de todos los productos. Puedes buscar y filtrar los elementos.</li>
+        <li>Agregar Nuevo Producto: Haz clic en "Agregar" y completa el formulario con los detalles del producto.</li>
+        <li>Editar o Eliminar Productos: Selecciona un producto del listado para editar o eliminar.</li>
+        </ol>
+        <h3>Gestión de Órdenes de Compra</h3>
+        <ol>
+        <li>Acceso al Módulo: Desde el panel principal, selecciona "Órdenes de Compra".</li>
+        <li>Crear Nueva Orden: Haz clic en "Nueva Orden", selecciona el proveedor, productos y cantidades.</li>
+        <li>Guardar y Enviar: Guarda la orden y envíala al proveedor correspondiente.</li>
+        </ol>
+        <h3>Gestión de Usuarios</h3>
+        <ol>
+        <li>Acceso al Módulo: Desde el panel principal, selecciona "Usuarios".</li>
+        <li>Agregar o Editar Usuarios: Puedes agregar nuevos usuarios o editar los existentes.</li>
+        </ol>
+
+        <h2>5. Seguridad del Sistema</h2>
+        <h3>Copia de Seguridad</h3>
+        <ol>
+        <li>Acceso al Módulo de Copias de Seguridad: Selecciona "Copia de Seguridad" desde el menú principal.</li>
+        <li>Crear y Descargar Copia de Seguridad: Haz clic en "Crear Copia de Seguridad" y descárgala a tu dispositivo.</li>
+        </ol>
+        <h3>Restauración de la Base de Datos</h3>
+        <ol>
+        <li>Acceso al Módulo de Restauración: Selecciona "Restauración".</li>
+        <li>Seleccionar y Restaurar: Elige el archivo de backup y haz clic en "Restaurar".</li>
+        </ol>
+
+        <h2>6. Soporte y Ayuda</h2>
+        <p>Si necesitas asistencia técnica o tienes preguntas, puedes contactar al equipo de soporte desde la opción "Soporte" en el menú principal. Completa el formulario con la descripción del problema y recibirás asistencia por correo electrónico.</p>
+    
+        <object data="{{ Manual_de_Usuario_Ardecors.pdf }}" type="application/pdf" width="100%" height="800">
+        Tu navegador no admite la visualización de PDF integrada. Puedes <a href="{{ Manual_de_Usuario_Ardecors.pdf }}">descargar el manual</a>.
+    </object>
+</div>
+{% endblock %}

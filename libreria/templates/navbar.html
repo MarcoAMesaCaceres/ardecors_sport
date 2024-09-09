@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_details">
+            <img src="{% static 'img/logoardecors.png' %}" alt="logo" width="50" height="50"> 
+            
+
+            
+            <div class="logo_name">Ardecors</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
+            <li>
+                <a href="{% url 'user_list' %}">
+                    <i class='bx bx-user'></i>
+                   
+                    <span class="link_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            {%endif%}
+            <li>
+                <a href="{% url 'lista_articles' %}">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Articulos</span>
+                </a>
+                <span class="tooltip">Articulos</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_ventas' %}">
+                    <i class='bx bx-cart'></i>
+                    <span class="link_name">Ventas</span>
+                </a>
+                <span class="tooltip">Ventas</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_compras' %}">
+                    <i class='bx bx-shopping-bag'></i>
+                    <span class="link_name">Compras</span>
+                </a>
+                <span class="tooltip">Compras</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_proveedores' %}">
+                    <i class='bx bx-package'></i>
+                    <span class="link_name">Proveedores</span>
+                </a>
+                <span class="tooltip">Proveedores</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_tareas' %}">
+                    <i class='bx bx-task'></i>
+                    <span class="link_name">Tareas</span>
+                </a>
+                <span class="tooltip">Tareas</span>
+            </li>
+            <li>
+                <a href="{% url 'ardecors' %}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Volver al Inicio</span>
+                </a>
+                <span class="tooltip">Volver al Inicio</span>
+            </li>
+            <li>
+                <a href="{% url 'lista_ayuda' %}">
+                    <i class='bx bx-help-circle'></i>
+                    <span class="link_name">Ayuda</span>
+                </a>
+                <span class="tooltip">Ayuda</span>
+            </li>
+            {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
+            <li>
+                <a href="{% url 'backup_databases' %}">
+                    <i class='bx bx-data'></i>
+                   
+                    <span class="link_name">Repaldos</span>
+                </a>
+                <span class="tooltip">Respaldos</span>
+            </li>
+            {%endif%}
+            <li class="profile">
+                <div class="profile_details">
+                    <img src="{% static 'img/usuario.png' %}" alt="profile image">
+                    <div class="profile_content">
+                        <div class="name">Usuario</div>
+                        <div class="designation">Admin</div>
+                    </div>
+                </div>
+                <li>
+                    <a href="{% url 'login' %}">
+                        <i class='bx bx-log-out' id="log_out"></i>
+                        <span class="link_name">Volver al Login</span>
+                        
+                    </a>
+                    <span class="tooltip">Volver al Login</span>
+                </li>
+                
+            </li>
+        </ul>
+    </div>
+    <script src="{% static 'js/admin_dashboard.js' %}"></script>
+    
+
+    
