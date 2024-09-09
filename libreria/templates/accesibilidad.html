@@ -1,0 +1,47 @@
+<!-- accesibilidad.html -->
+ {% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesibilidad</title>
+    <link rel="stylesheet" href="{% static 'css/accesibilidad.css' %}"> 
+    <link rel="stylesheet" href="{% static '/js/accesibilidad.js' %}">
+</head>
+<body>
+    <div class="accesibilidad" style="display: flex;">
+        <button class="accesibilidad__inicio" id="toggle-inicio" style="transform: translateX(100%); display: flex;">
+            <img src="{% static 'img/accesibilidad-mano.svg' %}" alt="inicio" width="55px" style="filter: none;">
+        </button>
+        <div class="accesibilidad__buttons hidden visible" id="toggle-buttons" style="display: flex;">
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-contrast">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-contraste.svg' %}" alt="contraste" width="55px">
+                    <h6 class="accesibilidad__boton--text">Contraste</h6>
+                </button>
+            </div>
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-zoom-in">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-aumento.svg' %}" alt="aumentar" width="55px" style="filter: none;">
+                    <h6 class="accesibilidad__boton--text">
+                        Aumentar
+                        <br>
+                        letra
+                    </h6>
+                </button>
+            </div>
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-zoom-out">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-disminuir.svg' %}" alt="disminuir" width="55px" style="filter: none;">
+                    <h6 class="accesibilidad__boton--text">
+                        Disminuir
+                        <br>
+                        letra
+                    </h6>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

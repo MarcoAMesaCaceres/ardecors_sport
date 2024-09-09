@@ -1,8 +1,10 @@
 {% extends "base_usuario.html" %}
 {% load static %}
 {% block title %}Lista de Usuarios{% endblock %}
+<link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
-
+{% include 'navbar.html' %}
+<div class="home-section">
 <div class="container mt-4">
     <h2>Lista de Usuarios</h2>
     <a href="{% url 'approve_users' %}" class="btn btn-primary mb-3">Aprobar Usuarios Pendientes</a>
@@ -30,7 +32,6 @@
         </tbody>
     </table>
     <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
-
 </div>
-
+</div>
 {% endblock %}

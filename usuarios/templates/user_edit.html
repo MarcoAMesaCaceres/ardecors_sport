@@ -1,8 +1,10 @@
 {% extends "base_usuario.html" %}
 {% load static %}
 {% block title %}Editar Usuario{% endblock %}
+<link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
-
+{% include 'navbar.html' %}
+<div class="home-section">
 <div class="container mt-4">
     <h2>Editar Usuario: {{ user.username }}</h2>
     <form method="post">
@@ -21,5 +23,5 @@
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>
-
+</div>
 {% endblock %}
