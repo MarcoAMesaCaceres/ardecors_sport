@@ -115,26 +115,29 @@
                 </a>
                 <span class="tooltip">Respaldos</span>
             </li>
+            <li>
+                <a href="{% url 'login' %}">
+                    <i class='bx bx-log-out' id="log_out"></i>
+                    <span class="link_name">volver al Login</span>
+                </a>
+                <span class="tooltip">Volver al Login</span>
+            </li>
             {%endif%}
             <li class="profile">
                 <div class="profile_details">
                     <img src="{% static 'img/usuario.png' %}" alt="profile image">
                     <div class="profile_content">
-                        <div class="name">Usuario</div>
-                        <div class="designation">Admin</div>
+                        <div class="name">
+                            {{ request.user.username }}
+                        </div>
+                        <div class="designation">
+                            {{ request.user.userprofile.get_role_display }}
+                        </div>
                     </div>
                 </div>
-                <li>
-                    <a href="{% url 'login' %}">
-                        <i class='bx bx-log-out' id="log_out"></i>
-                        <span class="link_name">volver al Login</span>
-                    </a>
-                    <span class="tooltip">Volver al Login</span>
-                </li>
-                
-            </li>
-        </ul>
-    </div>
+            
+                <!-- ... (resto del código sin cambios) ... -->
+            </div>
     <script src="{% static 'js/admin_dashboard.js' %}"></script>
     
 
