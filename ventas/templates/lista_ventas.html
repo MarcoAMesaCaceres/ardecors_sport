@@ -78,7 +78,7 @@
                     <th>Fecha</th>
                     <th>Cliente</th>
                     <th>Artículo</th>
-                    <th>Total</th>
+                
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -89,7 +89,6 @@
                     <td>{{ venta.fecha|date:"d/m/Y" }}</td>
                     <td>{{ venta.cliente }}</td>
                     <td>{{ venta.articulo.nombre|default:"No especificado" }}</td>
-                    <td>${{ venta.total|floatformat:2 }}</td>
                     <td>
                         <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
                         <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>

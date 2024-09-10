@@ -44,8 +44,8 @@
         <tr>
             <th>Fecha</th>
             <th>Proveedor</th>
-            <th>Total</th>
             <th>Producto</th>
+            <th>Total</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -54,7 +54,6 @@
         <tr>
             <td>{{ compra.fecha|date:"d/m/Y" }}</td>
             <td>{{ compra.proveedor }}</td>
-            <td>{{ compra.total|floatformat:2 }}</td>
             <td>{{ compra.producto }}</td>
             <td>
                 <a href="{% url 'editar_compras' compra.pk %}" class="btn btn-sm btn-warning">Editar</a>

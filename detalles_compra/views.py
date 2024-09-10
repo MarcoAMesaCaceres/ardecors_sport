@@ -15,6 +15,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
 
 
+
 def lista_detalles_compra(request, compra_id=None):
     if compra_id:
         compra = get_object_or_404(Compras, id=compra_id)
@@ -32,7 +33,7 @@ def crear_detalle_compra(request, compra_id):
             detalle = form.save(commit=False)
             detalle.compra = compra
             detalle.save()
-            return redirect('lista_detalles_compra')
+            return redirect('lista_detalles_compra', compra_id=compra.id)
     else:
         form = DetalleCompraForm(initial={'compra': compra})
     return render(request, 'crear_detalle_compra.html', {'form': form, 'compra': compra})
@@ -51,62 +52,58 @@ def editar_detalle_compra(request, pk):
 def eliminar_detalle_compra(request, pk):
     detalle = get_object_or_404(DetalleCompra, pk=pk)
     if request.method == 'POST':
+        compra_id = detalle.compra.id
         detalle.delete()
-        return redirect('lista_detalles_compra')
+        return redirect('lista_detalles_compra', compra_id=compra_id)
     return render(request, 'eliminar_detalle_compra.html', {'detalle': detalle})
 
 def exportar_excel(request):
-    detalleCompra = DetalleCompra.objects.all()
+    detalles_compra = DetalleCompra.objects.all()
     
-    # Crear libro y hoja de Excel
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = 'detalleCompra'
+    ws.title = 'Detalles de Compra'
 
-    # Agregar encabezados
     headers = ['ID', 'Fecha', 'Proveedor', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
     for col_num, header in enumerate(headers, 1):
         col_letter = get_column_letter(col_num)
         ws[f'{col_letter}1'] = header
 
-    # Agregar filas de ventas
-    for row_num, venta in enumerate(detalleCompra, 2):
-        ws[f'A{row_num}'] = detalleCompra.id
-        ws[f'B{row_num}'] = detalleCompra.fecha.strftime('%d/%m/%Y')
-        ws[f'C{row_num}'] = detalleCompra.cliente
-        ws[f'D{row_num}'] = detalleCompra.producto.nombre if detalleCompra.producto else 'No especificado'
-        ws[f'E{row_num}'] = detalleCompra.cantidad
-        ws[f'F{row_num}'] = detalleCompra.precio_unitario
-        ws[f'G{row_num}'] = detalleCompra.total
+    for row_num, detalle in enumerate(detalles_compra, 2):
+        ws[f'A{row_num}'] = detalle.id
+        ws[f'B{row_num}'] = detalle.fecha.strftime('%d/%m/%Y')
+        ws[f'C{row_num}'] = detalle.compra.proveedor.nombre if detalle.compra.proveedor else 'No especificado'
+        ws[f'D{row_num}'] = detalle.producto
+        ws[f'E{row_num}'] = detalle.cantidad
+        ws[f'F{row_num}'] = detalle.precio_unitario
+        ws[f'G{row_num}'] = detalle.total
 
-    # Crear respuesta HTTP para descargar el archivo
-    response = HttpResponse(
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    )
-    response['Content-Disposition'] = 'attachment; filename=ventas.xlsx'
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=detalles_compra.xlsx'
     wb.save(response)
     return response
 
 def exportar_pdf(request):
-    # Crear un buffer de bytes para el PDF
     buffer = BytesIO()
-
-    # Crear el documento PDF
     doc = SimpleDocTemplate(buffer, pagesize=letter)
     elements = []
 
-    # Obtener los datos de las ventas
-    detalleCompra = DetalleCompra.objects.all()
+    detalles_compra = DetalleCompra.objects.all()
 
-    # Crear los datos para la tabla
-    data = [['ID', 'proveedor', 'Fecha', 'Total']]  # Encabezados
-    for venta in detalleCompra:
-        data.append([str(detalleCompra.id), detalleCompra.proveedor, str(detalleCompra.fecha), str(detalleCompra.total)])
+    data = [['ID', 'Proveedor', 'Fecha', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']]
+    for detalle in detalles_compra:
+        data.append([
+            str(detalle.id),
+            detalle.compra.proveedor.nombre if detalle.compra.proveedor else 'No especificado',
+            str(detalle.fecha),
+            detalle.producto,
+            str(detalle.cantidad),
+            str(detalle.precio_unitario),
+            str(detalle.total)
+        ])
 
-    # Crear la tabla
     table = Table(data)
     
-    # Estilo de la tabla
     style = TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -125,14 +122,8 @@ def exportar_pdf(request):
     ])
     table.setStyle(style)
 
-    # Agregar la tabla al documento
     elements.append(table)
-
-    # Construir el PDF
     doc.build(elements)
 
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='detalleCompra.pdf')
-
+    return FileResponse(buffer, as_attachment=True, filename='detalles_compra.pdf')

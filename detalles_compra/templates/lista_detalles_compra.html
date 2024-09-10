@@ -33,7 +33,7 @@
     {% for detalle in detalles %}
         <tr>
             <td>{{ detalle.fecha|date:"d/m/Y" }}</td>
-            <td>{{ detalle.producto }}</td>
+            <td>{{ compra.producto }}</td>
             <td>{{ detalle.cantidad }}</td>
             <td>{{ detalle.precio_unitario }}</td>
             <td>{{ detalle.total }}</td>

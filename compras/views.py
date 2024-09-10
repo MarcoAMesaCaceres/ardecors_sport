@@ -21,8 +21,6 @@ def lista_compras(request):
     
     if form.is_valid():
         search_query = form.cleaned_data.get('search_query')
-        min_total = form.cleaned_data.get('min_total')
-        max_total = form.cleaned_data.get('max_total')
         fecha_inicio = form.cleaned_data.get('fecha_inicio')
         fecha_fin = form.cleaned_data.get('fecha_fin')
         
@@ -32,12 +30,6 @@ def lista_compras(request):
                 Q(producto__icontains=search_query)
             )
         
-        if min_total:
-            compras = compras.filter(total__gte=min_total)
-        
-        if max_total:
-            compras = compras.filter(total__lte=max_total)
-        
         if fecha_inicio:
             compras = compras.filter(fecha__gte=fecha_inicio)
         
@@ -45,9 +37,6 @@ def lista_compras(request):
             compras = compras.filter(fecha__lte=fecha_fin)
     
     return render(request, 'lista_compras.html', {'compras': compras, 'form': form})
-
-# ... (resto de las vistas)
-# compras/views.py
 
 def crear_compras(request):
     if request.method == 'POST':
