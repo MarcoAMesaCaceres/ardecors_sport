@@ -1,71 +1,64 @@
-
 {% extends 'base_proveedor.html' %}
 {% load static %}
-
-    {% block content %}
-    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
-    <link rel="icon" href="{% static 'img/logoardecors.png' %}">
-    {% include 'navbar.html' %}
-
-    <!-- Aquí colocamos el breadcrumb -->
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Lista de Proveedores</a></li>
-    </ul>
+{% block content %}
+{% include 'navbar.html' %}
 
 <div class="home-section">
-<h1>Lista de Proveedores</h1>
+    <nav aria-label="breadcrumb">
+       
+    </nav>
 
-<a href="{% url 'crear_proveedor' %}" class="btn btn-primary mb-3">Crear Nuevo Proveedor</a>
+    <h1 class="mb-4">Lista de Proveedores</h1>
 
-<!-- Botón para imprimir la lista de Proveedore -->
-<button onclick="Proveedores()" class="btn btn-primary mb-3">Imprimir Proveedores</button>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Contacto</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for proveedor in proveedores %}
-        <tr>
-            <td>{{ proveedor.id }}</td>
-            <td>{{ proveedor.nombre }}</td>
-            <td>{{ proveedor.contacto|default_if_none:"-" }}</td>
-            <td>{{ proveedor.telefono|default_if_none:"-" }}</td>
-            <td>{{ proveedor.email|default_if_none:"-" }}</td>
-            <td>
-                <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
-                <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="6">No hay proveedores registrados.</td>
-        </tr>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         {% endfor %}
-    </tbody>
-</table>
-<a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a> 
-<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
-<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+    {% endif %}
 
-<script>
-    $(document).ready(function() {
-        $('#ventas-table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
-    </script>
+    <a href="{% url 'crear_proveedor' %}" class="btn btn-primary mb-3">Crear Nuevo Proveedor</a>
+
+    <button class="btn btn-secondary mb-3" onclick="window.print()">Imprimir Proveedores</button>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.id }}</td>
+                    <td>{{ proveedor.nombre }}</td>
+                    <td>{{ proveedor.telefono|default_if_none:"-" }}</td>
+                    <td>{{ proveedor.email|default_if_none:"-" }}</td>
+                    <td>
+                        <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                        <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay proveedores registrados.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="mt-3">
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
+        <a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
+        <a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+    </div>
+</div>
 
 
 {% block extra_js %}

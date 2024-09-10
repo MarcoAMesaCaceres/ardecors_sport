@@ -1,8 +1,9 @@
 
 {% load static %}
-
+{% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="es">
+    <div class="home-section">
 <head>
     <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Pagina de Ayuda</a></li>
     <meta charset="UTF-8">
@@ -11,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/ayuda.css' %}"?v1.4>
+    <link rel="stylesheet" href="{% static 'css/ayuda.css' %}?v1.3">
     <title>{% block title %}Gestión{% endblock %}</title>
 </head>
 <body>
@@ -45,6 +46,7 @@
             <!-- Aquí se mostrará el contenido específico de cada página -->
             {% endblock %}
         </div>
+    </div>
     </main>
 
     <footer class="bg-dark text-light py-3 mt-auto">
@@ -58,6 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/ayuda.js' %}"></script>
     
+
 
 </body>
 </html>

@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
 from .models import Proveedor
 from .forms import ProveedorForm
 
@@ -7,29 +8,36 @@ def lista_proveedores(request):
     return render(request, 'lista_proveedores.html', {'proveedores': proveedores})
 
 def editar_proveedor(request, pk):
-    proveedores = get_object_or_404(proveedores, pk=pk)
+    proveedor = get_object_or_404(Proveedor, pk=pk)
     if request.method == 'POST':
-        form = ProveedorForm(request.POST, instance=proveedores)
+        form = ProveedorForm(request.POST, instance=proveedor)
         if form.is_valid():
             form.save()
-            return redirect('lista_ventas')
+            messages.success(request, "Proveedor actualizado exitosamente.")
+            return redirect('lista_proveedores')
+        else:
+            messages.error(request, "Error al actualizar el proveedor. Por favor, revise los datos.")
     else:
-        form = ProveedorForm(instance=proveedores)
-    return render(request, 'editar_proveedor.html', {'form': form, 'proveedores': proveedores})
-
+        form = ProveedorForm(instance=proveedor)
+    return render(request, 'editar_proveedor.html', {'form': form, 'proveedor': proveedor})
 
 def crear_proveedor(request):
     if request.method == 'POST':
         form = ProveedorForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Proveedor creado exitosamente.")
+            return redirect('lista_proveedores')
+        else:
+            messages.error(request, "Error al crear el proveedor. Por favor, revise los datos.")
     else:
         form = ProveedorForm()
     return render(request, 'crear_proveedor.html', {'form': form})
 
 def eliminar_proveedor(request, pk):
-    Proveedores = get_object_or_404(Proveedor, pk=pk)
+    proveedor = get_object_or_404(Proveedor, pk=pk)
     if request.method == 'POST':
-        Proveedores.delete()
-        return redirect('lista_ventas')
-    return render(request, 'eliminar_proveedor.html', {'Proveedores': Proveedores})
+        proveedor.delete()
+        messages.success(request, "Proveedor eliminado exitosamente.")
+        return redirect('lista_proveedores')
+    return render(request, 'eliminar_proveedor.html', {'proveedor': proveedor})

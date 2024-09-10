@@ -1,22 +1,20 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Crear balones flotantes
-    for (let i = 0; i < 10; i++) {
-        let balloon = document.createElement('div');
-        balloon.classList.add('balloon');
-        balloon.style.width = balloon.style.height = Math.random() * 100 + 50 + 'px';
-        balloon.style.backgroundColor = getRandomColor();
-        balloon.style.left = Math.random() * 100 + '%';
-        balloon.style.top = Math.random() * 100 + '%';
-        document.body.appendChild(balloon);
-    }
+    // Obtener la URL de la imagen del elemento script
+    let imageData = document.getElementById('image-data');
+    let imageUrl = imageData.dataset.imageUrl;
 
-    // Obtener color aleatorio
-    function getRandomColor() {
-        let letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+    // Crear un elemento de imagen
+    let image = document.createElement('img');
+    
+    // Establecer la fuente de la imagen
+    image.src = imageUrl;
+    
+    // Añadir una clase a la imagen para poder estilizarla
+    image.classList.add('centered-image');
+    
+    // Añadir la imagen al body del documento
+    document.body.appendChild(image);
+
+    // Para depuración, imprime la URL en la consola
+    console.log("URL de la imagen:", imageUrl);
 });

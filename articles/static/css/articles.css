@@ -61,7 +61,7 @@
 }
 
 footer{
-    background-color: #0E2C40;
+    background-color: #0E2C40 !important;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -71,5 +71,5 @@ footer{
 }
 
 footer h3{
-    font-size: 0.8vw;
+    font-size: 0.8vw !important;
 }
