@@ -56,13 +56,19 @@ def crear_detalle_venta(request, venta_id):
         form = DetalleVentaForm(request.POST)
         if form.is_valid():
             detalle = form.save(commit=False)
-            detalle.venta = venta
-            detalle.save()
-            messages.success(request, 'Detalle de venta agregado exitosamente.')
-            return redirect('lista_detalles_venta', venta_id=venta.id)
+            detalle.venta = venta  # Asigna la venta aquí
+            # Llama a full_clean después de asignar la venta para evitar errores de validación
+            try:
+                detalle.full_clean()  # Realiza una validación completa del modelo
+                detalle.save()
+                messages.success(request, 'Detalle de venta agregado exitosamente.')
+                return redirect('lista_detalles_venta', venta_id=venta.id)
+            except ValidationError as e:
+                form.add_error(None, e)  # Agrega los errores de validación al formulario
     else:
         form = DetalleVentaForm()
     return render(request, 'crear_detalle_venta.html', {'form': form, 'venta': venta})
+
 
 def editar_detalle_venta(request, pk):
     detalle = get_object_or_404(DetalleVenta, pk=pk)
