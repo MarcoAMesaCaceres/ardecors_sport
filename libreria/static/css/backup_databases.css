@@ -113,3 +113,14 @@ header {
     footer h3 {
         font-size: 0.8vw;
     }
+
+    head {
+        background-color: #0E2C40 !important; 
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            width: 100%;
+            flex-shrink: 0;
+    }

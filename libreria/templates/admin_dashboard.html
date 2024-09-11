@@ -14,8 +14,8 @@
     
     
     <section class="home-section">
-        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}" style="font-weight: bold;">Panel de Administración</a></li>
-        
+        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}" style="font-weight: bold;">...Panel de Administración</a></li>
+        <style> head{ background-color: #0E2C40; color: #ffffff; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0;} </style>
     <br>
         <div class="container">
             <div class="text"><h1>Bienvenido a Ardecors, la fábrica de balones<h1></div>
@@ -29,4 +29,9 @@
 </body>
     <script src="{% static 'js/admin_dashboard.js' %}"></script>
 
+    <footer> <h3>© 2024 ARDECORS - Todos los derechos reservados</h3> </footer>
+    <style> html, body { height: 100%; margin: 0; padding: 0; } body { display: flex; flex-direction: column; } .content { flex: 1 0 auto; } 
+        footer { background-color: #0E2C40; color: #ffffff; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0; }
+        footer h3 { font-size: 0.8vw; margin: 0; } footer { position: fixed; bottom: 0; left: 0; } 
+    </style>
 </html>
