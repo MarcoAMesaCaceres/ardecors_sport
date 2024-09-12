@@ -8,3 +8,16 @@
     font-size: 16px;
     margin-bottom: 20px;
   }
+
+  
+
+.imagen-fondo {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1; /* Coloca la imagen detrás del texto */
+  width: 1800px; /* Ajusta el tamaño de la imagen según necesites */
+  height: auto;
+  opacity: 0.2; /* Ajusta la transparencia (0.0 es completamente transparente, 1.0 es opaco) */
+}
