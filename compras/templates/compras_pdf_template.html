@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .compras-header {
+            text-align: center;
+        }
+        .compras-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .compras-list th, .compras-list td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .compras-list th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="compras-header">Reporte de Compras</h1>
+    <table class="compras-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Proveedor</th>
+                <th>Artículo</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+            <tr>
+                <td>{{ compra.id }}</td>
+                <td>{{ compra.fecha }}</td>
+                <td>{{ compra.proveedor }}</td>
+                <td>{{ compra.articulo }}</td>
+                <td>{{ compra.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

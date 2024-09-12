@@ -17,8 +17,10 @@ from .forms import LoginForm, RegisterForm, CustomPasswordResetForm
 from .models import UserProfile, User
 from django.contrib.auth.decorators import login_required
 from .decorators import admin_required
-
-
+from django.views.decorators.cache import never_cache
+from django.utils.decorators import method_decorator
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(never_cache, name='dispatch')
 class CustomLoginView(LoginView):
     form_class = LoginForm
     template_name = 'login.html'
@@ -28,9 +30,14 @@ class CustomLoginView(LoginView):
         if not user.is_active:
             messages.error(self.request, 'Tu cuenta aún no ha sido aprobada por un administrador.')
             return self.form_invalid(form)
-        return super().form_valid(form)
-@user_passes_test(lambda u: u.is_staff)
+        response = super().form_valid(form)
+        response['Cache-Control'] = 'no-store, must-revalidate'
+        response['Pragma'] = 'no-cache'
+        response['Expires'] = '0'
+        return response
 
+@user_passes_test(lambda u: u.is_staff)
+@never_cache
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -40,7 +47,11 @@ def register(request):
             return redirect('login')
     else:
         form = RegisterForm()
-    return render(request, 'register.html', {'form': form})
+    response = render(request, 'register.html', {'form': form})
+    response['Cache-Control'] = 'no-store, must-revalidate'
+    response['Pragma'] = 'no-cache'
+    response['Expires'] = '0'
+    return response
 @login_required
 @admin_required
 def approve_users(request):

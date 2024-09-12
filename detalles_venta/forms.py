@@ -2,11 +2,15 @@ from django import forms
 from .models import Article
 from .models import DetalleVenta
 from decimal import Decimal
+from django import forms
+from .models import Article, DetalleVenta
+from decimal import Decimal
 class DetalleVentaForm(forms.ModelForm):
     class Meta:
         model = DetalleVenta
-        fields = ['cantidad', 'precio_unitario'] 
+        fields = ['articulo', 'cantidad', 'precio_unitario']
         widgets = {
+            'articulo': forms.Select(attrs={'class': 'form-control'}),
             'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'min': '1'}),
             'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01', 'min': '0.01'}),
         }
@@ -23,12 +27,14 @@ class DetalleVentaForm(forms.ModelForm):
             raise forms.ValidationError("El precio unitario debe ser un número positivo.")
         return precio_unitario
 
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        instance.total = Decimal(instance.cantidad) * instance.precio_unitario
-        if commit:
-            instance.save()
-        return instance
+    def clean(self):
+        cleaned_data = super().clean()
+        articulo = cleaned_data.get('articulo')
+        cantidad = cleaned_data.get('cantidad')
+        if articulo and cantidad:
+            if articulo.stock < cantidad:
+                raise forms.ValidationError(f"No hay suficiente stock para este artículo. Stock disponible: {articulo.stock}")
+        return cleaned_data
 class DetalleVentaSearchForm(forms.Form):
     articulo = forms.ModelChoiceField(
         queryset=Article.objects.all(),

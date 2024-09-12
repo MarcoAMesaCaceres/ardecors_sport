@@ -20,20 +20,9 @@
 
 <form method="post">
     {% csrf_token %}
-    {% for field in form %}
-    <div class="mb-3">
-        {{ field.label_tag }}
-        {{ field }}
-        {% if field.errors %}
-        <div class="text-danger">
-            {{ field.errors }}
-        </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-
+    {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="{% url 'lista_detalles_venta' %}" class="btn btn-secondary">Cancelar</a>
+    <a href="{% url 'lista_detalles_venta' venta.id %}" class="btn btn-secondary">Cancelar</a>
 </form>
 </div>
 {% endblock %}

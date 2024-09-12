@@ -163,7 +163,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Rutas adicionales para archivos estáticos
+# Asegúrate de que todas las rutas existan en tu sistema de archivos
 STATICFILES_DIRS = [
     BASE_DIR / 'libreria' / 'static',
     BASE_DIR / 'articles' / 'static',
@@ -175,8 +175,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'usuarios' / 'static',
     BASE_DIR / 'ventas' / 'static',
     BASE_DIR / 'ayuda' / 'static',
-    os.path.join(BASE_DIR, "static"),
+    
 ]
+
 
 
 # Default primary key field type

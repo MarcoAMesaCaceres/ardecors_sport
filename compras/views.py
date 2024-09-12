@@ -2,18 +2,20 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Compras
 from .forms import ComprasForm, ComprasSearchForm
 from django.db.models import Q
+from django.template.loader import get_template
 
 # Exportar pdf, excel
 from django.http import HttpResponse
 from io import BytesIO
 import openpyxl
 from openpyxl.utils import get_column_letter
-from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
-from django.utils import timezone
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+
+
 
 def lista_compras(request):
     compras = Compras.objects.all()
@@ -96,74 +98,47 @@ def exportar_excel(request):
     )
     response['Content-Disposition'] = 'attachment; filename=compras.xlsx'
 
-def exportar_pdf(request):
-    # Crear un buffer de bytes para el PDF
+def exportar_pdf_compras(request):
+    # Crear un buffer en memoria
     buffer = BytesIO()
 
-    # Crear el documento PDF
+    # Crear un documento PDF con el buffer
     doc = SimpleDocTemplate(buffer, pagesize=letter)
-    elements = []
 
-    # Estilos
-    styles = getSampleStyleSheet()
-    title_style = styles['Heading1']
-    
-    # Título del documento
-    title = Paragraph("Reporte de Compras", title_style)
-    elements.append(title)
-    elements.append(Spacer(1, 12))
+    # Consulta los datos de compras
+    compras = Compras.objects.all()
 
-    # Obtener los datos de las compras
-    compras = Compras.objects.all().order_by('-fecha')
-
-    # Crear los datos para la tabla
-    data = [['ID', 'Fecha', 'Proveedor', 'Producto', 'Total']]  # Encabezados
+    # Preparar los datos para la tabla
+    data = []
+    data.append(['Fecha', 'Proveedor', 'Producto', 'Detalle'])  # Encabezado
     for compra in compras:
         data.append([
-            str(compra.id),
-            compra.fecha.strftime('%d/%m/%Y'),
-            compra.proveedor.nombre if compra.proveedor else 'No especificado',
-            compra.producto,
-            f"${compra.total:.2f}"
+            str(compra.fecha),
+            compra.proveedor if compra.proveedor else 'N/A',
+            compra.producto if compra.producto else 'N/A',
+            str(compra)
         ])
 
-    # Crear la tabla
+    # Crear una tabla
     table = Table(data)
-    
-    # Estilo de la tabla
-    style = TableStyle([
+    table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 12),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-        ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-        ('FONTSIZE', (0, 1), (-1, -1), 10),
-        ('TOPPADDING', (0, 1), (-1, -1), 6),
-        ('BOTTOMPADDING', (0, 1), (-1, -1), 6),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black)
-    ])
-    table.setStyle(style)
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ]))
 
-    # Agregar la tabla al documento
-    elements.append(table)
-    
-    # Agregar fecha de generación del reporte
-    date_style = styles['Normal']
-    date_style.alignment = 1  # Centro
-    current_date = timezone.now().strftime("%d/%m/%Y %H:%M:%S")
-    date_paragraph = Paragraph(f"Reporte generado el: {current_date}", date_style)
-    elements.append(Spacer(1, 20))
-    elements.append(date_paragraph)
+    # Construir el documento PDF
+    doc.build([table])
 
-    # Construir el PDF
-    doc.build(elements)
+    # Obtener el valor del buffer y cerrarlo
+    pdf = buffer.getvalue()
+    buffer.close()
 
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='reporte_compras.pdf')
+    # Crear una respuesta HTTP con el PDF
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="compras.pdf"'
+    return response

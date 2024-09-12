@@ -39,7 +39,7 @@
 <!-- Botón para imprimir la lista de compras -->
 <button onclick="Compras()" class="btn btn-primary mb-3">Imprimir Lista de Compras</button>
 
-<table class="table">
+<table id="elementosTable" class="table">
     <thead>
         <tr>
             <th>Fecha</th>
@@ -70,7 +70,7 @@
 </table>
 
 <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
-<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
+<a href="{% url 'exportar_pdf_compras' %}" class="btn btn-primary mb-3">Generar PDF</a>
 <a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
 
 

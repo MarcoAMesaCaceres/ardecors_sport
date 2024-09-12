@@ -6,11 +6,10 @@ from django.utils import timezone
 class VentaForm(forms.ModelForm):
     class Meta:
         model = Venta
-        fields = ['fecha', 'cliente', 'articulo']
+        fields = ['fecha', 'cliente']
         widgets = {
             'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'cliente': forms.TextInput(attrs={'class': 'form-control'}),
-            'articulo': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def clean_cliente(self):
@@ -26,13 +25,6 @@ class VentaForm(forms.ModelForm):
         if fecha > timezone.now().date():
             raise forms.ValidationError("La fecha de venta no puede ser futura.")
         return fecha
-
-    def clean(self):
-        cleaned_data = super().clean()
-        articulo = cleaned_data.get('articulo')
-        if articulo and articulo.stock < 1:
-            raise forms.ValidationError("No hay stock suficiente para este artículo.")
-        return cleaned_data
 
 class VentaSearchForm(forms.Form):
     cliente = forms.CharField(
