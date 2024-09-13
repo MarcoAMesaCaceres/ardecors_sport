@@ -1,0 +1,66 @@
+/* Accesibilidad styles */
+.accesibilidad {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 1000;
+}
+
+.accesibilidad__inicio {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.accesibilidad__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.accesibilidad__buttons.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.accesibilidad__buttons.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.accesibilidad__container {
+    display: flex;
+    align-items: center;
+}
+
+.accesibilidad__boton {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.accesibilidad__boton--img {
+    width: 70px;
+    height: 70px;
+}
+
+.accesibilidad__boton--text {
+    margin-left: 10px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* High contrast mode */
+body.high-contrast {
+    background-color: black;
+    color: white;
+}
+
+body.high-contrast a,
+body.high-contrast button {
+    color: yellow;
+}

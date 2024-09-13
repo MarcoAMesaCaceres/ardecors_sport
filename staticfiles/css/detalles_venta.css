@@ -1,0 +1,75 @@
+/* Estilo general para la sección de Detalles de Venta */
+.detalles-venta-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.detalles-venta-container h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.detalles-venta-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.detalles-venta-container table th,
+.detalles-venta-container table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.detalles-venta-container table th {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+.detalles-venta-container table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.detalles-venta-container table tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+.detalles-venta-container .total-container {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    color: #333;
+}
+
+.detalles-venta-container .total-container span {
+    color: #007bff;
+}
+
+
+
+
+
+.detalles-venta-container .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.detalles-venta-container .btn:hover {
+    background-color: #0056b3;
+}

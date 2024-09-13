@@ -32,7 +32,7 @@
             <tbody>
                 {% for detalle in detalles %}
                     <tr>
-                        <td>{{ detalle.fecha|date:"d/m/Y" }}</td>
+                        <td>{{ compra.fecha|date:"d/m/Y" }}</td>
                         <td>{{ detalle.cantidad }}</td>
                         <td>{{ detalle.precio_unitario }}</td>
                         <td>{{ detalle.total }}</td>
@@ -55,8 +55,7 @@
     {% endif %}
 
 <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Volver a la Lista de Compras</a>
-<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
-<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
 
 <script>
     $(document).ready(function() {

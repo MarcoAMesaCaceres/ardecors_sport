@@ -1,3 +1,4 @@
+
 from django import forms
 from .models import DetalleCompra
 
@@ -5,6 +6,11 @@ class DetalleCompraForm(forms.ModelForm):
     class Meta:
         model = DetalleCompra
         fields = ['producto', 'cantidad', 'precio_unitario']
+        widgets = {
+            'producto': forms.TextInput(attrs={'class': 'form-control w-100'}),
+            'cantidad': forms.NumberInput(attrs={'class': 'form-control w-100'}),
+            'precio_unitario': forms.NumberInput(attrs={'class': 'form-control w-100'}),
+        }
 
     def clean(self):
         cleaned_data = super().clean()

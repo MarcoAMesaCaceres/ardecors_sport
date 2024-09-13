@@ -34,11 +34,10 @@ def crear_detalle_compra(request, compra_id):
             detalle.compra = compra
             detalle.save()
             compra.actualizar_total()
-            return redirect('crear_detalle_compra', compra_id=compra.id)
+            return redirect('lista_detalles_compra', compra_id=compra.id)
     else:
         form = DetalleCompraForm()
-    detalles = DetalleCompra.objects.filter(compra=compra)
-    return render(request, 'crear_detalle_compra.html', {'form': form, 'compra': compra, 'detalles': detalles})
+    return render(request, 'crear_detalle_compra.html', {'form': form, 'compra': compra})
 
 def editar_detalle_compra(request, pk):
     detalle = get_object_or_404(DetalleCompra, pk=pk)

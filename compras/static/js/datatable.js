@@ -26,30 +26,13 @@ $(document).ready(function () {
             {
                 extend: 'excel',
                 text: 'Excel',
-                title: '',
-                filename: 'Laboratorio Dental - Inventario',
-                customize: function(xlsx) {
-                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                    
-                    // Insertar logo
-                    $('c[r=A1] is', sheet).attr('t', 's');
-                    $('c[r=A1] v', sheet).text(logoBase64);
-                    
-                    // Título
-                    $('c[r=B1]', sheet).attr('s', '51');
-                    $('c[r=B1] v', sheet).text('ARDECORS - SPORT');
-                    
-                    // Estilos para encabezados de tabla
-                    $('row:eq(3) c', sheet).attr('s', '53');
-                    
-                    // Agregar bordes y centrar contenido
-                    var rowCount = $('row', sheet).length;
-                    for (var i = 3; i <= rowCount; i++) {
-                        $('row:eq(' + i + ') c', sheet).attr('s', '54');
-                    }
+                title: 'Ardecors Sport - Inventario',
+                filename: 'Ardecors_sport_inventario',
+                exportOptions: {
+                    columns: ':not(:last-child)' // Excluye la última columna (acciones)
                 }
             },
-            {
+                {
                 extend: 'pdf',
                 text: 'PDF',
                 title: '',

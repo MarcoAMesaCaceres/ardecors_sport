@@ -37,6 +37,7 @@
 <table id="elementosTable" class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Fecha</th>
             <th>Proveedor</th>
             <th>Producto</th>
@@ -46,9 +47,14 @@
     <tbody>
         {% for compra in compras %}
         <tr>
+            <td>{{ compra.id }}</td>
             <td>{{ compra.fecha|date:"d/m/Y" }}</td>
             <td>{{ compra.proveedor }}</td>
-            <td>{{ compra.producto }}</td>
+            <td>
+                {% for detalle in compra.detalles.all %}
+                    {{ detalle.producto }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
             <td>
                 <a href="{% url 'editar_compras' compra.pk %}" class="btn btn-sm btn-warning">Editar</a>
                 <a href="{% url 'eliminar_compras' compra.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
