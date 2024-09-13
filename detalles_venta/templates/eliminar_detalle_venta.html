@@ -1,19 +1,18 @@
-{% extends 'base_detalle_venta.html' %}
+{% extends 'base_venta.html' %}
 {% load static %}
-{% block title %}Eliminar Detalles Ventas{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
-    <link rel="icon" href="{% static 'img/logoardecors.png' %}">
-    {% include 'navbar.html' %}
-    <div class="home-section">
-<h1>Eliminar detalles ventas</h1>
-<p>¿Estás seguro de que deseas eliminar el detalle de la venta "{{ venta.nombre }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-    <a href="{% url 'lista_detalles_venta' %}" class="btn btn-secondary">Cancelar</a>
-</form>
+{% include 'navbar.html' %}
+
+<div class="home-section">
+    <div class="container mt-4">
+        <h1>Eliminar Detalle de Venta</h1>
+        <p>¿Está seguro de que desea eliminar este detalle de venta?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+            <a href="{% url 'lista_detalles_venta' detalle.venta.id %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
 </div>
 {% endblock %}

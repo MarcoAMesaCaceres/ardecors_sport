@@ -33,10 +33,12 @@ def crear_detalle_compra(request, compra_id):
             detalle = form.save(commit=False)
             detalle.compra = compra
             detalle.save()
-            return redirect('lista_detalles_compra', compra_id=compra.id)
+            compra.actualizar_total()
+            return redirect('crear_detalle_compra', compra_id=compra.id)
     else:
-        form = DetalleCompraForm(initial={'compra': compra})
-    return render(request, 'crear_detalle_compra.html', {'form': form, 'compra': compra})
+        form = DetalleCompraForm()
+    detalles = DetalleCompra.objects.filter(compra=compra)
+    return render(request, 'crear_detalle_compra.html', {'form': form, 'compra': compra, 'detalles': detalles})
 
 def editar_detalle_compra(request, pk):
     detalle = get_object_or_404(DetalleCompra, pk=pk)
@@ -83,47 +85,3 @@ def exportar_excel(request):
     wb.save(response)
     return response
 
-def exportar_pdf(request):
-    buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter)
-    elements = []
-
-    detalles_compra = DetalleCompra.objects.all()
-
-    data = [['ID', 'Proveedor', 'Fecha', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']]
-    for detalle in detalles_compra:
-        data.append([
-            str(detalle.id),
-            detalle.compra.proveedor.nombre if detalle.compra.proveedor else 'No especificado',
-            str(detalle.fecha),
-            detalle.producto,
-            str(detalle.cantidad),
-            str(detalle.precio_unitario),
-            str(detalle.total)
-        ])
-
-    table = Table(data)
-    
-    style = TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 14),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-        ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-        ('FONTSIZE', (0, 1), (-1, -1), 12),
-        ('TOPPADDING', (0, 1), (-1, -1), 6),
-        ('BOTTOMPADDING', (0, 1), (-1, -1), 6),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black)
-    ])
-    table.setStyle(style)
-
-    elements.append(table)
-    doc.build(elements)
-
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='detalles_compra.pdf')

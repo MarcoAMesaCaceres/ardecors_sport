@@ -4,8 +4,8 @@ import datetime
 
 class DetalleCompra(models.Model):
     id = models.AutoField(primary_key=True)
-    compra = models.ForeignKey('compras.Compras', on_delete=models.CASCADE, related_name='detalles',null=True, blank=True)
-    fecha = models.DateField(default=datetime.date.today)
+    compra = models.ForeignKey('compras.Compras', on_delete=models.CASCADE, related_name='detalles',null=True)
+    producto = models.CharField(max_length=255,null=True)
     cantidad = models.PositiveIntegerField()
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
     total = models.DecimalField(max_digits=10, decimal_places=2, editable=False)

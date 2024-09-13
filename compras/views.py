@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Compras
-from .forms import ComprasForm, ComprasSearchForm
+from .forms import ComprasForm
 from django.db.models import Q
 from django.template.loader import get_template
 
@@ -19,33 +19,14 @@ from reportlab.lib.units import inch
 
 def lista_compras(request):
     compras = Compras.objects.all()
-    form = ComprasSearchForm(request.GET)
-    
-    if form.is_valid():
-        search_query = form.cleaned_data.get('search_query')
-        fecha_inicio = form.cleaned_data.get('fecha_inicio')
-        fecha_fin = form.cleaned_data.get('fecha_fin')
-        
-        if search_query:
-            compras = compras.filter(
-                Q(proveedor__nombre__icontains=search_query) | 
-                Q(producto__icontains=search_query)
-            )
-        
-        if fecha_inicio:
-            compras = compras.filter(fecha__gte=fecha_inicio)
-        
-        if fecha_fin:
-            compras = compras.filter(fecha__lte=fecha_fin)
-    
-    return render(request, 'lista_compras.html', {'compras': compras, 'form': form})
+    return render(request, 'lista_compras.html', {'compras': compras})
 
 def crear_compras(request):
     if request.method == 'POST':
         form = ComprasForm(request.POST)
         if form.is_valid():
             compra = form.save()
-            return redirect('lista_detalles_compra', compra_id=compra.id)
+            return redirect('crear_detalle_compra', compra_id=compra.id)
     else:
         form = ComprasForm()
     return render(request, 'crear_compras.html', {'form': form})
@@ -98,47 +79,3 @@ def exportar_excel(request):
     )
     response['Content-Disposition'] = 'attachment; filename=compras.xlsx'
 
-def exportar_pdf_compras(request):
-    # Crear un buffer en memoria
-    buffer = BytesIO()
-
-    # Crear un documento PDF con el buffer
-    doc = SimpleDocTemplate(buffer, pagesize=letter)
-
-    # Consulta los datos de compras
-    compras = Compras.objects.all()
-
-    # Preparar los datos para la tabla
-    data = []
-    data.append(['Fecha', 'Proveedor', 'Producto', 'Detalle'])  # Encabezado
-    for compra in compras:
-        data.append([
-            str(compra.fecha),
-            compra.proveedor if compra.proveedor else 'N/A',
-            compra.producto if compra.producto else 'N/A',
-            str(compra)
-        ])
-
-    # Crear una tabla
-    table = Table(data)
-    table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black),
-    ]))
-
-    # Construir el documento PDF
-    doc.build([table])
-
-    # Obtener el valor del buffer y cerrarlo
-    pdf = buffer.getvalue()
-    buffer.close()
-
-    # Crear una respuesta HTTP con el PDF
-    response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="compras.pdf"'
-    return response

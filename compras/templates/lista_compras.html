@@ -29,15 +29,10 @@
 
 <h1>Lista de Compras</h1>
 
-<form method="get" class="mb-3">
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Buscar</button>
-</form>
+
 
 <a href="{% url 'crear_compras' %}" class="btn btn-primary mb-3">Crear Nueva Compra</a>
 
-<!-- Botón para imprimir la lista de compras -->
-<button onclick="Compras()" class="btn btn-primary mb-3">Imprimir Lista de Compras</button>
 
 <table id="elementosTable" class="table">
     <thead>
@@ -45,7 +40,6 @@
             <th>Fecha</th>
             <th>Proveedor</th>
             <th>Producto</th>
-            <th>Total</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -70,8 +64,7 @@
 </table>
 
 <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
-<a href="{% url 'exportar_pdf_compras' %}" class="btn btn-primary mb-3">Generar PDF</a>
-<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
 
 
 <script>

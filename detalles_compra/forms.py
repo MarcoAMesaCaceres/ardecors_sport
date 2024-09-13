@@ -4,25 +4,7 @@ from .models import DetalleCompra
 class DetalleCompraForm(forms.ModelForm):
     class Meta:
         model = DetalleCompra
-        fields = ['compra', 'fecha', 'cantidad', 'precio_unitario']
-        widgets = {
-            'fecha': forms.DateInput(attrs={'type': 'date'}),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if 'instance' in kwargs and kwargs['instance']:
-            self.fields['producto'] = forms.CharField(
-                initial=kwargs['instance'].producto,
-                disabled=True,
-                required=False
-            )
-        elif 'initial' in kwargs and 'compra' in kwargs['initial']:
-            self.fields['producto'] = forms.CharField(
-                initial=kwargs['initial']['compra'].producto,
-                disabled=True,
-                required=False
-            )
+        fields = ['producto', 'cantidad', 'precio_unitario']
 
     def clean(self):
         cleaned_data = super().clean()

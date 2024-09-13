@@ -24,23 +24,13 @@ from xhtml2pdf import pisa
 from django.templatetags.static import static
 from reportlab.lib.enums import TA_LEFT
 
-def lista_ventas(request):
-    ventas = Venta.objects.all()
-    form = VentaSearchForm(request.GET)
-    
-    if form.is_valid():
-        cliente = form.cleaned_data.get('cliente')
-        fecha_inicio = form.cleaned_data.get('fecha_inicio')
-        fecha_fin = form.cleaned_data.get('fecha_fin')
+from django.shortcuts import render
+from .models import Venta
+from .forms import VentaSearchForm
 
-        if cliente:
-            ventas = ventas.filter(cliente__icontains=cliente)
-        if fecha_inicio:
-            ventas = ventas.filter(fecha__gte=fecha_inicio)
-        if fecha_fin:
-            ventas = ventas.filter(fecha__lte=fecha_fin)
-    
-    return render(request, 'lista_ventas.html', {'ventas': ventas, 'form': form})
+def lista_ventas(request):
+    ventas = Venta.objects.all().prefetch_related('detalles__articulo')
+    return render(request, 'lista_ventas.html', {'ventas': ventas})
 
 def crear_venta(request):
     if request.method == 'POST':

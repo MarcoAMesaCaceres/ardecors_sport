@@ -1,31 +1,12 @@
-{% extends 'base_detalle_venta.html' %}
-% load static %}
-{% block title %}Editar  Detalles Ventas{% endblock %}
-
-{% block content %}
-<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
-    <link rel="icon" href="{% static 'img/logoardecors.png' %}">
-    {% include 'navbar.html' %}
-
-    <!-- Aquí colocamos el breadcrumb -->
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Editar detalle venta</a></li>
-    </ul>
-
-    <div class="home-section">
-<h1>Editar Detalles Ventas</h1>
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="mb-3">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-        {{ field.errors }}
-        {{ field }}
+<div class="home-section">
+    <div class="container mt-4">
+        <h1>Editar Detalle de Venta</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{% url 'lista_detalles_venta' detalle.venta.id %}" class="btn btn-secondary">Cancelar</a>
+        </form>
     </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    <a href="{% url 'lista_detalles_venta' %}" class="btn btn-secondary">Cancelar</a>
-</form>
 </div>
 {% endblock %}

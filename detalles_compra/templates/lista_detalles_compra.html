@@ -18,43 +18,41 @@
 <!-- Botón para imprimir detalles compras -->
 <button onclick="Detalles_Compra()" class="btn btn-primary mb-3">Imprimir Detalle de la Compra</button>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Total</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for detalle in detalles %}
-        <tr>
-            <td>{{ detalle.fecha|date:"d/m/Y" }}</td>
-            <td>{{ compra.producto }}</td>
-            <td>{{ detalle.cantidad }}</td>
-            <td>{{ detalle.precio_unitario }}</td>
-            <td>{{ detalle.total }}</td>
-            <td>
-                <a href="{% url 'editar_detalle_compra' detalle.pk %}" class="btn btn-primary">Editar</a>
-                <a href="{% url 'eliminar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
-            </td>
-        </tr>
-    {% empty %}
-        <tr>
-            <td colspan="6">No hay detalles de compra disponibles.</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% if detalles %}
+<table id="elementosTable" class="table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles %}
+                    <tr>
+                        <td>{{ detalle.fecha|date:"d/m/Y" }}</td>
+                        <td>{{ detalle.cantidad }}</td>
+                        <td>{{ detalle.precio_unitario }}</td>
+                        <td>{{ detalle.total }}</td>
+                        <td>
+                            <a href="{% url 'editar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{% url 'eliminar_detalle_compra' detalle.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay detalles de compra disponibles.</p>
+    {% endif %}
 
-{% if compra %}
-    <a href="{% url 'crear_detalle_compra' compra.id %}" class="btn btn-primary">Agregar Detalle</a>
-{% else %}
-    <p>Seleccione una compra para agregar detalles.</p>
-{% endif %}
+    {% if compra %}
+        <a href="{% url 'crear_detalle_compra' compra.id %}" class="btn btn-primary">Agregar Detalle</a>
+    {% else %}
+        <p>Seleccione una compra para agregar detalles.</p>
+    {% endif %}
 
 <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Volver a la Lista de Compras</a>
 <a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
