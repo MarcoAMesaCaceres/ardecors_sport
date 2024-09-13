@@ -21,8 +21,24 @@ $(document).ready(function () {
                 "previous": "Anterior"
             }
         },
+        
         dom: 'lBfrtip',
         buttons: [
+
+            {
+                extend: 'copy',
+                text: 'Copiar'
+            },
+            {
+                extend: 'csv',
+                text: 'CSV',
+                exportOptions: {
+                    columns: function (index, data, node) {
+                        return index !== $('#elementosTable').find('thead th').length - 1;
+                    }
+                }
+            },
+
             {
                 extend: 'excel',
                 text: 'Excel',
