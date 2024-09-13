@@ -58,29 +58,3 @@ def eliminar_detalle_compra(request, pk):
         return redirect('lista_detalles_compra', compra_id=compra_id)
     return render(request, 'eliminar_detalle_compra.html', {'detalle': detalle})
 
-def exportar_excel(request):
-    detalles_compra = DetalleCompra.objects.all()
-    
-    wb = openpyxl.Workbook()
-    ws = wb.active
-    ws.title = 'Detalles de Compra'
-
-    headers = ['ID', 'Fecha', 'Proveedor', 'Producto', 'Cantidad', 'Precio Unitario', 'Total']
-    for col_num, header in enumerate(headers, 1):
-        col_letter = get_column_letter(col_num)
-        ws[f'{col_letter}1'] = header
-
-    for row_num, detalle in enumerate(detalles_compra, 2):
-        ws[f'A{row_num}'] = detalle.id
-        ws[f'B{row_num}'] = detalle.fecha.strftime('%d/%m/%Y')
-        ws[f'C{row_num}'] = detalle.compra.proveedor.nombre if detalle.compra.proveedor else 'No especificado'
-        ws[f'D{row_num}'] = detalle.producto
-        ws[f'E{row_num}'] = detalle.cantidad
-        ws[f'F{row_num}'] = detalle.precio_unitario
-        ws[f'G{row_num}'] = detalle.total
-
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=detalles_compra.xlsx'
-    wb.save(response)
-    return response
-
