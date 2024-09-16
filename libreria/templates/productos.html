@@ -14,7 +14,7 @@
             <script src="{% static '/js/productos.js' %}" async></script>
             <link rel="stylesheet" href="{% static 'css/accesibilidad.css' %}">
             <script src="{% static 'js/accesibilidad.js' %}"></script> 
-        <title>productos | </title>
+        <title>Productos</title>
     </head>
     <body>
         <header>
@@ -24,17 +24,20 @@
 
                 
                 
-                        <div class="button-container">
-                            <button class="button button-blue"><a
+                    <div class="button-container">
+            
+                        <h2>rdecors</h2>
+                        
+            
+                        <button class="button button-yellow"><a
+                            href="{% url 'productos' %}">Productos</a></button>
+                        <button class="button button-green"><a href="{% url 'sobre' %}">Sobre
+                            Nosotros</a></button>
+                        <button class="button button-red"><a
+                            href="{% url 'contacto' %}">Contacto</a></button>
+                        <button class="button button-yellow"><a
                             href="{% url 'login' %}">Login</a></button>
-                            <button class="button button-yellow"><a
-                                href="{% url 'ardecors' %}">Inicio</a></button>
-                            <button class="button button-green"><a href="{% url 'sobre' %}">Sobre
-                                Nosotros</a></button>
-                            <button class="button button-red"><a
-                                href="{% url 'contacto' %}">Contacto</a></button>
-                                
-                        </div>
+                    </div>
                 
 
                 </nav>

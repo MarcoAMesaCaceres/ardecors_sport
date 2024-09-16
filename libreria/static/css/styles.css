@@ -127,12 +127,13 @@ header {
   
   h1 {
     font-size: 36px;
-    color: #000000;
+    color: #0E2C40;
     text-align: center;
   }
   
   p {
-    font-size: 18px;
+    text-align: justify;
+    font-size: 20px;
     color: #000000;
   }
   
@@ -144,6 +145,16 @@ header {
   }
   
   h2 {
+    color: rgb(255, 213, 0);
+    font-size: 30px;
+    text-align: center;
+  }
+  #mision h2 {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    text-align: center;
+  }
+  #vision h2 {
     color: rgb(255, 255, 255);
     font-size: 30px;
     text-align: center;
@@ -180,6 +191,7 @@ header {
   
   li {
     color: black;
+    text-align: justify;
   }
   
   .button-green {
@@ -335,4 +347,128 @@ header {
 .high-contrast {
     background-color: #000;
     color: #fff;
+}
+
+
+#contacto .contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#contacto .contact-method {
+  flex-basis: calc(50% - 15px);
+  margin-bottom: 20px;
+}
+
+#contacto .contact-method h3 {
+  color: #0E2C40;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+#contacto .contact-method p {
+  margin: 0;
+}
+
+
+/* Estilos generales para la página Sobre Nosotros */
+#nosotros {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilos para el título principal */
+#nosotros h1 {
+    color: #0E2C40;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #0E2C40;
+    padding-bottom: 10px;
+}
+
+/* Estilos para la descripción de la empresa */
+#nosotros p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Estilos para la sección de valores */
+#valores {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#valores h2 {
+    color: #0E2C40;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+    padding-left: 30px;
+    position: relative;
+    text-align: justify;
+}
+
+ li:before {
+    content: "•";
+    color: #0E2C40;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+/* Estilos para resaltar palabras clave */
+.highlight {
+    font-weight: bold;
+    color: #0E2C40;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    #nosotros {
+        padding: 20px 10px;
+    }
+
+    #nosotros h1 {
+        font-size: 2em;
+    }
+
+    #valores {
+        padding: 20px;
+    }
+
+    #valores h2 {
+        font-size: 2em;
+    }
+}
+
+/* Animación para elementos que aparecen al hacer scroll */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
