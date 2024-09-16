@@ -22,8 +22,35 @@ $(document).ready(function () {
             }
         },
         
+        
         dom: 'lBfrtip',
         buttons: [
+
+            {
+                text: 'Filas',
+                action: function (e, dt, node, config) {
+                    // Crear un menú desplegable con las opciones de longitud
+                    var menuHtml = '<div class="dropdown-menu" style="display: block;">' +
+                        '<a class="dropdown-item" href="#" data-value="1">1 fila</a>' +
+                        '<a class="dropdown-item" href="#" data-value="5">5 filas</a>' +
+                        '<a class="dropdown-item" href="#" data-value="10">10 filas</a>' +
+                        '<a class="dropdown-item" href="#" data-value="20">20 filas</a>' +
+                        '</div>';
+
+                    // Añadir el menú desplegable al botón
+                    $(node).siblings('.dropdown-menu').remove(); // Eliminar cualquier menú existente
+                    $(node).after(menuHtml);
+
+                    // Manejar el clic en los elementos del menú
+                    $(node).siblings('.dropdown-menu').find('a').on('click', function (e) {
+                        e.preventDefault();
+                        var value = $(this).data('value');
+                        dt.page.len(value).draw(); // Cambiar la longitud de la página
+                        $(node).siblings('.dropdown-menu').remove(); // Ocultar el menú después de la selección
+                    });
+                },
+                className: 'btn btn-primary'
+            },
 
             {
                 extend: 'copy',
@@ -134,6 +161,52 @@ $(document).ready(function () {
                 exportOptions: {
                     columns: ':not(:last-child)' // Excluye la última columna (acciones)
                 }
+            },
+
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                exportOptions: {
+                    columns: function (index, data, node) {
+                        return index !== $('#elementosTable').find('thead th').length - 1;
+                    }
+                },
+                customize: function (win) {
+                    // Agregar marca de agua textual en la impresión
+                    $(win.document.body).find('table').addClass('logoBase64');
+            
+                    // Crear el div para la marca de agua
+                    $(win.document.body).append('<div class="print-watermark">ARDECORS - SPORT</div>');
+            
+                    // Estilo para la marca de agua
+                    $(win.document.body).find('.print-watermark').css({
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: '36px',
+                        color: 'gray',
+                        opacity: '0.3',
+                        transform: 'translate(-50%, -50%) rotate(-30deg)',
+                        zIndex: '1000',
+                        pointerEvents: 'none'
+                    });
+            
+                    // Ajustar los márgenes del documento según normas ICONTEC
+                    $(win.document.body).css({
+                        margin: '3cm'
+                    });
+            
+                    // Ajustar el estilo de la tabla para evitar problemas de paginación
+                    $(win.document.body).find('table').css({
+                        margin: '0',
+                        padding: '0',
+                        width: '100%',
+                        pageBreakInside: 'auto'
+                    });
+                }
+            
             }
         ],
     });
