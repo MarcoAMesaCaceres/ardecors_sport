@@ -10,17 +10,14 @@ def lista_articles(request):
 
 def crear_articles(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'El artículo ha sido creado exitosamente.')
+            article = form.save()
+            print(f"Imagen guardada en: {article.imagen.path}")  # Añade esta línea
             return redirect('lista_articles')
-        else:
-            messages.error(request, 'Ha ocurrido un error al crear el artículo. Por favor, revise los campos.')
     else:
         form = ArticleForm()
     return render(request, 'crear_articles.html', {'form': form})
-
 def editar_articles(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':

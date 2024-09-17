@@ -1,8 +1,9 @@
 {% extends 'base_articles.html' %}
 {% load static %}
-{% block title %}Lista de Artículos{% endblock %}
-{% block content %}
 
+{% block title %}Lista de Artículos{% endblock %}
+
+{% block content %}
 <div class="wrapper">
     {% include 'navbar.html' %}
 
@@ -11,11 +12,6 @@
             <h1>Lista de Artículos</h1>
 
             <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
-
-            <form method="get" action="{% url 'lista_articles' %}">
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
 
             <table class="table">
                 <thead>
@@ -33,9 +29,9 @@
                     <tr>
                         <td>
                             {% if article.imagen %}
-                                <img src="{{ article.imagen.url }}" alt="{{ article.nombre }}" style="width: 50px; height: 50px;">
+                                <img src="{{ article.imagen.url }}" alt="{{ article.nombre }}" style="width: 50px; height: 50px; object-fit: cover;">
                             {% else %}
-                                <img src="{% static 'img/placeholder.png' %}" alt="{{ article.nombre }}" style="width: 50px; height: 50px;">
+                                <img src="{% static 'img/placeholder.png' %}" alt="Imagen no disponible" style="width: 50px; height: 50px; object-fit: cover;">
                             {% endif %}
                         </td>
                         <td>{{ article.nombre }}</td>
@@ -59,5 +55,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

@@ -22,8 +22,8 @@ class ArticleForm(forms.ModelForm):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get('descripcion')
-        if descripcion and len(descripcion) < 10:
-            raise ValidationError("La descripción debe tener al menos 10 caracteres.")
+        if descripcion and len(descripcion) < 5:
+            raise ValidationError("La descripción debe tener al menos 5 caracteres.")
         return descripcion
 
     def clean_precio(self):
