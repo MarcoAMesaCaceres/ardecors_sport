@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
-from .models import clientes
 from .forms import ClientesForm
 
 def lista_clientes(request):
@@ -26,13 +25,11 @@ def crear_clientes(request):
         form = ClientesForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "clientes creado exitosamente.")
+            messages.success(request, 'Cliente creado exitosamente.')
             return redirect('lista_clientes')
-        else:
-            messages.error(request, "Error al crear clientes. Por favor, revise los datos.")
     else:
         form = ClientesForm()
-    return render(request, 'crear_clientes.html', {'form': form})
+    return render(request, 'clientes/crear_clientes.html', {'form': form})
 
 def eliminar_clientes(request, pk):
     clientes = get_object_or_404(clientes, pk=pk)
