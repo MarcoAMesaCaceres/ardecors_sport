@@ -140,6 +140,17 @@ def password_reset(request):
 def base_usuario(request):
     return render(request, 'base_usuario.html')
 
+def base_clientes(request):
+    return render(request, 'base_clientes.html')
+def crear_clientes(request):
+    return render(request, 'crear_clientes.html')
+def lista_clientes(request):
+    return render(request, 'lista_clientes.html')
+def editar_clientes(request):
+    return render(request, 'editar_clientes.html')
+def eliminar_clientes(request):
+    return render(request, 'eliminar_clientes.html')
+
 def logout_view(request):
     logout(request)
     return redirect('ardecors')

@@ -41,8 +41,8 @@
                     <td>{{ clientes.telefono|default_if_none:"-" }}</td>
                     <td>{{ clientes.email|default_if_none:"-" }}</td>
                     <td>
-                        <a href="{% url 'editar_clientes' proveedor.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
-                        <a href="{% url 'eliminar_clientes' proveedor.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        <a href="{% url 'editar_clientes' clientes.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                        <a href="{% url 'eliminar_clientes' clientes.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
                     </td>
                 </tr>
             {% empty %}
