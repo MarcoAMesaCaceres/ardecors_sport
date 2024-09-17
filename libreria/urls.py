@@ -53,9 +53,17 @@ urlpatterns = [
     path('lista_proveedores/', views.lista_proveedores, name='lista_proveedores'),
     path('editar_proveedor/', views.editar_proveedor, name='editar_proveedora'),
     path('eliminar_proveedor/', views.eliminar_proveedor, name='eliminar_proveedor'),
+    
     path('lista_ayuda/', views.lista_ayuda, name='lista_ayuda'),
     path('detalle_ayuda/', views.detalle_ayuda, name='detalle_ayuda'),
     path('base_ayuda/', views.base_ayuda, name='besa_ayuda'),
+
+    path('base_clientes/', views.base_clientes, name='base_clientes'),
+    path('crear_clientes/', views.crear_clientes, name='crear_clientes'),
+    path('lista_clientes/', views.lista_clientes, name='lista_clientes'),
+    path('editar_clientes/', views.editar_clientes, name='editar_clientes'),
+    path('eliminar_clientes/', views.eliminar_clientes, name='eliminar_clientes'),
+    
 
     path('user_list/', views.user_list, name='user_list'),
     path('user_edit/', views.user_edit, name='user_edit'),

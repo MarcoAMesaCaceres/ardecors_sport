@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'tareas',
     'detalles_compra',
     'detalles_venta', 
-    'ayuda'   
+    'ayuda',
+    'clientes'
+    
 ]
 
 MIDDLEWARE = [
@@ -175,6 +177,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'usuarios' / 'static',
     BASE_DIR / 'ventas' / 'static',
     BASE_DIR / 'ayuda' / 'static',
+    BASE_DIR / 'clientes' / 'static',
     
 ]
 
