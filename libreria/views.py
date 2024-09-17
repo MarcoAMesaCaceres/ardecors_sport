@@ -277,3 +277,9 @@ def download_backup(request, filename):
     raise Http404
 
 
+from django.shortcuts import render
+from articles.models import Article
+
+def productos(request):
+    articulos = Article.objects.all()
+    return render(request, 'productos.html', {'articulos': articulos})

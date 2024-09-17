@@ -1,31 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article
-from .forms import ArticleForm,ArticleSearchForm
+from .forms import ArticleForm
 from django.db.models import Q
 from django.contrib import messages
 
 def lista_articles(request):
     articles = Article.objects.all()
-    form = ArticleSearchForm(request.GET)
-    
-    if form.is_valid():
-        search_query = form.cleaned_data.get('search_query')
-        min_price = form.cleaned_data.get('min_price')
-        max_price = form.cleaned_data.get('max_price')
-        
-        if search_query:
-            articles = articles.filter(
-                Q(nombre__icontains=search_query) | 
-                Q(descripcion__icontains=search_query)
-            )
-        
-        if min_price:
-            articles = articles.filter(precio__gte=min_price)
-        
-        if max_price:
-            articles = articles.filter(precio__lte=max_price)
-    
-    return render(request, 'lista_articles.html', {'articles': articles, 'form': form})
+    return render(request, 'lista_articles.html', {'articles': articles})
 
 def crear_articles(request):
     if request.method == 'POST':

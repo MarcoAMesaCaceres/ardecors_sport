@@ -1,41 +1,30 @@
-
 {% extends 'base_articles.html' %}
-
 {% load static %}
-
-
-<link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
 {% include 'navbar.html' %}
 
-    <!-- Aquí colocamos el breadcrumb -->
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Panel de Administración / Crear Articulos</a></li>
-    </ul>
-
 <div class="home-section">
-    
-<h1 class="mb-4">{% if producto %}Editar{% else %}Crear{% endif %} Articulos</h1>
-<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
-    
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="mb-3">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-        {{ field }}
-        {% if field.errors %}
-        <div class="text-danger">
-            {% for error in field.errors %}
-            <small>{{ error }}</small>
-            {% endfor %}
+    <h1 class="mb-4">{% if producto %}Editar{% else %}Crear{% endif %} Articulo</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+            <div class="text-danger">
+                {% for error in field.errors %}
+                <small>{{ error }}</small>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="{% url 'lista_articles' %}" class="btn btn-secondary">Cancelar</a>
-</form>
-<div/>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'lista_articles' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
 {% endblock %}

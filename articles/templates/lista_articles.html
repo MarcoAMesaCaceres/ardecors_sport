@@ -1,31 +1,26 @@
 {% extends 'base_articles.html' %}
 {% load static %}
-
 {% block title %}Lista de Artículos{% endblock %}
-<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
-    <link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
+
 <div class="wrapper">
     {% include 'navbar.html' %}
 
-    
-    
     <div class="home-section">
-        
         <div class="content">
             <h1>Lista de Artículos</h1>
-            
+
             <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
-            
-            <form method="get" class="mb-3">
+
+            <form method="get" action="{% url 'lista_articles' %}">
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
-            
-            <table id="elementosTable" class="table">
+
+            <table class="table">
                 <thead>
                     <tr>
+                        <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
@@ -36,6 +31,13 @@
                 <tbody>
                     {% for article in articles %}
                     <tr>
+                        <td>
+                            {% if article.imagen %}
+                                <img src="{{ article.imagen.url }}" alt="{{ article.nombre }}" style="width: 50px; height: 50px;">
+                            {% else %}
+                                <img src="{% static 'img/placeholder.png' %}" alt="{{ article.nombre }}" style="width: 50px; height: 50px;">
+                            {% endif %}
+                        </td>
                         <td>{{ article.nombre }}</td>
                         <td>{{ article.descripcion|truncatewords:10 }}</td>
                         <td>${{ article.precio }}</td>
@@ -47,14 +49,15 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5">No hay artículos disponibles.</td>
+                        <td colspan="6">No hay artículos disponibles.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </br>
+
             <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
         </div>
     </div>
 </div>
+
 {% endblock %}
