@@ -9,7 +9,7 @@
     {% include 'navbar.html' %}
     <div class="home-section">
 <h1>Eliminar venta</h1>
-<p>¿Estás seguro de que deseas eliminar la venta  de "{{ venta.cliente }}"?</p>
+<p>¿Estás seguro de que deseas eliminar la venta   "{{venta.id }}"?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Sí, eliminar</button>

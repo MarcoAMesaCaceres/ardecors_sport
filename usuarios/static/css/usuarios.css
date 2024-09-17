@@ -116,21 +116,6 @@ a:hover {
 }
 
 /* CSS personalizado para el breadcrumb */
-.breadcrumb {
-    margin: 0 0 20px 0;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-}
-
-.breadcrumb-item a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.breadcrumb-item a:hover {
-    text-decoration: underline;
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

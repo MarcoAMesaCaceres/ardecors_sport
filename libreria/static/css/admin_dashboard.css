@@ -229,7 +229,8 @@
 .sidebar .profile .profile_details{
   display: flex;
   align-items: center;
-  flex-wrap:  nowrap;
+  flex-wrap: nowrap;
+ 
 }
 
 .sidebar li img{

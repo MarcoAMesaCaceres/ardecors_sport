@@ -1,5 +1,7 @@
 {% extends "base_usuario.html" %}
 {% block content %}
+{% include 'navbar.html' %}
+<div class="home-section">
 <h2>Usuarios pendientes de aprobación</h2>
 {% if pending_users %}
     <ul>
@@ -22,5 +24,6 @@
     <p>No hay usuarios pendientes de aprobación.</p>
 
 <a href="{% url 'user_list' %}" class="btn btn-primary mb-3">Volver al lista de usuarios</a>
+</div>
 {% endif %}
 {% endblock %}

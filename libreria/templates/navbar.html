@@ -45,7 +45,11 @@
             
             <div class="logo_name">Ardecors</div>
             <i class='bx bx-menu' id="btn"></i>
+            <li>
+                <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
+            </li>
         </div>
+        
         <ul class="nav-list">
             {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
             <li>
@@ -122,10 +126,11 @@
                 </a>
                 <span class="tooltip">Volver al Login</span>
             </li>
+            
             {%endif%}
             <li class="profile">
                 <div class="profile_details">
-                    <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
+                    
                     <div class="profile_content">
                         <div class="name">
                             {{ request.user.username }}
