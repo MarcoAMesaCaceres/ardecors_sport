@@ -12,7 +12,7 @@
 *{
   padding: 0%;
   margin: 0%;
-  box-sizing: border-box;
+  
   font-family: 'Poppins', sans-serif;
 }
 
@@ -83,7 +83,7 @@
 
 .sidebar i {
   color: var(--color-white);
-  height: 60px;
+  height: 80px;
   line-height: 60px;
   min-width: 50px;
   font-size: 25px;
@@ -214,7 +214,7 @@
 .sidebar li.profile{
   position: fixed;
   height: 60px;
-  width: 78px;
+  width: 90px;
   left: 0;
   bottom:-8px;
   padding:10px 14px;
@@ -243,15 +243,13 @@
 
 .sidebar li.profile .name,
 .sidebar li.profile .designation{
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 500;
   color:var(--color-white);
   white-space: nowrap;
 }
 
-.sidebar li.profile .designation{
-  font-size: 12px;
-}
+
 
 .sidebar .profile #log_out{
   position: absolute;
@@ -276,7 +274,7 @@
   position: relative;
   background-color: var(--color-body);
   min-height: 100vh;
-  left: 78px;
+  left: 200px;
   width: calc(100% - 78px);
   transition: all .5s ease;
 }
