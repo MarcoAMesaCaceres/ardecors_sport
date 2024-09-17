@@ -1,10 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from .forms import ClientesForm
+from .models import clientes  # Importación corregida
 
 def lista_clientes(request):
-    clientes = clientes.objects.all()
-    return render(request, 'lista_clientes.html', {'clientes': clientes})
+    clientes_list = clientes.objects.all()  # Nombre de variable cambiado para evitar conflicto
+    return render(request, 'lista_clientes.html', {'clientes': clientes_list})
 
 def editar_clientes(request, pk):
     clientes = get_object_or_404(clientes, pk=pk)
@@ -20,16 +21,16 @@ def editar_clientes(request, pk):
         form = ClientesForm(instance=clientes)
     return render(request, 'editar_clientes.html', {'form': form, 'clientes': clientes})
 
-def crear_clientes(request):
+def crear_cliente(request):
     if request.method == 'POST':
         form = ClientesForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Cliente creado exitosamente.')
-            return redirect('lista_clientes')
+            return redirect('clientes_list')  # Redirige a una lista de clientes después de guardar
     else:
         form = ClientesForm()
-    return render(request, 'clientes/crear_clientes.html', {'form': form})
+
+    return render(request, 'crear_cliente.html', {'form': form})
 
 def eliminar_clientes(request, pk):
     clientes = get_object_or_404(clientes, pk=pk)
