@@ -147,24 +147,23 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
     //Actualizamos total
     actualizarTotalCarrito();
 }
-//Aumento en uno la cantidad del elemento seleccionado
-function sumarCantidad(event){
+// Aumento en uno la cantidad del elemento seleccionado
+function sumarCantidad(event) {
     var buttonClicked = event.target;
     var selector = buttonClicked.parentElement;
-    console.log(selector.getElementsByClassName('carrito-item-cantidad')[0].value);
-    var cantidadActual = selector.getElementsByClassName('carrito-item-cantidad')[0].value;
-    cantidadActual++;
+    var cantidadActual = parseInt(selector.getElementsByClassName('carrito-item-cantidad')[0].value); // Convertir a número
+    cantidadActual++; // Incrementar la cantidad
     selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
     actualizarTotalCarrito();
 }
-//Resto en uno la cantidad del elemento seleccionado
-function restarCantidad(event){
+
+// Resto en uno la cantidad del elemento seleccionado
+function restarCantidad(event) {
     var buttonClicked = event.target;
     var selector = buttonClicked.parentElement;
-    console.log(selector.getElementsByClassName('carrito-item-cantidad')[0].value);
-    var cantidadActual = selector.getElementsByClassName('carrito-item-cantidad')[0].value;
+    var cantidadActual = parseInt(selector.getElementsByClassName('carrito-item-cantidad')[0].value); // Convertir a número
     cantidadActual--;
-    if(cantidadActual>=1){
+    if (cantidadActual >= 1) {
         selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
         actualizarTotalCarrito();
     }
@@ -194,27 +193,32 @@ function ocultarCarrito(){
         items.style.width = '100%';
     }
 }
-//Actualizamos el total de Carrito
-function actualizarTotalCarrito(){
-    //seleccionamos el contenedor carrito
+// Actualizamos el total de Carrito
+function actualizarTotalCarrito() {
+    // Seleccionamos el contenedor carrito
     var carritoContenedor = document.getElementsByClassName('carrito')[0];
     var carritoItems = carritoContenedor.getElementsByClassName('carrito-item');
     var total = 0;
-    //recorremos cada elemento del carrito para actualizar el total
-    for(var i=0; i< carritoItems.length;i++){
+
+    // Recorremos cada elemento del carrito para actualizar el total
+    for (var i = 0; i < carritoItems.length; i++) {
         var item = carritoItems[i];
         var precioElemento = item.getElementsByClassName('carrito-item-precio')[0];
-        //quitamos el simobolo peso y el punto de milesimos.
-        var precio = parseFloat(precioElemento.innerText.replace('$','').replace('.',''));
+
+        // Quitamos el símbolo peso y el punto de miles
+        var precio = parseFloat(precioElemento.innerText.replace('$', '').replace(/\./g, '')); // Asegurarse de remover los puntos de miles
+
         var cantidadItem = item.getElementsByClassName('carrito-item-cantidad')[0];
-        console.log(precio);
-        var cantidad = cantidadItem.value;
-        total = total + (precio * cantidad);
+        var cantidad = parseInt(cantidadItem.value); // Asegurarse de convertir a número
+
+        total += (precio * cantidad); // Sumar el precio por la cantidad
     }
-    total = Math.round(total * 100)/100;
 
-    document.getElementsByClassName('carrito-precio-total')[0].innerText = '$'+total.toLocaleString("es") + ",00";
+    // Redondeamos el total a 2 decimales
+    total = Math.round(total * 100) / 100;
 
+    // Actualizamos el texto del total en el carrito
+    document.getElementsByClassName('carrito-precio-total')[0].innerText = '$' + total.toLocaleString("es") + ",00";
 }
 
 
