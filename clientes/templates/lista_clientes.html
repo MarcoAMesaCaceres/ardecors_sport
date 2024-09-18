@@ -33,6 +33,7 @@
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Dirección</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -41,8 +42,9 @@
                 <tr>
                     <td>{{ clientes.id }}</td>
                     <td>{{ clientes.nombre }}</td>
-                    <td>{{ clientes.telefono|}}</td>
-                    <td>{{ clientes.email|}}</td>
+                    <td>{{ clientes.telefono}}</td>
+                    <td>{{ clientes.email}}</td>
+                    <td>{{ clientes.direccion}}</td>
                     <td>
                         <a href="{% url 'editar_clientes' clientes.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
                         <a href="{% url 'eliminar_clientes' clientes.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>

@@ -1,12 +1,12 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from articles.models import Article
-
+from clientes.models import Clientes
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)
     fecha = models.DateField()
-    cliente = models.CharField(max_length=255)
+    clientes = models.ForeignKey(Clientes, on_delete=models.CASCADE)
+    # ... resto del modelo
 
     def clean(self):
         # Validar que la fecha no sea futura
@@ -17,5 +17,5 @@ class Venta(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
-    def __str__(self):
-        return f"Venta {self.id} - {self.cliente} - {self.fecha}"
+def __str__(self):
+    return f"Venta {self.id} - {self.clientes} - {self.fecha}"

@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from reportlab.lib.utils import ImageReader
 from .models import Venta
-from .forms import VentaForm, VentaSearchForm
+from .forms import VentaForm
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
@@ -26,7 +26,7 @@ from reportlab.lib.enums import TA_LEFT
 
 from django.shortcuts import render
 from .models import Venta
-from .forms import VentaSearchForm
+
 
 def lista_ventas(request):
     ventas = Venta.objects.all().prefetch_related('detalles__articulo')
