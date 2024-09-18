@@ -4,13 +4,12 @@ from .models import Clientes
 class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
-        fields = ['nombre', 'contacto', 'telefono', 'email', 'direccion']
+        fields = ['nombre', 'telefono', 'email', 'direccion']
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'contacto': forms.TextInput(attrs={'class': 'form-control'}),
             'telefono': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'direccion': forms.Textarea(attrs={'class': 'form-control'}),
+            'direccion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
 
     def clean_nombre(self):

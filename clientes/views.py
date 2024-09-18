@@ -4,8 +4,8 @@ from .forms import ClientesForm
 from .models import Clientes  # Assume the model name is capitalized
 
 def lista_clientes(request):
-    clientes_list = Clientes.objects.all()
-    return render(request, 'lista_clientes.html', {'clientes': clientes_list})
+    clientes = Clientes.objects.all()
+    return render(request, 'lista_clientes.html', {'clientes': clientes})
 
 def editar_clientes(request, pk):
     cliente = get_object_or_404(Clientes, pk=pk)
@@ -21,17 +21,18 @@ def editar_clientes(request, pk):
         form = ClientesForm(instance=cliente)
     return render(request, 'editar_clientes.html', {'form': form, 'cliente': cliente})
 
-def crear_clientes(request):  # Changed from crear_cliente to crear_clientes
+def crear_clientes(request):
     if request.method == 'POST':
         form = ClientesForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Cliente creado exitosamente.")
-            return redirect('lista_clientes')
+            messages.success(request, 'Cliente creado exitosamente.')
+            return redirect('lista_clientes')  # Redirige a la lista de clientes después de guardar
         else:
-            messages.error(request, "Error al crear cliente. Por favor, revise los datos.")
+            messages.error(request, 'Por favor, corrija los errores a continuación.')
     else:
         form = ClientesForm()
+
     return render(request, 'crear_clientes.html', {'form': form})
 
 def eliminar_clientes(request, pk):

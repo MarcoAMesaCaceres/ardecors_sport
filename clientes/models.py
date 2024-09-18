@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator, EmailValidator
 from django.db import models
 from django.core.validators import RegexValidator, EmailValidator
 
-class clientes(models.Model):
+class Clientes(models.Model):
     nombre = models.CharField(max_length=255, validators=[
         RegexValidator(
             regex=r'^[a-zA-Z\s]+$',
