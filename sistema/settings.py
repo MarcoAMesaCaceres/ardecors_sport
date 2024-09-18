@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'tareas',
     'detalles_compra',
     'detalles_venta', 
-    'ayuda'   
+    'ayuda',
+    'clientes'   
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'sistema.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
+        'DIRS': [ 
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -73,10 +74,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'sistema.wsgi.application'
 
@@ -173,6 +177,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'usuarios' / 'static',
     BASE_DIR / 'ventas' / 'static',
     BASE_DIR / 'ayuda' / 'static',
+    BASE_DIR / 'clientes' / 'static',
     
 ]
 

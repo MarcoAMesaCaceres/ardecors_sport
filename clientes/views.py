@@ -1,41 +1,43 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from .forms import ClientesForm
-from .models import clientes  # Importación corregida
+from .models import Clientes  # Assume the model name is capitalized
 
 def lista_clientes(request):
-    clientes_list = clientes.objects.all()  # Nombre de variable cambiado para evitar conflicto
+    clientes_list = Clientes.objects.all()
     return render(request, 'lista_clientes.html', {'clientes': clientes_list})
 
 def editar_clientes(request, pk):
-    clientes = get_object_or_404(clientes, pk=pk)
+    cliente = get_object_or_404(Clientes, pk=pk)
     if request.method == 'POST':
-        form = ClientesForm(request.POST, instance=clientes)
+        form = ClientesForm(request.POST, instance=cliente)
         if form.is_valid():
             form.save()
-            messages.success(request, "clientes actualizado exitosamente.")
+            messages.success(request, "Cliente actualizado exitosamente.")
             return redirect('lista_clientes')
         else:
-            messages.error(request, "Error al actualizar clientes. Por favor, revise los datos.")
+            messages.error(request, "Error al actualizar cliente. Por favor, revise los datos.")
     else:
-        form = ClientesForm(instance=clientes)
-    return render(request, 'editar_clientes.html', {'form': form, 'clientes': clientes})
+        form = ClientesForm(instance=cliente)
+    return render(request, 'editar_clientes.html', {'form': form, 'cliente': cliente})
 
-def crear_cliente(request):
+def crear_clientes(request):  # Changed from crear_cliente to crear_clientes
     if request.method == 'POST':
         form = ClientesForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('clientes_list')  # Redirige a una lista de clientes después de guardar
+            messages.success(request, "Cliente creado exitosamente.")
+            return redirect('lista_clientes')
+        else:
+            messages.error(request, "Error al crear cliente. Por favor, revise los datos.")
     else:
         form = ClientesForm()
-
-    return render(request, 'crear_cliente.html', {'form': form})
+    return render(request, 'crear_clientes.html', {'form': form})
 
 def eliminar_clientes(request, pk):
-    clientes = get_object_or_404(clientes, pk=pk)
+    cliente = get_object_or_404(Clientes, pk=pk)
     if request.method == 'POST':
-        clientes.delete()
-        messages.success(request, "clientes eliminado exitosamente.")
+        cliente.delete()
+        messages.success(request, "Cliente eliminado exitosamente.")
         return redirect('lista_clientes')
-    return render(request, 'eliminar_clientes.html', {'clientes': clientes})
+    return render(request, 'eliminar_clientes.html', {'cliente': cliente})

@@ -18,7 +18,7 @@
 
     <form method="post">
         {% csrf_token %}
-        
+
         {% if form.errors %}
         <div class="alert alert-danger">
             Por favor, corrija los siguientes errores:
@@ -35,24 +35,28 @@
         </div>
         {% endif %}
 
+        <!-- Campo para Nombre -->
         <div class="mb-3">
             <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre clientes</label>
-            {{ form.nombre }}
+            <input type="text" name="nombre" id="{{ form.nombre.id_for_label }}" class="form-control" value="{{ form.nombre.value }}">
         </div>
 
+        <!-- Campo para Teléfono -->
         <div class="mb-3">
             <label for="{{ form.telefono.id_for_label }}" class="form-label">Teléfono</label>
-            {{ form.telefono }}
+            <input type="text" name="telefono" id="{{ form.telefono.id_for_label }}" class="form-control" value="{{ form.telefono.value }}">
         </div>
 
+        <!-- Campo para Correo Electrónico -->
         <div class="mb-3">
             <label for="{{ form.email.id_for_label }}" class="form-label">Correo Electrónico</label>
-            {{ form.email }}
+            <input type="email" name="email" id="{{ form.email.id_for_label }}" class="form-control" value="{{ form.email.value }}">
         </div>
 
+        <!-- Campo para Dirección -->
         <div class="mb-3">
             <label for="{{ form.direccion.id_for_label }}" class="form-label">Dirección</label>
-            {{ form.direccion }}
+            <input type="text" name="direccion" id="{{ form.direccion.id_for_label }}" class="form-control" value="{{ form.direccion.value }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
