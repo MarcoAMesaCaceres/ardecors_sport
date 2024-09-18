@@ -71,79 +71,16 @@
         <section class="contenedor">
             <!-- Contenedor de elementos -->
             <div class="contenedor-items">
+                {% for article in articles %}
                 <div class="item">
-                    <span class="titulo-item">Balón de Futbol #4 Argentina Lionel Messi</span>
-                    <img src="{% static 'img/slider 1sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$81.000</span>
+                    <span class="titulo-item">{{ article.nombre }}</span>
+                    <img src="{{ article.imagen.url }}" alt="{{ article.nombre }}" class="img-item">
+                    <span class="precio-item">${{ article.precio }}</span>
                     <button class="boton-item">Agregar al Carrito</button>
                 </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #4 Champions Final 2022</span>
-                    <img src="{% static 'img/slider 2sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$81.000</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Fútbol #1 Bob Esponja</span>
-                    <img src="{% static 'img/slider 3sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$43.275</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balon de Futbol #5 Mundial 2022</span>
-                    <img src="{% static 'img/slider 4sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$117.900</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Mundial 1982</span>
-                    <img src="{% static 'img/slider 5sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$111.094</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Mundial 2018 </span>
-                    <img src="{% static 'img/slider 6sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$111.094</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Mundial 1954</span>
-                    <img src="{% static 'img/slider 7sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$111.094</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Mundial 1966</span>
-                    <img src="{% static 'img/slider 8sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$111.094</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Mundial 1974 </span>
-                    <img src="{% static 'img/slider 9sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$111.094</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Copa America 2024 </span>
-                    <img src="{% static 'img/slider 10sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$85.625</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Euro Copa 2024 </span>
-                    <img src="{% static 'img/slider 11sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$85.625</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
-                <div class="item">
-                    <span class="titulo-item">Balón de Futbol #5 Cristiano Ronaldo </span>
-                    <img src="{% static 'img/slider 12sf.png' %}" alt class="img-item">
-                    <span class="precio-item">$42.500</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                </div>
+                {% endfor %}
             </div>
+                    
             <!-- Carrito de Compras -->
             <div class="carrito" id="carrito">
                 <div class="header-carrito">

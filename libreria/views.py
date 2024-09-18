@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from articles.models import Article
 
 from django.http import HttpResponse, Http404
 import os
@@ -292,5 +293,7 @@ from django.shortcuts import render
 from articles.models import Article
 
 def productos(request):
-    articulos = Article.objects.all()
-    return render(request, 'productos.html', {'articulos': articulos})
+    # Obtiene todos los artículos de la base de datos
+    articles = Article.objects.all()
+    # Pasa los artículos al template de productos
+    return render(request, 'productos.html', {'articles': articles})
