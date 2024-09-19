@@ -47,7 +47,7 @@ function pagarClicked() {
     var total = document.getElementsByClassName('carrito-precio-total')[0].innerText;
 
     // Inicializar el mensaje
-    var mensaje = "HOLA¡ Me interesa este artículo  de ardecors. El total de mi compra es: " + total + "\n\nArtículos en el carrito:\n";
+    var mensaje = "HOLA¡ Me interesa estos artículos de ardecors. El total de mi compra es: " + total + "\n\nArtículos en el carrito:\n";
 
     // Obtener todos los elementos del carrito
     var carritoItems = document.getElementsByClassName('carrito-item');
@@ -57,20 +57,20 @@ function pagarClicked() {
         var item = carritoItems[i];
         var titulo = item.getElementsByClassName('carrito-item-titulo')[0].innerText;
         var cantidad = item.getElementsByClassName('carrito-item-cantidad')[0].value;
+        var precio = item.getElementsByClassName('carrito-item-precio')[0].innerText;
         var imagenSrc = item.getElementsByTagName('img')[0].src;
 
         // Agregar la información del artículo al mensaje
-        mensaje += `\n- ${titulo} (Cantidad: ${cantidad})\nVer imagen: ${imagenSrc}`;
+        mensaje += `\n- ${titulo}\n  Cantidad: ${cantidad}\n  Precio: ${precio}\n  Imagen: ${imagenSrc}\n`;
     }
 
     // Construir el enlace de WhatsApp
     var numeroWhatsApp = "3508765092"; // Número de WhatsApp sin el signo "+"
-    var enlace = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
+    var enlace = "https://api.whatsapp.com/send?phone=" + numeroWhatsApp + "&text=" + encodeURIComponent(mensaje);
 
-    // Redirigir al enlace de WhatsApp
-    window.location.href = enlace;
+    // Abrir el enlace de WhatsApp en una nueva ventana
+    window.open(enlace, '_blank');
 }
-
 
 
 //Funciòn que controla el boton clickeado de agregar al carrito

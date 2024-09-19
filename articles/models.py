@@ -1,13 +1,15 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator
 
+from django.core.validators import RegexValidator, MinValueValidator
+
 class Article(models.Model):
     nombre = models.CharField(
         max_length=255,
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z0-9\s]+$',
-                message='El nombre solo puede contener letras, números y espacios.'
+                regex=r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$',
+                message='El nombre solo puede contener letras (incluyendo tildes), números y espacios.'
             )
         ]
     )

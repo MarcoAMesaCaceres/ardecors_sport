@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from articles.models import Article
 from django.core.exceptions import ValidationError
 
 class ArticleForm(forms.ModelForm):
@@ -16,8 +16,8 @@ class ArticleForm(forms.ModelForm):
 
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
-        if not nombre.replace(' ', '').isalnum():
-            raise ValidationError("El nombre solo puede contener letras, números y espacios.")
+        if not all(char.isalnum() or char.isspace() or char in 'áéíóúÁÉÍÓÚñÑ' for char in nombre):
+            raise ValidationError("El nombre solo puede contener letras (incluyendo tildes), números y espacios.")
         return nombre
 
     def clean_descripcion(self):
@@ -40,10 +40,11 @@ class ArticleForm(forms.ModelForm):
 
     def clean_imagen(self):
         imagen = self.cleaned_data.get('imagen')
-        if imagen:
-            if imagen.size > 5 * 1024 * 1024:  # 5MB limit
-                raise ValidationError("El tamaño de la imagen no debe exceder 5MB.")
-            ext = imagen.name.split('.')[-1].lower()
-            if ext not in ['jpg', 'jpeg', 'png', 'gif']:
-                raise ValidationError("Solo se permiten archivos de imagen (jpg, jpeg, png, gif).")
+        if not imagen:
+            raise ValidationError("La imagen es obligatoria.")
+        if imagen.size > 5 * 1024 * 1024:  # 5MB limit
+            raise ValidationError("El tamaño de la imagen no debe exceder 5MB.")
+        ext = imagen.name.split('.')[-1].lower()
+        if ext not in ['jpg', 'jpeg', 'png', 'gif']:
+            raise ValidationError("Solo se permiten archivos de imagen (jpg, jpeg, png, gif).")
         return imagen
