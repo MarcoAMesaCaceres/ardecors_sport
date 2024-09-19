@@ -10,7 +10,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
             integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-            <link rel="stylesheet" href="{% static '/css/productos.css' %}">
+            <link rel="stylesheet" href="{% static '/css/productos.css' %}?v1.2">
             <script src="{% static '/js/productos.js' %}" async></script>
             <link rel="stylesheet" href="{% static 'css/accesibilidad.css' %}">
             <script src="{% static 'js/accesibilidad.js' %}"></script> 
@@ -102,6 +102,11 @@
                 </div>
             </div>
         </section>
+        <div class="paginacion">
+            <button id="prev-page" class="btn-paginacion">Anterior</button>
+            <span id="page-info"></span>
+            <button id="next-page" class="btn-paginacion">Siguiente</button>
+        </div>
     </body>
     <footer>
         <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>

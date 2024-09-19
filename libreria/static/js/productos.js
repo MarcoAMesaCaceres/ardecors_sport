@@ -221,8 +221,53 @@ function actualizarTotalCarrito() {
     document.getElementsByClassName('carrito-precio-total')[0].innerText = '$' + total.toLocaleString("es") + ",00";
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const itemsPorPagina = 8; // Cambiado a 8 productos por página
+    let paginaActual = 1;
+    const items = document.querySelectorAll('.contenedor-items .item'); // Selecciona los elementos de producto
+    const totalPaginas = Math.ceil(items.length / itemsPorPagina);
 
+    // Muestra los elementos en la página actual
+    function mostrarItems() {
+        const inicio = (paginaActual - 1) * itemsPorPagina;
+        const fin = inicio + itemsPorPagina;
 
+        // Oculta todos los elementos
+        items.forEach((item, index) => {
+            if (index >= inicio && index < fin) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Actualiza la información de la página
+        document.getElementById('page-info').textContent = `Página ${paginaActual} de ${totalPaginas}`;
+
+        // Deshabilitar botones si estamos en la primera o última página
+        document.getElementById('prev-page').disabled = paginaActual === 1;
+        document.getElementById('next-page').disabled = paginaActual === totalPaginas;
+    }
+
+    // Manejo del botón de la página anterior
+    document.getElementById('prev-page').addEventListener('click', function() {
+        if (paginaActual > 1) {
+            paginaActual--;
+            mostrarItems();
+        }
+    });
+
+    // Manejo del botón de la página siguiente
+    document.getElementById('next-page').addEventListener('click', function() {
+        if (paginaActual < totalPaginas) {
+            paginaActual++;
+            mostrarItems();
+        }
+    });
+
+    // Mostrar la primera página cuando se carga el contenido
+    mostrarItems();
+});
 
 
 

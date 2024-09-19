@@ -304,3 +304,25 @@ header h1{
     padding: 10px;
     width: 100%;
     }
+
+    .paginacion {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .btn-paginacion {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+    
+    .btn-paginacion:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+    
