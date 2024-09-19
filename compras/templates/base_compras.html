@@ -77,7 +77,15 @@
         href="{% static 'css/custom.css' %}?v1.1"
     />
 
-    <!-- <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">_______Panel de Administración - Pagina de Compras</a></li> -->
+    <div class="breadcrumb-container">
+        <ul class="breadcrumb-list">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin_dashboard' %}" style="color: black; text-decoration: none;">
+                    VOLVER Panel de Administración - Pagina de Compras
+                </a>
+            </li>
+        </ul>
+    </div>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

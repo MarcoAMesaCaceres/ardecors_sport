@@ -5,7 +5,7 @@
     padding: 0.75rem 1rem;
     margin-bottom: 1rem;
     list-style: none;
-    background-color: #e9ecef;
+    background-color: #0d0d0e; 
     border-radius: 0.25rem;
     font-weight: 600; /* Hace que todo el texto del breadcrumb sea más grueso */
 }
