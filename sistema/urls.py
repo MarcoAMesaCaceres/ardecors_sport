@@ -32,6 +32,7 @@ urlpatterns = [
     path('ventas/', include('ventas.urls')),
     path('ayuda/', include('ayuda.urls')),
     path('clientes/', include('clientes.urls')),
+    path('insumos/', include('insumos.urls')),
     
     # Añade esta línea para redirigir la raíz a la página principal de 'libreria'
     path('', RedirectView.as_view(url='/libreria/', permanent=True)),

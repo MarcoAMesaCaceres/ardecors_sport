@@ -1,9 +1,9 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator
-
+from proveedores.models import Proveedor
 from django.core.validators import RegexValidator, MinValueValidator
 
-class Article(models.Model):
+class Insumos(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(
         max_length=255,
@@ -22,12 +22,13 @@ class Article(models.Model):
             MinValueValidator(0.01, message='El precio debe ser un número positivo.')
         ]
     )
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     stock = models.IntegerField(
         validators=[
             MinValueValidator(0, message='El stock debe ser un número positivo o cero.')
         ]
     )
-    imagen = models.ImageField(upload_to='articulos/', null=True, blank=True)
+    
 
     def __str__(self):
         return self.nombre

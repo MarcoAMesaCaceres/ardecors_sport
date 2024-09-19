@@ -13,9 +13,10 @@
 
             <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
 
-            <table class="table">
+            <table id="elementosTable" class="table">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
@@ -34,6 +35,7 @@
                                 <img src="{% static 'img/placeholder.png' %}" alt="Imagen no disponible" style="width: 50px; height: 50px; object-fit: cover;">
                             {% endif %}
                         </td>
+                        <td>{{ article.}}</td>
                         <td>{{ article.nombre }}</td>
                         <td>{{ article.descripcion|truncatewords:10 }}</td>
                         <td>${{ article.precio }}</td>

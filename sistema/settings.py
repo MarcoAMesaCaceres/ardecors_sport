@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'detalles_compra',
     'detalles_venta', 
     'ayuda',
-    'clientes'   
+    'clientes', 
+    'insumos' 
+
 ]
 
 MIDDLEWARE = [
@@ -167,6 +169,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Asegúrate de que todas las rutas existan en tu sistema de archivos
 STATICFILES_DIRS = [
+    
     BASE_DIR / 'libreria' / 'static',
     BASE_DIR / 'articles' / 'static',
     BASE_DIR / 'tareas' / 'static',
@@ -178,6 +181,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'ventas' / 'static',
     BASE_DIR / 'ayuda' / 'static',
     BASE_DIR / 'clientes' / 'static',
+    BASE_DIR / 'insumos' / 'static',
     
 ]
 
