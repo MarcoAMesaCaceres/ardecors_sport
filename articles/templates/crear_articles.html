@@ -4,7 +4,7 @@
 {% include 'navbar.html' %}
 
 <div class="home-section">
-    <h1 class="mb-4">{% if producto %}Editar{% else %}Crear{% endif %} Producto</h1>
+    <h1 class="mb-4">{% if producto %}Editar{% else %}Crear{% endif %} Articulo</h1>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
