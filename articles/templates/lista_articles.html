@@ -1,7 +1,7 @@
 {% extends 'base_articles.html' %}
 {% load static %}
 
-{% block title %}Lista de Artículos{% endblock %}
+{% block title %}Lista de Productos{% endblock %}
 
 {% block content %}
 <div class="wrapper">
@@ -9,9 +9,9 @@
 
     <div class="home-section">
         <div class="content">
-            <h1>Lista de Artículos</h1>
+            <h1>Lista de Productos</h1>
 
-            <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
+            <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Producto</a>
 
             <table class="table">
                 <thead>
@@ -45,7 +45,7 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="6">No hay artículos disponibles.</td>
+                        <td colspan="6">No hay productoS disponibles.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
