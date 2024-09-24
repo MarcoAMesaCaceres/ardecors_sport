@@ -13,7 +13,7 @@
 </head>
 <div class="accesibilidad">
     <button class="accesibilidad__inicio" id="toggle-inicio">
-        <img src="{% static 'img/icono-acce.png' %}" alt="inicio" width="80px">
+        <img src="{% static 'img/icono-acce.png' %}" alt="inicio" width="55px">
     </button>
     <div class="accesibilidad__buttons hidden" id="toggle-buttons">
         <div class="accesibilidad__container">
@@ -44,9 +44,7 @@
 
             
             <div class="logo_name">Ardecors</div>
-            <li>
-            <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
-            </li>
+            
             <i class='bx bx-menu' id="btn"></i>
             
         </div>
@@ -144,13 +142,16 @@
                 </a>
                 <span class="tooltip">Volver al Login</span>
             </li>
-            
+            <li>
+            <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
+            </li>
             {%endif%}
             <li class="profile">
                
                 <div class="profile_details">
                     
                     <div class="profile_content">
+                        
                         <div class="name">
                             {{ request.user.username }}
                         </div>

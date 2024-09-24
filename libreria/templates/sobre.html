@@ -12,52 +12,51 @@
     <script src="{% static 'js/accesibilidad.js' %}"></script> 
     </head>
     <body>
-        <header>
-            <div class="logo">
-            <img src="{% static 'img/logoardecors.png' %}" alt="logo"> 
-    
-            <div class="button-container">
-                
-                <h2>rdecors</h2>
-                
-    
-                <button class="button button-yellow"><a
-                    href="{% url 'productos' %}">Productos</a></button>
-                <button class="button button-green"><a href="{% url 'sobre' %}">Sobre
-                    Nosotros</a></button>
-                <button class="button button-red"><a
-                    href="{% url 'contacto' %}">Contacto</a></button>
-                <button class="button button-yellow"><a
-                    href="{% url 'login' %}">Login</a></button>
+       <header>
+        <div class="logo">
+        <img src="{% static 'img/logoardecors.png' %}" alt="logo"> 
+
+        <div class="button-container">
+            
+            <h2>rdecors</h2>
+            
+
+            <button class="button button-yellow"><a
+                href="{% url 'productos' %}">Productos</a></button>
+            <button class="button button-green"><a href="{% url 'ardecors' %}">Inicio<Inicio/a></button>
+            <button class="button button-red"><a
+                href="{% url 'contacto' %}">Contacto</a></button>
+            <button class="button button-yellow"><a
+                href="{% url 'login' %}">Acceso a Empleados</a></button>
+        </div>
+
+        </nav>
+    </header>
+    <div class="accesibilidad">
+        <button class="accesibilidad__inicio" id="toggle-inicio">
+            <img src="{% static 'img/icono-acce.png' %}" alt="inicio" width="55px">
+        </button>
+        <div class="accesibilidad__buttons hidden" id="toggle-buttons">
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-contrast">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-contraste.svg' %}" alt="contraste" width="55px">
+                    <h6 class="accesibilidad__boton--text">Contraste</h6>
+                </button>
             </div>
-    
-            </nav>
-        </header>
-        <div class="accesibilidad">
-            <button class="accesibilidad__inicio" id="toggle-inicio">
-                <img src="{% static 'img/icono-acce.png' %}" alt="inicio" width="100px">
-            </button>
-            <div class="accesibilidad__buttons hidden" id="toggle-buttons">
-                <div class="accesibilidad__container">
-                    <button class="accesibilidad__boton" id="toggle-contrast">
-                        <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-contraste.svg' %}" alt="contraste" width="55px">
-                        <h6 class="accesibilidad__boton--text">Contraste</h6>
-                    </button>
-                </div>
-                <div class="accesibilidad__container">
-                    <button class="accesibilidad__boton" id="toggle-zoom-in">
-                        <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-aumento.svg' %}" alt="aumentar" width="55px">
-                        <h6 class="accesibilidad__boton--text">Aumentar<br>letra</h6>
-                    </button>
-                </div>
-                <div class="accesibilidad__container">
-                    <button class="accesibilidad__boton" id="toggle-zoom-out">
-                        <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-disminuir.svg' %}" alt="disminuir" width="55px">
-                        <h6 class="accesibilidad__boton--text">Disminuir<br>letra</h6>
-                    </button>
-                </div>
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-zoom-in">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-aumento.svg' %}" alt="aumentar" width="55px">
+                    <h6 class="accesibilidad__boton--text">Aumentar<br>letra</h6>
+                </button>
+            </div>
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-zoom-out">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-disminuir.svg' %}" alt="disminuir" width="55px">
+                    <h6 class="accesibilidad__boton--text">Disminuir<br>letra</h6>
+                </button>
             </div>
         </div>
+    </div>
         <section id="nosotros">
             <h1>Sobre Nosotros</h1>
             <p>Ardecors: Una empresa dedicada a la fabricación de balones
