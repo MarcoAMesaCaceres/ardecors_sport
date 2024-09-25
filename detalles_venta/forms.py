@@ -6,16 +6,14 @@ class DetalleVentaForm(forms.ModelForm):
         model = DetalleVenta
         fields = ['articulo', 'cantidad', 'precio_unitario']
         widgets = {
-            'articulo': forms.Select(attrs={'class': 'form-control'}),
-            'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
-            'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'min': 0, 'step': '0.01'}),
+            'articulo': forms.Select(attrs={'class': 'form-control', 'id': 'id_articulo'}),
+            'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'id': 'id_cantidad'}),
+            'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'min': 0, 'step': '0.01', 'readonly': True, 'id': 'id_precio_unitario'}),
         }
 
-    def clean_cantidad(self):
-        cantidad = self.cleaned_data.get('cantidad')
-        if cantidad <= 0:
-            raise forms.ValidationError("La cantidad debe ser mayor que cero.")
-        return cantidad
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['precio_unitario'].required = False
 
     def clean(self):
         cleaned_data = super().clean()
@@ -23,5 +21,5 @@ class DetalleVentaForm(forms.ModelForm):
         cantidad = cleaned_data.get('cantidad')
         if articulo and cantidad:
             if articulo.stock < cantidad:
-                raise forms.ValidationError("No hay stock suficiente para este artículo.")
+                raise forms.ValidationError(f"No hay stock suficiente. Stock disponible: {articulo.stock}")
         return cleaned_data

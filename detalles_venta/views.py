@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Venta, DetalleVenta
 from .forms import DetalleVentaForm
+from django.http import JsonResponse
 
 def crear_detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, id=venta_id)
@@ -17,6 +18,13 @@ def crear_detalle_venta(request, venta_id):
         form = DetalleVentaForm()
     return render(request, 'crear_detalle_venta.html', {'form': form, 'venta': venta})
 
+def get_articulo_info(request):
+    articulo_id = request.GET.get('articulo_id')
+    articulo = get_object_or_404(Article, id=articulo_id)
+    return JsonResponse({
+        'precio': float(articulo.precio),
+        'stock': articulo.stock
+    })
 def lista_detalles_venta(request, venta_id):
     venta = get_object_or_404(Venta, id=venta_id)
     detalles = DetalleVenta.objects.filter(venta=venta)

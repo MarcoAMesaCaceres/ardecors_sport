@@ -6,8 +6,8 @@ from articles.models import Article
 
 class DetalleVenta(models.Model):
     id = models.AutoField(primary_key=True)
-    venta = models.ForeignKey(Venta, on_delete=models.CASCADE, related_name='detalles',null=True)
-    articulo = models.ForeignKey(Article, on_delete=models.CASCADE,null=True)
+    venta = models.ForeignKey(Venta, on_delete=models.CASCADE, related_name='detalles', null=True)
+    articulo = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
     cantidad = models.PositiveIntegerField()
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
     total = models.DecimalField(max_digits=10, decimal_places=2)
@@ -17,9 +17,11 @@ class DetalleVenta(models.Model):
             raise ValidationError({'cantidad': "La cantidad debe ser mayor que cero."})
         
         if self.articulo and self.articulo.stock < self.cantidad:
-            raise ValidationError({'cantidad': "No hay stock suficiente para este artículo."})
+            raise ValidationError({'cantidad': f"No hay stock suficiente. Stock disponible: {self.articulo.stock}"})
 
     def save(self, *args, **kwargs):
+        if not self.precio_unitario:
+            self.precio_unitario = self.articulo.precio
         self.total = self.cantidad * self.precio_unitario
         self.full_clean()
         super().save(*args, **kwargs)
