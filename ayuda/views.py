@@ -31,9 +31,8 @@ class ManualUsuarioView(TemplateView):
         return context
     
 def descargar_manual(request):
-    pdf_path = 'D:\\ardecors_django\\sistema\\ayuda\\static\\docs\\Manual_de_Usuario_Ardecors.pdf'
+    pdf_path = 'ayuda\\static\\docs\\Manual_de_Usuario_Ardecors.pdf'
     if os.path.exists(pdf_path):
         return FileResponse(open(pdf_path, 'rb'), as_attachment=True, content_type='application/pdf')
     else:
-        # Handle the case where the file is not found
-        return HttpResponse("The file could not be found.")    
+        return HttpResponse("The file could not be found.", status=404)

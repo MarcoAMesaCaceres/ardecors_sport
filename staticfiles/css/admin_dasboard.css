@@ -2,11 +2,13 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+
   }
   .container p {
     line-height: 1.5;
-    font-size: 16px;
+    font-size: 20px;
     margin-bottom: 20px;
+    text-align: justify;
   }
 
   
@@ -17,7 +19,8 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: -1; /* Coloca la imagen detrás del texto */
-  width: 1800px; /* Ajusta el tamaño de la imagen según necesites */
+  width: 1500px; /* Ajusta el tamaño de la imagen según necesites */
+justify-content: justify;
   height: auto;
-  opacity: 0.2; /* Ajusta la transparencia (0.0 es completamente transparente, 1.0 es opaco) */
+  opacity: 0.1; /* Ajusta la transparencia (0.0 es completamente transparente, 1.0 es opaco) */
 }
