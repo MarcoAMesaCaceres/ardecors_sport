@@ -4,6 +4,7 @@ from .models import Venta, DetalleVenta
 from .forms import DetalleVentaForm
 from django.http import JsonResponse
 
+
 def crear_detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, id=venta_id)
     if request.method == 'POST':

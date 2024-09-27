@@ -12,7 +12,18 @@ from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from django.http import JsonResponse
+from insumos.models import Insumos
 
+def get_insumo_info(request, insumo_id):
+    try:
+        insumo = Insumos.objects.get(id=insumo_id)
+        return JsonResponse({
+            'precio': str(insumo.precio),
+            'stock': insumo.stock
+        })
+    except Insumos.DoesNotExist:
+        return JsonResponse({'error': 'Insumo no encontrado'}, status=404)
 
 
 
