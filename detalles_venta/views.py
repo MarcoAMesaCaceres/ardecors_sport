@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import Venta, DetalleVenta
 from .forms import DetalleVentaForm
 from django.http import JsonResponse
+from articles.models import Article
 
 
 def crear_detalle_venta(request, venta_id):
