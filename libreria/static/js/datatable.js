@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    // Verificar si la tabla ya está inicializada
+    if (!$.fn.DataTable.isDataTable('#elementosTable')) {
     $('#elementosTable').DataTable({
         "paging": true,
         "lengthChange": true,
@@ -210,4 +212,5 @@ $(document).ready(function () {
             }
         ],
     });
+    }
 });
