@@ -1,6 +1,16 @@
 {% extends "base_usuario.html" %}
+{%load static%}
 {% block content %}
+<link rel="stylesheet" href="{% static '/css/usuarios.css' %}">
 {% include 'navbar.html' %}
+
+<div class="breadcrumb">
+    <a href="{% url 'admin_dashboard' %}" data-tooltip="Ver Panel de Administración">PANEL DE ADMINISTRACIÓN</a> &gt; 
+    LISTA DE USUARIOS  &gt; USUARIOS PENDIENTES
+    <style> .breadcrumb { background-color: #0E2C40; margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0; padding: 10px; color: white; border-bottom: 5px solid rgb(255, 255, 255);} 
+        .breadcrumb a { color: white; text-decoration: none; } .breadcrumb span { color: rgb(77, 212, 59);} </style> 
+</div>
+
 <div class="home-section">
 <h2>Usuarios pendientes de aprobación</h2>
 {% if pending_users %}
