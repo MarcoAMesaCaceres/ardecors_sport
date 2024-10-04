@@ -28,6 +28,7 @@
                 <tbody>
                     {% for article in articles %}
                     <tr>
+                        <td>{{ article.id}}</td>
                         <td>
                             {% if article.imagen %}
                                 <img src="{{ article.imagen.url }}" alt="{{ article.nombre }}" style="width: 50px; height: 50px; object-fit: cover;">
@@ -35,7 +36,7 @@
                                 <img src="{% static 'img/placeholder.png' %}" alt="Imagen no disponible" style="width: 50px; height: 50px; object-fit: cover;">
                             {% endif %}
                         </td>
-                        <td>{{ article.}}</td>
+
                         <td>{{ article.nombre }}</td>
                         <td>{{ article.descripcion|truncatewords:10 }}</td>
                         <td>${{ article.precio }}</td>

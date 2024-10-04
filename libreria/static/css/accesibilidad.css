@@ -1,8 +1,8 @@
 /* Accesibilidad styles */
 .accesibilidad {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    bottom: 5px;
+    right: 10px;
     z-index: 1000;
 }
 
@@ -55,12 +55,17 @@
 }
 
 /* High contrast mode */
+
 body.high-contrast {
     background-color: black;
     color: white;
 }
-
+body.high-contrast p,
 body.high-contrast a,
 body.high-contrast button {
-    color: yellow;
+    color: white;
+}
+
+body.high-contrast ul{
+color:  white;
 }
