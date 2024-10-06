@@ -70,53 +70,13 @@ $(document).ready(function () {
 
             {
                 extend: 'excel',
-                    text: 'Excel',
-                    title: 'Ardecors Sport - Inventario',
-                    filename: 'Ardecors_sport_inventario',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Excluye la última columna (acciones)
-                    },
-                    action: function (e, dt, button) {
-                        // Obtener los datos de la tabla
-                        var data = dt.buttons.exportData();
-                        var wb = XLSX.utils.book_new();
-                        var ws = XLSX.utils.aoa_to_sheet(data.body);
-                        
-                        // Cargar la imagen
-                        var img = new Image();
-                        img.src = 'static/img/logo.png'; // Cambia a la ruta correcta
-                        
-                        img.onload = function() {
-                            // Convertir la imagen a Base64
-                            var canvas = document.createElement('canvas');
-                            canvas.width = img.width;
-                            canvas.height = img.height;
-                            var ctx = canvas.getContext('2d');
-                            ctx.drawImage(img, 0, 0);
-                            var imgData = canvas.toDataURL('image/png').split(',')[1]; // Obtiene Base64
-
-                            // Añadir la imagen al libro
-                            if (!wb.Sheets[ws['!ref']]['!images']) {
-                                wb.Sheets[ws['!ref']]['!images'] = [];
-                            }
-                            wb.Sheets[ws['!ref']]['!images'].push({
-                                data: imgData,
-                                type: 'png',
-                                position: {
-                                    s: { r: 0, c: ws['!ref'].split(':')[1].charCodeAt(0) - 1 }, // Ajusta según sea necesario
-                                    e: { r: 5, c: ws['!ref'].split(':')[1].charCodeAt(0) - 1 + 5 }  // Ajusta tamaño
-                                }
-                            });
-
-                            // Añadir la hoja al libro
-                            XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
-                            XLSX.writeFile(wb, 'Ardecors_sport_inventario.xlsx');
-                        };
-                    }
-                },
-            
-        
-    
+                text: 'Excel',
+                title: 'Ardecors Sport - Inventario',
+                filename: 'Ardecors_sport_inventario',
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
+            },
 
                 {
                 extend: 'pdf',
