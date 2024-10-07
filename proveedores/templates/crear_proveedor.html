@@ -1,10 +1,11 @@
 {% extends 'base_proveedor.html' %}
 {% load static %}
-
+<div class="home-section">
 {% block title %}Crear Proveedor{% endblock %}
 
 {% block content %}
 {% include 'navbar.html' %}
+<div class="home-section">
 <div class="breadcrumb">
     <a href="{% url 'lista_proveedores' %}" data-tooltip="Ver Panel de Administración"> LISTA DE PROVEEDORES  </a> &gt; 
     CREAR NUEVO PROVEEDOR
@@ -58,4 +59,5 @@
         <a href="{% url 'lista_proveedores' %}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+</div
 {% endblock %}

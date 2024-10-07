@@ -5,6 +5,7 @@
 
 {% block content %}
 {% include 'navbar.html' %}
+<div class="home-section">
 <div class="breadcrumb">
     <a href="{% url 'lista_clientes' %}" data-tooltip="Ver Panel de Administración"> LISTA DE CLIENTES </a> &gt; 
     EDITAR CLIENTES 
@@ -38,5 +39,5 @@
         <a href="{% url 'lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
-
+</div>
 {% endblock %}

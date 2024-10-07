@@ -5,7 +5,7 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-
+<div class="home-section">
 <div class="container mt-4">
     <div class="breadcrumb">
         <a href="{% url 'lista_clientes' %}" data-tooltip="Ver Panel de Administración"> LISTA DE CLIENTES </a> &gt; 
@@ -62,5 +62,6 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{% url 'lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
     </form>
+</div>
 </div>
 {% endblock %}
