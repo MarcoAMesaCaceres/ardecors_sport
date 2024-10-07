@@ -30,6 +30,8 @@ $(document).ready(function () {
 
             {
                 text: 'Filas',
+                className: 'btn-fila',
+                attr: { style: 'background-color: #000000; color: white;'},
                 action: function (e, dt, node, config) {
                     // Crear un menú desplegable con las opciones de longitud
                     var menuHtml = '<div class="dropdown-menu" style="display: block;">' +
@@ -56,11 +58,15 @@ $(document).ready(function () {
 
             {
                 extend: 'copy',
-                text: 'Copiar'
+                text: 'Copiar',
+                className: 'btn-copy',
+                attr: { style: 'background-color: #737373; color: white;'},
             },
             {
                 extend: 'csv',
                 text: 'CSV',
+                className: 'btn-csv',
+                attr: { style: 'background-color: #FFA500; color: white;'},
                 exportOptions: {
                     columns: function (index, data, node) {
                         return index !== $('#elementosTable').find('thead th').length - 1;
@@ -71,6 +77,10 @@ $(document).ready(function () {
             {
                 extend: 'excel',
                 text: 'Excel',
+                className: 'btn-excel',
+                attr: {
+                    style: 'background-color: #006400; color: white;' // Estilo para el botón Excel
+                },
                 title: 'Ardecors Sport - Inventario',
                 filename: 'Ardecors_sport_inventario',
                 exportOptions: {
@@ -81,6 +91,9 @@ $(document).ready(function () {
                 {
                 extend: 'pdf',
                 text: 'PDF',
+                className: 'btn-pdf',
+                attr: {
+                    style: 'background-color: #8E0215; color: white;'},
                 title: '',
                 filename: 'Ardecors sport - Inventario',
                 customize: function (doc) {
@@ -169,6 +182,8 @@ $(document).ready(function () {
             {
                 extend: 'print',
                 text: 'Imprimir',
+                className: 'btn-print',
+                attr: { style: 'background-color: #001BFF; color: white;'},
                 exportOptions: {
                     columns: function (index, data, node) {
                         return index !== $('#elementosTable').find('thead th').length - 1;
@@ -208,7 +223,7 @@ $(document).ready(function () {
                         width: '100%',
                         pageBreakInside: 'auto'
                     });
-                    
+                    $('#elementosTable_info').css('margin-top', '30px');
                 }
             
             }
