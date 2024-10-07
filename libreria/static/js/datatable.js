@@ -10,9 +10,9 @@ $(document).ready(function () {
         "autoWidth": false,
         "responsive": true,
         "language": {
-            "lengthMenu": "Mostrar MENU registros por página",
+            "lengthMenu": "",
             "zeroRecords": "No se encontraron registros",
-            "info": "Mostrando página PAGE de PAGES",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",
             "infoFiltered": "(filtrado de MAX registros totales)",
             "search": "Buscar:",
@@ -203,11 +203,12 @@ $(document).ready(function () {
             
                     // Ajustar el estilo de la tabla para evitar problemas de paginación
                     $(win.document.body).find('table').css({
-                        margin: '0',
-                        padding: '0',
+                        margin: '20',
+                        padding: '20',
                         width: '100%',
                         pageBreakInside: 'auto'
                     });
+                    
                 }
             
             }

@@ -34,8 +34,7 @@
 <h1>Lista de Tareas</h1>
 <a href="{% url 'crear_tareas' %}" class="btn btn-primary mb-3">Crear Nueva Tarea</a>
 
-<!-- Botón para imprimir la lista de Tareas -->
-<button onclick="Tareas()" class="btn btn-primary mb-3">Imprimir Tareas</button>
+
 
 <table id="elementosTable" class="table table-striped">
     <thead>
@@ -67,8 +66,7 @@
     </tbody>
 </table>
 <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>
-<a href="{% url 'exportar_pdf' %}" class="btn btn-primary mb-3">Generar PDF</a>
-<a href="{% url 'exportar_excel' %}" class="btn btn-primary mb-3">Exportar a Excel</a>
+
 
 
 <script>
