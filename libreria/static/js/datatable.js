@@ -215,4 +215,40 @@ $(document).ready(function () {
         ],
     });
     }
+    $('<style>')
+        .prop('type', 'text/css')
+        .html(`
+            .dataTables_wrapper .dataTables_length select {
+                padding: 6px 30px 6px 10px;
+                margin: 0 8px;
+            }
+            .dataTables_wrapper .dataTables_filter input {
+                margin-left: 8px;
+                padding: 6px 10px;
+            }
+            .dataTables_wrapper .dataTables_info {
+                padding-top: 10px;
+            }
+            .dataTables_wrapper .dataTables_paginate {
+                padding-top: 10px;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 5px 12px;
+                margin: 0 3px;
+            }
+            .dt-buttons {
+                padding-bottom: 15px;
+            }
+            table.dataTable thead th, table.dataTable thead td {
+                padding: 12px 18px;
+            }
+            table.dataTable tbody td {
+                padding: 10px 15px;
+            }
+            .btn {
+                margin-right: 5px;
+            }
+        `)
+        .appendTo('head');
+
 });
