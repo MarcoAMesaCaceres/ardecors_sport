@@ -4,13 +4,22 @@
 <link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
 {% include 'navbar.html' %}
+<div class="breadcrumb">
+    <a href="{% url 'user_list' %}" data-tooltip="Ver Panel de Administración"> LISTA DE USUARIOS </a> &gt; 
+    EDITAR USUARIOS  
+    <style> .breadcrumb { background-color: #0E2C40; margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0; padding: 10px; color: white; border-bottom: 5px solid rgb(255, 255, 255);} 
+        .breadcrumb a { color: white; text-decoration: none; } .breadcrumb span { color: rgb(77, 212, 59);} </style> 
+</div>
 <div class="home-section">
 <div class="container mt-4">
     <h2>Editar Usuario: {{ user.username }}</h2>
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
-            <div class="form-group">
+            <div class="form-group user-list">
+                <style>
+                    .user-list { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #ccc;}
+                </style>
                 {{ field.label_tag }}
                 {{ field }}
                 {% if field.errors %}
