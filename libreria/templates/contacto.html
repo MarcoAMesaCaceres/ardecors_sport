@@ -10,7 +10,7 @@
     <style>
         body {
             background-image: url("{% static 'img/ardecors.png' %}"); 
-            background-size: cover;
+            background-size: 90% auto;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
@@ -20,6 +20,7 @@
 
         body.dark-mode {
             background-image: url("{% static 'img/Mongui.png' %}"); 
+            background-size: 100% auto;
             background-color: #f0f0f0; 
             color: white;
         }
@@ -83,7 +84,7 @@
     
     <div class="accesibilidad">
         <button class="accesibilidad__inicio" id="toggle-inicio">
-            <img src="{% static 'img/icono-acce.png' %}" alt="inicio" width="55px">
+            <img src="{% static 'img/icono-acce.png.png' %}" alt="inicio" width="55px">
         </button>
         <div class="accesibilidad__buttons" id="toggle-buttons">
             <div class="accesibilidad__container">
@@ -106,7 +107,7 @@
             </div>
             <div class="accesibilidad__container">
                 <button class="accesibilidad__boton" id="toggle-dark-mode">
-                    <img class="accesibilidad__boton--img" src="{% static 'img/icono-modo-oscuridad.svg' %}" alt="modo oscuro" width="55px">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/logo.png' %}" alt="modo oscuro" width="55px">
                     <h6 class="accesibilidad__boton--text">Modo Oscuro</h6>
                 </button>
             </div>
