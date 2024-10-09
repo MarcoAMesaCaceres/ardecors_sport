@@ -1,8 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator, EmailValidator
-
-from django.db import models
-from django.core.validators import RegexValidator, EmailValidator
+from django.core.exceptions import ValidationError
 
 class Clientes(models.Model):
     nombre = models.CharField(max_length=255, validators=[
@@ -27,5 +25,7 @@ class Clientes(models.Model):
     def clean(self):
         super().clean()
         if not self.email and not self.telefono:
-            from django.core.exceptions import ValidationError
             raise ValidationError('Se debe proporcionar al menos un email o un número de teléfono.')
+
+    def tiene_ventas(self):
+        return self.ventas.exists()

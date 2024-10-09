@@ -14,7 +14,11 @@ from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
-
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.db import transaction
+from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 
 def lista_compras(request):
@@ -25,8 +29,16 @@ def crear_compras(request):
     if request.method == 'POST':
         form = ComprasForm(request.POST)
         if form.is_valid():
-            compra = form.save()
-            return redirect('crear_detalle_compra', compra_id=compra.id)
+            try:
+                compra = form.save()
+                messages.success(request, 'Compra creada exitosamente.')
+                return redirect('crear_detalle_compra', compra_id=compra.id)
+            except ValidationError as e:
+                messages.error(request, f'Error al crear la compra: {e}')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{field}: {error}')
     else:
         form = ComprasForm()
     return render(request, 'crear_compras.html', {'form': form})

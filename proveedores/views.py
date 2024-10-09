@@ -2,7 +2,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from .models import Proveedor
 from .forms import ProveedorForm
-
+from django.core.exceptions import ValidationError
+from insumos.models import Insumos
+from proveedores.models import  Proveedor
 def lista_proveedores(request):
     proveedores = Proveedor.objects.all()
     return render(request, 'lista_proveedores.html', {'proveedores': proveedores})
@@ -37,7 +39,11 @@ def crear_proveedor(request):
 def eliminar_proveedor(request, pk):
     proveedor = get_object_or_404(Proveedor, pk=pk)
     if request.method == 'POST':
-        proveedor.delete()
-        messages.success(request, "Proveedor eliminado exitosamente.")
-        return redirect('lista_proveedores')
+        try:
+            proveedor.delete()
+            messages.success(request, "Proveedor eliminado exitosamente.")
+            return redirect('lista_proveedores')
+        except ValidationError as e:
+            messages.error(request, str(e))
+            return redirect('lista_proveedores')
     return render(request, 'eliminar_proveedor.html', {'proveedor': proveedor})

@@ -56,16 +56,53 @@
 
 /* High contrast mode */
 
+/* Existing styles... */
+
+/* High contrast mode */
 body.high-contrast {
     background-color: black;
     color: white;
 }
+
 body.high-contrast p,
 body.high-contrast a,
-body.high-contrast button {
+body.high-contrast button,
+body.high-contrast table,
+body.high-contrast th,
+body.high-contrast td {
     color: white;
 }
 
-body.high-contrast ul{
-color:  black;
+body.high-contrast ul {
+    color: white;
+}
+
+body.high-contrast table,
+body.high-contrast th,
+body.high-contrast td {
+    border-color: white;
+}
+
+body.high-contrast table {
+    background-color: #333;
+}
+
+body.high-contrast th {
+    background-color: #444;
+}
+
+body.high-contrast td {
+    background-color: #222;
+}
+
+/* Estilo para los tooltips en modo de alto contraste */
+body.high-contrast .tooltip {
+    color: black;
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+body, table, th, td {
+    transition: background-color 0.3s, color 0.3s;
 }

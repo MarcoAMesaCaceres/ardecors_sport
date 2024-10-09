@@ -1,19 +1,29 @@
 from django import forms
 from .models import Venta
-from clientes.models import Clientes
 from django.utils import timezone
 
 class VentaForm(forms.ModelForm):
+    fecha = forms.DateTimeField(
+        widget=forms.DateTimeInput(
+            attrs={
+                'type': 'datetime-local',
+                'class': 'form-control',
+                'step': '60',  # Para mostrar solo minutos, no segundos
+                'readonly': True  # Hace que el campo sea solo lectura
+            }
+        ),
+        initial=lambda: timezone.localtime(timezone.now())
+    )
+
     class Meta:
         model = Venta
-        fields = ['fecha', 'clientes']  # Cambiado de 'cliente' a 'clientes'
+        fields = ['fecha', 'cliente']
         widgets = {
-            'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'clientes': forms.Select(attrs={'class': 'form-control'}),  # Cambiado de 'cliente' a 'clientes'
+            'cliente': forms.Select(attrs={'class': 'form-control'}),
         }
 
-    def clean_fecha(self):
-        fecha = self.cleaned_data.get('fecha')
-        if fecha > timezone.now().date():
-            raise forms.ValidationError("La fecha de venta no puede ser futura.")
-        return fecha
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.initial.get('fecha'):
+            bogota_now = timezone.localtime(timezone.now())
+            self.initial['fecha'] = bogota_now.strftime('%Y-%m-%dT%H:%M')

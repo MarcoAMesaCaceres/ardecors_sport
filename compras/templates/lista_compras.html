@@ -1,6 +1,8 @@
 
 {% extends 'base_compras.html' %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/articles.css' %}">
 {% block title %}Lista de Compras{% endblock %}
 {% block content %}
 {% include 'navbar.html' %}
@@ -31,7 +33,7 @@
             {% for compra in compras %}
             <tr>
                 <td>{{ compra.id }}</td>
-                <td>{{ compra.fecha|date:"d/m/Y" }}</td>
+                <td>{{ compra.fecha|date:"d/m/Y h:i A" }}</td>
                 <td>{{ compra.proveedor }}</td>
                 <td>
                     {% for detalle in compra.detalles.all %}
@@ -41,7 +43,7 @@
                 <td>
                     <a href="{% url 'editar_compras' compra.pk %}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{% url 'eliminar_compras' compra.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
-                    <a href="{% url 'lista_detalles_compra' compra.pk %}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{% url 'lista_detalles_compra' compra.pk %}" class="btn btn-sm btn-info">Ver Detalles</a>
                 </td>
             </tr>
             {% empty %}

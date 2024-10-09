@@ -31,3 +31,7 @@ class Article(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def clean(self):
+        if self.stock < 0:
+            raise ValidationError('El stock no puede ser negativo.')

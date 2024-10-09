@@ -1,5 +1,7 @@
 {% extends 'base_venta.html' %}
 {% load static %}
+{% block title %}Lista de Ventas{% endblock %}
+<link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
 {% include 'navbar.html' %}
 <head>
@@ -49,14 +51,15 @@
                     {% for venta in ventas %}
                         <tr>
                             <td>{{ venta.id }}</td>
-                            <td>{{ venta.fecha|date:"d/m/Y" }}</td>
-                            <td>{{ venta.clientes}}</td>
+                            <td>{{ venta.fecha|date:"d/m/Y h:i A" }}</td>
+                            <td>{{ venta.cliente.nombre }}</td>
                             <td>
                                 <ul>
                                 {% for detalle in venta.detalles.all %}
                                     <li>{{ detalle.articulo.nombre }}</li>
                                 {% endfor %}
                                 </ul>
+                            </td>
                             <td>
                                 <a href="{% url 'editar_venta' venta.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
                                 <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>

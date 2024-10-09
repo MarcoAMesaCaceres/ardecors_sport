@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator
 from proveedores.models import Proveedor
-from django.core.validators import RegexValidator, MinValueValidator
+from django.core.exceptions import ValidationError
+from detalles_compra.models import DetalleCompra
 
 class Insumos(models.Model):
     id = models.AutoField(primary_key=True)
@@ -28,7 +29,16 @@ class Insumos(models.Model):
             MinValueValidator(0, message='El stock debe ser un número positivo o cero.')
         ]
     )
-    
 
     def __str__(self):
         return self.nombre
+
+    def delete(self, *args, **kwargs):
+        # Verificar si tiene compras asociadas
+        if DetalleCompra.objects.filter(insumo=self).exists():
+            raise ValidationError("No se puede eliminar el insumo porque tiene compras asociadas.")
+        super().delete(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "Insumo"
+        verbose_name_plural = "Insumos"

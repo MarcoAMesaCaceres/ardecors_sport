@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from .forms import ClientesForm
-from .models import Clientes  # Assume the model name is capitalized
+from .models import Clientes
 
 def lista_clientes(request):
     clientes = Clientes.objects.all()
@@ -37,8 +37,18 @@ def crear_clientes(request):
 
 def eliminar_clientes(request, pk):
     cliente = get_object_or_404(Clientes, pk=pk)
-    if request.method == 'POST':
-        cliente.delete()
-        messages.success(request, "Cliente eliminado exitosamente.")
+    
+    # Verificar si el cliente tiene ventas asociadas
+    if cliente.tiene_ventas():
+        messages.error(request, "No se puede eliminar el cliente porque tiene ventas asociadas.")
         return redirect('lista_clientes')
+        
+    if request.method == 'POST':
+        try:
+            cliente.delete()
+            messages.success(request, "Cliente eliminado exitosamente.")
+        except Exception as e:
+            messages.error(request, "Error al eliminar el cliente.")
+        return redirect('lista_clientes')
+    
     return render(request, 'eliminar_clientes.html', {'cliente': cliente})

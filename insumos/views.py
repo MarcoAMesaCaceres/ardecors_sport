@@ -3,6 +3,8 @@ from .models import Insumos
 from .forms import InsumosForm
 from django.db.models import Q
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+from proveedores.models import  Proveedor
 
 def lista_insumos(request):
     insumos = Insumos.objects.all()
@@ -33,9 +35,13 @@ def editar_insumos(request, pk):
     return render(request, 'editar_insumos.html', {'form': form, 'insumos': insumos})
 
 def eliminar_insumos(request, pk):
-    insumos= get_object_or_404(Insumos, pk=pk)
+    insumos = get_object_or_404(Insumos, pk=pk)
     if request.method == 'POST':
-        insumos.delete()
-        messages.success(request, 'El insumo ha sido eliminado exitosamente.')
-        return redirect('lista_insumos')
+        try:
+            insumos.delete()
+            messages.success(request, 'El insumo ha sido eliminado exitosamente.')
+            return redirect('lista_insumos')
+        except ValidationError as e:
+            messages.error(request, str(e))
+            return redirect('lista_insumos')
     return render(request, 'eliminar_insumos.html', {'insumos': insumos})

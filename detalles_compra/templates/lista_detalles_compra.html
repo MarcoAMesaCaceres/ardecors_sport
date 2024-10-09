@@ -27,7 +27,7 @@
         <tbody>
             {% for detalle in detalles %}
             <tr>
-                <td>{{ compra.fecha|date:"d/m/Y" }}</td>
+                <td>{{ compra.fecha|date:"d/m/Y h:i A" }}</td>
                 <td>{{ detalle.insumo.nombre }}</td>
                 <td>{{ detalle.cantidad }}</td>
                 <td>{{ detalle.precio_unitario }}</td>

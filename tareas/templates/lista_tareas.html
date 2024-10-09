@@ -64,30 +64,12 @@
         </tr>
         {% endfor %}
     </tbody>
+    
 </table>
+</br>
 <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administracion</a>
 
 
 
-<script>
-$(document).ready(function() {
-    $('#ventas-table').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    });
-});
-</script>
-
-
-{% block extra_js %}
-    <script>
-        function Tareas() {
-            window.print();
-        }
-    </script>
-</div>
-    {% endblock %}
 
 {% endblock %}

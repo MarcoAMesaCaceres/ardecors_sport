@@ -64,5 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
   toggleZoomOut.addEventListener('click', saveSettings);
 
   // Load settings on page load
+  
   loadSettings();
 });
