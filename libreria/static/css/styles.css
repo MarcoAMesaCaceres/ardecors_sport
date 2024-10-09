@@ -132,13 +132,25 @@ header {
   }
   
   p {
+    
+  max-width: 1000px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+
     text-align: justify;
     font-size: 20px;
     color: #000000;
   }
-  
+  .mission-vision-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
   #mision,
   #vision {
+    width: calc(50% - 20px);
+  padding: 20px;
+  box-sizing: border-box;
     padding: 20px;
     background-color: #0E2C40;
     border-bottom: 1px solid #000000;
@@ -153,6 +165,7 @@ header {
     color: rgb(255, 255, 255);
     font-size: 30px;
     text-align: center;
+    
   }
   #vision h2 {
     color: rgb(255, 255, 255);
@@ -160,13 +173,17 @@ header {
     text-align: center;
   }
   h3{
+    
     color: rgb(255, 255, 255);
   }
   
   #mision p,
   #vision p {
+    color: rgb(255, 255, 255);
     font-size: 16px;
     line-height: 1.5;
+    padding: 0 20px; 
+    text-align: justify;
   }
   
   .button-container {
@@ -471,4 +488,19 @@ li {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+@media screen and (max-width: 768px) {
+  .mission-vision-container {
+    flex-direction: column;
+  }
+
+  #mision, #vision {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Ajustar márgenes para móviles */
+  p {
+    padding: 0 20px;
+  }
 }
