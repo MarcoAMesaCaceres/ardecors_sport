@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let fontSize = 16; // Default font size
   const minFontSize = 12; // Minimum font size
-  const maxFontSize = 24; // Maximum font size
+  const maxFontSize = 17; // Maximum font size
 
   // Toggle accessibility buttons
   toggleInicio.addEventListener('click', function() {
