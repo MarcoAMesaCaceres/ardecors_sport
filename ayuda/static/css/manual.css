@@ -96,3 +96,14 @@ a {
       font-size: 10pt;
   }
 }
+
+.container {
+  background-image: url("{% static 'img/ardecorss.png' %}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 20px; /* Añadir un poco de espacio interno */
+  border-radius: 10px; /* Opcional: redondear bordes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+}

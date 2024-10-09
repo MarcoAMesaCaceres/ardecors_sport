@@ -3,77 +3,259 @@
 
 
 <script src="{% static 'js/manual.js' %}"></script>
+<!-- Añadir el estilo directamente en el HTML -->
+<style>
+    body {
+        background-image: url("{% static 'img/ardecors.png' %}");
+        background-size: 20%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center right, center left; /* Una imagen a la derecha y otra a la izquierda, ambas en el centro vertical */
+    }
+    .container {
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar el contenedor */
+    }
+</style>
 <link rel="stylesheet" href="{% static 'css/manual.css' %}">
+<link rel="stylesheet" href="{% static 'css/accesibilidad.css' %}">
+<script src="{% static 'js/accesibilidad.js' %}"></script> 
 {% block content %}
-{% include 'navbar.html' %}
+
+<div class="wrapper">
+    {% include 'navbar.html' %}
+        
+    <div class="breadcrumb">
+        <a href="{% url 'lista_ayuda' %}" data-tooltip="Ver Panel de Administración"> VOLVER / ARDECORS SPORT </a> &gt; 
+        MANUAL DE AYUDA
+        <style> .breadcrumb { background-color: #0E2C40; margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0; padding: 10px; color: white; border-bottom: 5px solid rgb(255, 255, 255);} 
+            .breadcrumb a { color: white; text-decoration: none; } .breadcrumb span { color: rgb(77, 212, 59);} </style> 
+    </div>
+    <div class="accesibilidad">
+        
+        <button class="accesibilidad__inicio" id="toggle-inicio">
+            <img src="{% static 'img/icono-acce.png' %}" alt="inicio" width="55px">
+        </button>
+        <div class="accesibilidad__buttons hidden" id="toggle-buttons">
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-contrast">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-contraste.svg' %}" alt="contraste" width="55px">
+                    <h6 class="accesibilidad__boton--text">Contraste</h6>
+                </button>
+            </div>
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-zoom-in">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-aumento.svg' %}" alt="aumentar" width="55px">
+                    <h6 class="accesibilidad__boton--text">Aumentar<br>letra</h6>
+                </button>
+            </div>
+            <div class="accesibilidad__container">
+                <button class="accesibilidad__boton" id="toggle-zoom-out">
+                    <img class="accesibilidad__boton--img" src="{% static 'img/accesibilidad-disminuir.svg' %}" alt="disminuir" width="55px">
+                    <h6 class="accesibilidad__boton--text">Disminuir<br>letra</h6>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
 <div class="container">
     
     <h1>Manual de Usuario: Sistema de Gestión de Inventarios Ardecors</h1>
 
-            <h2>1. Introducción</h2>
-        <p>Bienvenido al Sistema de Gestión de Inventarios Ardecors, una solución integral diseñada para optimizar las operaciones de la fábrica de balones. Este manual está destinado a proporcionarte una guía completa para utilizar el sistema de manera efectiva. Aquí encontrarás información detallada sobre cómo acceder al sistema, utilizar cada uno de los módulos, gestionar inventarios, órdenes de compra, usuarios y más. Cada sección está diseñada para ayudarte a familiarizarte con las funcionalidades del sistema y garantizar una experiencia de usuario fluida y eficiente.</p>
+    <h2>1. Introducción</h2>
+    <p>Bienvenido al Sistema de Gestión de Inventarios Ardecors, una solución integral diseñada para optimizar las operaciones de la fábrica de balones. Este manual está destinado a proporcionarte una guía completa para utilizar el sistema de manera efectiva. Aquí encontrarás información detallada sobre cómo acceder al sistema, utilizar cada uno de los módulos, gestionar inventarios, órdenes de compra, usuarios y más. Cada sección está diseñada para ayudarte a familiarizarte con las funcionalidades del sistema y garantizar una experiencia de usuario fluida y eficiente.</p>
 
-        <h2>2. Requisitos del Sistema</h2>
-        <p>Antes de comenzar a utilizar el sistema, asegúrate de cumplir con los siguientes requisitos:</p>
+    <h2>2. Requisitos del Sistema</h2>
+    <p>Antes de comenzar a utilizar el sistema, asegúrate de cumplir con los siguientes requisitos:</p>
+    <ul>
+        <li>Sistema Operativo: Compatible con Windows 10 o superior, macOS Mojave o superior, y distribuciones recientes de Linux (como Ubuntu 20.04 o superior).</li>
+        <li>Navegador Web: Recomendado Google Chrome, Mozilla Firefox o Microsoft Edge en sus últimas versiones. Se sugiere mantener habilitadas las cookies y JavaScript para un funcionamiento óptimo.</li>
+        <li>Conexión a Internet: Necesaria para la comunicación entre el servidor y el cliente. Se recomienda una conexión estable de al menos 1 Mbps.</li>
+        <li>Resolución de Pantalla: Al menos 1280x720 píxeles. Para una mejor experiencia de usuario, se recomienda una resolución de 1920x1080 píxeles o superior.</li>
+        <li>Software Adicional:</li>
         <ul>
-        <li>Sistema Operativo: Compatible con Windows 10 o superior.</li>
-        <li>Navegador Web: Recomendado Google Chrome, Mozilla Firefox o Microsoft Edge en sus últimas versiones.</li>
-        <li>Conexión a Internet: Necesaria para la comunicación entre el servidor y el cliente.</li>
-        <li>Resolución de Pantalla: Al menos 1280x720 píxeles.</li>
-        <li>Software Adicional: Adobe Acrobat Reader para visualizar documentos PDF.</li>
+            <li>Adobe Acrobat Reader: Para visualizar documentos PDF.</li>
+            <li>Programas de Compresión (opcional): Como WinRAR o 7-Zip, para manejar archivos comprimidos si es necesario.</li>
         </ul>
+        <li>Recursos del Sistema:</li>
+        <ul>
+            <li>RAM: Mínimo 4 GB (se recomiendan 8 GB para un mejor rendimiento).</li>
+            <li>Procesador: Intel Core i3 o equivalente como mínimo.</li>
+            <li>Espacio en Disco: Al menos 500 MB libres para la instalación y el almacenamiento de datos temporales.</li>
+        </ul>
+        <li>Accesibilidad: Se recomienda que el usuario tenga conocimientos básicos en el manejo de computadoras y navegación por Internet.</li>
+        <li>Seguridad: Asegúrate de contar con un software antivirus actualizado para proteger el equipo de posibles amenazas en línea.</li>
+    </ul>
 
-        <h2>3. Acceso al Sistema</h2>
-        <h3>Ingreso al Sistema</h3>
-        <ol>
-        <li>Abre tu navegador web preferido y escribe la URL del sistema en la barra de direcciones.</li>
-        <li>Verás una pantalla de inicio de sesión donde se te solicitarán tu nombre de usuario y contraseña.</li>
-        <li>Escribe tu nombre de usuario y contraseña, y haz clic en "Iniciar sesión" para acceder al panel principal.</li>
-        </ol>
-        <h3>Registro de Usuarios</h3>
-        <ol>
-        <li>En la pantalla de inicio de sesión, haz clic en "Registrar".</li>
-        <li>Completa el formulario de registro con tu nombre completo, correo electrónico y contraseña.</li>
-        <li>Haz clic en "Registrar" y luego activa tu cuenta mediante el enlace enviado a tu correo electrónico.</li>
-        </ol>
+    <h2>3. Acceso al Sistema</h2>
+    <h3>Ingreso al Sistema</h3>
+    <ol>
+        <li>Abre tu navegador web preferido y escribe la URL del sistema en la barra de direcciones. Asegúrate de que la conexión a Internet esté activa.</li>
+        <li>Pantalla de Inicio de Sesión: Verás una pantalla de inicio de sesión donde se te solicitarán tu nombre de usuario y contraseña. Asegúrate de que la URL comience con "https://" para garantizar que la conexión sea segura.</li>
+        <li>Introducción de Credenciales:</li>
+        <ul>
+            <li>Escribe tu nombre de usuario en el campo correspondiente.</li>
+            <li>Escribe tu contraseña en el campo designado. Ten en cuenta que las contraseñas son sensibles a mayúsculas y minúsculas, así que verifica que la tecla "Bloq Mayús" no esté activada si no es necesario.</li>
+        </ul>
+        <li>Iniciar Sesión: Haz clic en el botón "Iniciar sesión" para acceder al panel principal. Si tus credenciales son correctas, serás redirigido a la interfaz principal del sistema.</li>
+        <li>Recuperación de Contraseña (si es necesario):</li>
+        <ul>
+            <li>Si no recuerdas tu contraseña, haz clic en el enlace "¿Olvidaste tu contraseña?" en la pantalla de inicio de sesión.</li>
+            <li>Sigue las instrucciones que recibirás en tu correo electrónico para restablecerla.</li>
+        </ul>
+        <li>Cierre de Sesión:</li>
+        <ul>
+            <li>Una vez que hayas terminado de usar el sistema, asegúrate de cerrar sesión haciendo clic en el botón "Cerrar sesión" ubicado en la esquina inferior izquierda del panel principal. Esto es importante para mantener la seguridad de tu cuenta, especialmente si usas un ordenador compartido.</li>
+        </ul>
+    </ol>
 
-        <h2>4. Módulos del Sistema</h2>
-        <h3>Gestión de Inventarios</h3>
-        <ol>
-        <li>Acceso al Módulo: Desde el panel principal, selecciona "Inventarios".</li>
-        <li>Listado de Elementos: Verás un listado de todos los productos. Puedes buscar y filtrar los elementos.</li>
-        <li>Agregar Nuevo Producto: Haz clic en "Agregar" y completa el formulario con los detalles del producto.</li>
-        <li>Editar o Eliminar Productos: Selecciona un producto del listado para editar o eliminar.</li>
-        </ol>
-        <h3>Gestión de Órdenes de Compra</h3>
-        <ol>
-        <li>Acceso al Módulo: Desde el panel principal, selecciona "Órdenes de Compra".</li>
-        <li>Crear Nueva Orden: Haz clic en "Nueva Orden", selecciona el proveedor, productos y cantidades.</li>
-        <li>Guardar y Enviar: Guarda la orden y envíala al proveedor correspondiente.</li>
-        </ol>
-        <h3>Gestión de Usuarios</h3>
-        <ol>
-        <li>Acceso al Módulo: Desde el panel principal, selecciona "Usuarios".</li>
-        <li>Agregar o Editar Usuarios: Puedes agregar nuevos usuarios o editar los existentes.</li>
-        </ol>
+    <h3>Registro de Usuarios</h3>
+    <ol>
+        <li>En la pantalla ‘Acceso a Empleados’ de inicio de sesión, haz clic en "Registrar".</li>
+        <li>Completa el formulario de registro proporcionando los siguientes datos:</li>
+        <ul>
+            <li>Nombre completo: Ingresa tu nombre tal como quieres que aparezca en el sistema.</li>
+            <li>Correo electrónico: Asegúrate de ingresar un correo electrónico válido, ya que será necesario para la activación de tu cuenta.</li>
+            <li>Contraseña: Crea una contraseña segura siguiendo los requisitos establecidos (mínimo de caracteres, uso de mayúsculas, números, etc.).</li>
+        </ul>
+        <li>Revisa la información ingresada para asegurarte de que sea correcta.</li>
+        <li>Haz clic en "Registrar" para enviar tu solicitud de registro.</li>
+        <li>Recibirás un correo electrónico con un enlace de activación. Haz clic en el enlace para activar tu cuenta.</li>
+        <li>Una vez activada, podrás iniciar sesión en el sistema con tu correo electrónico y contraseña.</li>
+    </ol>
 
-        <h2>5. Seguridad del Sistema</h2>
-        <h3>Copia de Seguridad</h3>
-        <ol>
-        <li>Acceso al Módulo de Copias de Seguridad: Selecciona "Copia de Seguridad" desde el menú principal.</li>
-        <li>Crear y Descargar Copia de Seguridad: Haz clic en "Crear Copia de Seguridad" y descárgala a tu dispositivo.</li>
-        </ol>
-        <h3>Restauración de la Base de Datos</h3>
-        <ol>
-        <li>Acceso al Módulo de Restauración: Selecciona "Restauración".</li>
-        <li>Seleccionar y Restaurar: Elige el archivo de backup y haz clic en "Restaurar".</li>
-        </ol>
+    <h2>4. Estructura del Sistema</h2>
+    <h3>Módulo de Usuarios:</h3>
+    <ul>
+        <li>Funcionalidad: Permite la gestión de roles y permisos de los usuarios del sistema, asegurando que cada uno tenga acceso adecuado según sus responsabilidades.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Crear y modificar perfiles de usuarios.</li>
+            <li>Asignar roles (administrador, usuario, cliente, etc.).</li>
+            <li>Controlar permisos de acceso a diferentes módulos.</li>
+        </ul>
+    </ul>
 
-        <h2>6. Soporte y Ayuda</h2>
-        <p>Si necesitas asistencia técnica o tienes preguntas, puedes contactar al equipo de soporte desde la opción "Soporte" en el menú principal. Completa el formulario con la descripción del problema y recibirás asistencia por correo electrónico.</p>
+    <h3>Módulo de Clientes:</h3>
+    <ul>
+        <li>Funcionalidad: Registro y seguimiento de clientes, facilitando la gestión de las relaciones con ellos.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Registro de nuevos clientes.</li>
+            <li>Actualización de datos de clientes.</li>
+            <li>Seguimiento del historial de compras y comportamiento.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Productos:</h3>
+    <ul>
+        <li>Funcionalidad: Control del inventario y características de productos. Aquí se pueden agregar, editar y eliminar productos, así como realizar ajustes de inventario.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Registro y actualización de productos.</li>
+            <li>Visualización y control de stock.</li>
+            <li>Definición de características como precio, descripción, etc.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Proveedores:</h3>
+    <ul>
+        <li>Funcionalidad: Gestión de proveedores y control de compras relacionadas con el inventario y los insumos.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Registro de nuevos proveedores.</li>
+            <li>Gestión de las compras realizadas a proveedores.</li>
+            <li>Control del historial de compras y pagos a proveedores.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Ventas:</h3>
+    <ul>
+        <li>Funcionalidad: Procesamiento de ventas y generación de reportes de ventas.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Registro de nuevas ventas.</li>
+            <li>Seguimiento de ventas realizadas.</li>
+            <li>Generación de reportes de ventas por período.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Insumos:</h3>
+    <ul>
+        <li>Funcionalidad: Control de la materia prima e insumos necesarios para la realización de los productos. Permite asegurar la disponibilidad de los materiales para la producción.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Registro de insumos.</li>
+            <li>Control de inventario de materia prima.</li>
+            <li>Actualización del uso y reabastecimiento de insumos.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Compras:</h3>
+    <ul>
+        <li>Funcionalidad: Gestión del control de insumos y su reabastecimiento, asegurando que siempre haya stock disponible para producción.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Registro de nuevas compras de insumos.</li>
+            <li>Control de proveedores.</li>
+            <li>Historial de compras de insumos.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Tareas:</h3>
+    <ul>
+        <li>Funcionalidad: Asignación y seguimiento de tareas dentro de la empresa, útil para la coordinación interna y la gestión de proyectos.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Asignación de tareas a los usuarios.</li>
+            <li>Seguimiento del estado y progreso de las tareas.</li>
+            <li>Priorizar tareas según la urgencia y el impacto.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Ayuda:</h3>
+    <ul>
+        <li>Funcionalidad: Proporciona el manual de usuario, tutoriales y soporte para los usuarios del sistema. Ofrece documentación en PDF.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Acceso al Manual del usuario.</li>
+            <li>Con la guía de las preguntas frecuentes.</li>
+        </ul>
+    </ul>
+
+    <h3>Módulo de Respaldo:</h3>
+    <ul>
+        <li>Funcionalidad: Gestiona el mantenimiento y la seguridad de la base de datos del sistema, asegurando que se realicen copias de seguridad regularmente y que los datos estén protegidos.</li>
+        <li>Acciones principales:</li>
+        <ul>
+            <li>Realización de respaldos manuales de la base de datos.</li>
+            <li>Restauración de copias de seguridad en caso de pérdida de datos.</li>
+        </ul>
+    </ul>
+
+
+    <footer>
+        <h3>© 2024 ARDECORS - Todos los derechos reservados</h3>
+    </footer>
     
-        <object data="{{ Manual_de_Usuario_Ardecors.pdf }}" type="application/pdf" width="100%" height="800">
-        Tu navegador no admite la visualización de PDF integrada. Puedes <a href="{{ Manual_de_Usuario_Ardecors.pdf }}">descargar el manual</a>.
-    </object>
+    <style>
+        footer {
+            background-color: #0E2C40;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            width: 100%;
+        }
+        
+        footer h3 {
+            font-size: 0.8vw;
+            color: #ffffff;
+        }
+    </style>
 </div>
-{% endblock %}
+{% endblock %} 
