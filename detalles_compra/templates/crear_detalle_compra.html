@@ -4,6 +4,8 @@
 {% block title %}Crear Detalle Compra{% endblock %}
 
 {% block content %}
+{% include 'navbar.html' %}
+<div class="home-section">
     <div class="breadcrumb">
         <a href="{% url 'lista_compras' %}" data-tooltip="Ver lista_compras"> LISTA DE COMPRAS </a> &gt;
         <a > DETALLES COMPRAS </a>&gt; 
@@ -30,4 +32,5 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{% url 'lista_detalles_compra' compra_id=compra.id %}" class="btn btn-secondary">Volver a la Compra</a>
     </form>
+</div>
 {% endblock %}

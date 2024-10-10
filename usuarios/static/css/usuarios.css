@@ -27,9 +27,12 @@ form {
 h2 {
     color: #333;
     margin-bottom: 30px;
-    text-align: center;
+    
     font-weight: 600;
-    font-size: 28px;  /* Increased font size */
+    font-size: 28px;
+    word-wrap: break-word; /* Permite que las palabras largas se dividan */
+    overflow-wrap: break-word;
+    padding: 0 40px; /* Añade padding lateral */
 }
 
 .mb-3 {

@@ -268,6 +268,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostrar la primera página cuando se carga el contenido
     mostrarItems();
 });
+// Función para verificar el stock disponible de un artículo
+function verificarStock(articleId, cantidadSolicitada, callback) {
+    fetch(`/verificar-stock/${articleId}/?cantidad=${cantidadSolicitada}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.disponible) {
+                callback(true); // Stock disponible
+            } else {
+                alert("No hay suficiente stock disponible.");
+                callback(false); // Stock no disponible
+            }
+        })
+        .catch(error => {
+            console.error('Error al verificar el stock:', error);
+            callback(false);
+        });
+}
 
 
 
