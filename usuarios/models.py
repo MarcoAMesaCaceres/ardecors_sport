@@ -1,12 +1,12 @@
 
 
-# models.py
 from django.db import models
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     ROLES = (
+        
         ('admin', 'Admin'),
         ('employee', 'Empleado'),
     )
@@ -15,3 +15,8 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.get_role_display()} - {'Aprobado' if self.is_approved else 'Pendiente'}"
+
+    def save(self, *args, **kwargs):
+        if self.user.is_superuser:
+            self.role = 'superuser'
+        super().save(*args, **kwargs)

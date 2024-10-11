@@ -1,12 +1,58 @@
 {% extends "base_usuario.html" %}
 {% load static %}
-
 {% block title %}Lista de Usuarios{% endblock %}
-<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
-<link rel="stylesheet" href="{% static 'css/articles.css' %}">
-<link rel="icon" href="{% static 'img/logoardecors.png' %}">
 {% block content %}
 {% include 'navbar.html' %}
+
+<div class="breadcrumb">
+    <a href="{% url 'admin_dashboard' %}" data-tooltip="Ver Panel de Administración">PANEL DE ADMINISTRACIÓN</a> &gt; 
+    LISTA DE USUARIOS
+    <style> .breadcrumb { background-color: #0E2C40; margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0; padding: 10px; color: white; border-bottom: 5px solid rgb(255, 255, 255);} 
+        .breadcrumb a { color: white; text-decoration: none; } .breadcrumb span { color: rgb(77, 212, 59);} </style> 
+</div>
+<div class="home-section">
+    <div class="container mt-4">
+        <h2>Lista de Usuarios</h2>
+
+        <a href="{% url 'approve_users' %}" class="btn btn-primary mb-3">Aprobar Usuarios Pendientes</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.is_superuser %}
+                            Superusuario
+                        {% else %}
+                            {{ user.userprofile.get_role_display }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not user.is_superuser %}
+                        <a href="{% url 'user_edit' user.id %}" class="btn btn-sm btn-primary">Editar</a>
+                        {% endif %} 
+                        {% if not user.is_superuser %}
+                            <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
+    </div>
+</div>
 <div class="breadcrumb">
     <a href="{% url 'admin_dashboard' %}" data-tooltip="Ver Panel de Administración">PANEL DE ADMINISTRACIÓN</a> &gt; 
     LISTA DE USUARIOS
@@ -14,42 +60,4 @@
         .breadcrumb a { color: white; text-decoration: none; } .breadcrumb span { color: rgb(77, 212, 59);} </style> 
 </div>
 
-
-<div class="home-section">
-<div class="container mt-4">
-    <h2>Lista de Usuarios</h2>
-    <a href="{% url 'approve_users' %}" class="btn btn-primary mb-3">Aprobar Usuarios Pendientes</a>
-    <table id="elementosTable" class="table table-striped">
-        <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Email</th>
-                <th>Rol</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.userprofile.get_role_display }}</td>
-                <td>
-                    <a href="{% url 'user_edit' user.id %}" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-danger">Eliminar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-<br>
-    <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
-
-    <footer> <h3>© 2024 ARDECORS - Todos los derechos reservados</h3> </footer>
-    <style> html, body { height: 100%; margin: 0; padding: 0; } body { display: flex; flex-direction: column; } .content { flex: 1 0 auto; } 
-        footer { background-color: #0E2C40; color: #ffffff; display: flex; justify-content: center; align-items: center; padding: 10px; width: 100%; flex-shrink: 0; }
-        footer h3 { font-size: 0.8vw; margin: 0; } footer { position: fixed; bottom: 0; left: 0; } 
-    </style>
-</div>
-</div>
 {% endblock %}

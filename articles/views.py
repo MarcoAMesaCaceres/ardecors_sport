@@ -64,16 +64,6 @@ def eliminar_articles(request, pk):
         except Exception as e:
             messages.error(request, f'Error al eliminar el artículo: {e}')
     return render(request, 'eliminar_articles.html', {'article': article})
-from django.http import JsonResponse
 
 
-def verificar_stock(request, article_id):
-    cantidad_solicitada = int(request.GET.get('cantidad', 1))
-    try:
-        article = Article.objects.get(id=article_id)
-        if article.stock >= cantidad_solicitada:
-            return JsonResponse({'disponible': True})
-        else:
-            return JsonResponse({'disponible': False})
-    except Article.DoesNotExist:
-        return JsonResponse({'disponible': False, 'error': 'Artículo no encontrado'})
+

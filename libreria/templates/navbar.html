@@ -126,15 +126,6 @@
                 </a>
                 <span class="tooltip">Ayuda</span>
             </li>
-            {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
-            <li>
-                <a href="{% url 'backup_databases' %}">
-                    <i class='bx bx-data'></i>
-                   
-                    <span class="link_name">Repaldos</span>
-                </a>
-                <span class="tooltip">Respaldos</span>
-            </li>
             <li>
                 <a href="{% url 'login' %}">
                     <i class='bx bx-log-out' id="log_out"></i>
@@ -145,6 +136,16 @@
             <li>
             <img src="{% static 'img/logoardecors.png' %}" alt="profile image">
             </li>
+            {% if user.is_authenticated and user.is_superuser or user.userprofile.role == 'admin' %}
+            <li>
+                <a href="{% url 'backup_databases' %}">
+                    <i class='bx bx-data'></i>
+                   
+                    <span class="link_name">Repaldos</span>
+                </a>
+                <span class="tooltip">Respaldos</span>
+            </li>
+           
             {%endif%}
             <li class="profile">
                
@@ -156,7 +157,12 @@
                             {{ request.user.username }}
                         </div>
                         <div class="designation">
+                            {% if request.user.is_superuser %}
+                            Superuser
+                            {% else %}
                             {{ request.user.userprofile.get_role_display }}
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>

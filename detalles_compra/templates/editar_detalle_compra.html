@@ -5,6 +5,7 @@
 
 {% block content %}
 {% include 'navbar.html' %}
+<div class="home-section">
     <h1 class="mb-4">Editar detalle de compra #{{ detalle.id }}</h1>
 
     <form method="post">
@@ -23,4 +24,5 @@
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
         <a href="{% url 'lista_detalles_compra' compra_id=detalle.compra.id %}" class="btn btn-secondary">Cancelar</a>
     </form>
+</div>
 {% endblock %}

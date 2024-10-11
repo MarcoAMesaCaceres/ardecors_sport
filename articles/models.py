@@ -10,6 +10,7 @@ class Article(models.Model):
         validators=[
             RegexValidator(
                 regex=r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$',
+
                 message='El nombre solo puede contener letras (incluyendo tildes), números y espacios.'
             )
         ]

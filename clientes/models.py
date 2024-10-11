@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 class Clientes(models.Model):
     nombre = models.CharField(max_length=255, validators=[
         RegexValidator(
-            regex=r'^[a-zA-Z\s]+$',
+            regex=r'^[a-zA-ZñÑ\s]+$',
             message='El nombre solo puede contener letras y espacios.',
         ),
     ])
