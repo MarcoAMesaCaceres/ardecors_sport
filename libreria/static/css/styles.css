@@ -20,6 +20,7 @@ header {
     color: rgb(255, 255, 255);
   }
   
+  
   a:hover {
     color: #000000;
     text-align: right;
@@ -205,6 +206,7 @@ header {
     transition-duration: 0.4s;
     text-decoration: none;
   }
+  
   
   li {
     color: black;
@@ -437,11 +439,13 @@ ul {
     padding: 0;
 }
 
-li {
+li 
+a{
     margin-bottom: 20px;
     padding-left: 30px;
     position: relative;
     text-align: justify;
+    color: #000000;
 }
 
  li:before {

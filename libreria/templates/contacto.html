@@ -11,14 +11,28 @@
     <script src="{% static 'js/accesibilidad.js' %}"></script> 
     <style>
         body {
-            background-image: url("{% static 'img/ardecors.png' %}"); 
-            background-size: 90% auto;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            color: white; 
-            transition: background-color 0.5s, color 0.5s, font-size 0.5s;
-        }
+    position: relative; /* Necesario para el pseudo-elemento */
+    color: white; 
+    transition: background-color 0.5s, color 0.5s, font-size 0.5s;
+}
+
+body::before {
+    content: "";
+    background-image: url("{% static 'img/ardecors.png' %}");
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5; /* Ajusta la opacidad aquí */
+    z-index: -1; /* Asegúrate de que el pseudo-elemento esté detrás del contenido */
+}
+
+
 
         body.dark-mode {
             background-image: url("{% static 'img/Mongui.png' %}"); 
