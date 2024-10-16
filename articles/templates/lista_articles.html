@@ -17,6 +17,27 @@
         <div class="content">
             <h1>Lista de Artículos</h1>
 
+            <!-- Formulario de búsqueda -->
+            <form method="get" class="mb-4">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" name="nombre" class="form-control" placeholder="Buscar por Nombre" value="{{ request.GET.nombre }}">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="descripcion" class="form-control" placeholder="Buscar por Descripción" value="{{ request.GET.descripcion }}">
+                    </div>
+                    <div class="col">
+                        <input type="number" name="precio" class="form-control" placeholder="Buscar por Precio" value="{{ request.GET.precio }}">
+                    </div>
+                    <div class="col">
+                        <input type="number" name="stock" class="form-control" placeholder="Buscar por Stock" value="{{ request.GET.stock }}">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </div>
+                </div>
+            </form>
+
             <a href="{% url 'crear_articles' %}" class="btn btn-primary mb-3">Crear Nuevo Artículo</a>
 
             <table id="elementosTable" class="table">

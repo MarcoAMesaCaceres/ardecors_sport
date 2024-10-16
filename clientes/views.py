@@ -10,6 +10,7 @@ def lista_clientes(request):
     telefono_query = request.GET.get('telefono', '')
     email_query = request.GET.get('email', '')
     direccion_query = request.GET.get('direccion', '')
+    
 
     clientes = Clientes.objects.all()
 
@@ -23,7 +24,7 @@ def lista_clientes(request):
         clientes = clientes.filter(email__icontains=email_query)
     if direccion_query:
         clientes = clientes.filter(direccion__icontains=direccion_query)
-
+    
     return render(request, 'lista_clientes.html', {'clientes': clientes})
 
 def editar_clientes(request, pk):

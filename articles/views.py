@@ -4,9 +4,29 @@ from .forms import ArticleForm
 from django.db.models import Q
 from django.contrib import messages
 from django.db import transaction
+from django.core.exceptions import ValidationError
 
 def lista_articles(request):
+    nombre_query = request.GET.get('nombre', '')
+    descripcion_query = request.GET.get('descripcion', '')
+    precio_query = request.GET.get('precio', '')
+    stock_query = request.GET.get('stock', '')
+
     articles = Article.objects.all()
+
+    if nombre_query:
+        articles = articles.filter(nombre__icontains=nombre_query)
+    if descripcion_query:
+        articles = articles.filter(descripcion__icontains=descripcion_query)
+    if precio_query:
+        articles = articles.filter(precio=precio_query)  # Si deseas un filtro exacto
+    if stock_query:
+        articles = articles.filter(stock=stock_query)  # Si deseas un filtro exacto
+
+    # Validación: si no hay resultados después de la búsqueda
+    if not articles.exists():
+        messages.warning(request, "Este producto no existe en inventario.")
+
     return render(request, 'lista_articles.html', {'articles': articles})
 
 @transaction.atomic
