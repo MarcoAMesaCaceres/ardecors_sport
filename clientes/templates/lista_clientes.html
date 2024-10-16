@@ -35,7 +35,29 @@
 
     <a href="{% url 'crear_clientes' %}" class="btn btn-primary mb-3">Crear Nuevos clientes</a>
 
-    
+    <!-- Formulario de búsqueda -->
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col">
+                <input type="text" name="id" class="form-control" placeholder="Buscar por ID" value="{{ request.GET.id }}">
+            </div>
+            <div class="col">
+                <input type="text" name="nombre" class="form-control" placeholder="Buscar por Nombre" value="{{ request.GET.nombre }}">
+            </div>
+            <div class="col">
+                <input type="text" name="telefono" class="form-control" placeholder="Buscar por Teléfono" value="{{ request.GET.telefono }}">
+            </div>
+            <div class="col">
+                <input type="text" name="email" class="form-control" placeholder="Buscar por Email" value="{{ request.GET.email }}">
+            </div>
+            <div class="col">
+                <input type="text" name="direccion" class="form-control" placeholder="Buscar por Dirección" value="{{ request.GET.direccion }}">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
 
     <table id="elementosTable" class="table">
     <thead>
