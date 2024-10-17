@@ -3,6 +3,18 @@ from django.core.validators import RegexValidator, EmailValidator
 from django.core.exceptions import ValidationError
 
 class Clientes(models.Model):
+    documento = models.CharField(
+        max_length=20, 
+        unique=True, 
+        null=True,  # Allow null temporarily
+        blank=True,  # Allow blank temporarily
+        validators=[
+            RegexValidator(
+                regex=r'^\d{8,10}$',
+                message='El número de documento debe tener entre 8 y 10 dígitos.',
+            ),
+        ]
+    )
     nombre = models.CharField(max_length=255, validators=[
         RegexValidator(
             regex=r'^[a-zA-ZñÑ\s]+$',
@@ -20,7 +32,7 @@ class Clientes(models.Model):
     direccion = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.nombre
+        return f"{self.nombre} - {self.documento or 'Sin documento'}"
 
     def clean(self):
         super().clean()
