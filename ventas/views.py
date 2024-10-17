@@ -23,13 +23,39 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.templatetags.static import static
 from reportlab.lib.enums import TA_LEFT
-
+from django.db.models import Q
 from django.shortcuts import render
 from .models import Venta
 
 
 def lista_ventas(request):
+    id_query = request.GET.get('id', '')
+    fecha_query = request.GET.get('fecha', '')
+    cliente_query = request.GET.get('cliente', '')
+    articulo_query = request.GET.get('articulo', '')
+
+    # Filtrado inicial
     ventas = Venta.objects.all().prefetch_related('detalles__articulo')
+
+    # Validación y filtrado por ID
+    if id_query and not id_query.isdigit():
+        messages.error(request, "Debe colocar un número válido para el ID.")
+    else:
+        if id_query:
+            ventas = ventas.filter(id=id_query)
+
+    # Filtrado por fecha
+    if fecha_query:
+        ventas = ventas.filter(fecha__date=fecha_query)  # Asegúrate de que `fecha` sea un campo DateTimeField
+
+    # Filtrado por cliente (asumiendo que hay una relación)
+    if cliente_query:
+        ventas = ventas.filter(cliente__nombre__icontains=cliente_query)
+
+    # Filtrado por artículo
+    if articulo_query:
+        ventas = ventas.filter(detalles__articulo__nombre__icontains=articulo_query)
+
     return render(request, 'lista_ventas.html', {'ventas': ventas})
 
 def crear_venta(request):

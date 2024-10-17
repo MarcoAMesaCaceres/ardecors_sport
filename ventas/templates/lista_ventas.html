@@ -32,9 +32,29 @@
 
         <div class="mb-3"></div>
             <a href="{% url 'crear_venta' %}" class="btn btn-primary">Crear Nueva Venta</a>
-           
         </div>
-
+        
+        <!-- Formulario de búsqueda -->
+        <form method="get" class="mb-4">
+            <div class="row">
+                <div class="col">
+                    <input type="number" name="id" class="form-control" placeholder="Buscar por ID" value="{{ request.GET.id }}">
+                </div>
+                <div class="col">
+                    <input type="date" name="fecha" class="form-control" placeholder="Buscar por Fecha" value="{{ request.GET.fecha }}">
+                </div>
+                <div class="col">
+                    <input type="text" name="cliente" class="form-control" placeholder="Buscar por Cliente" value="{{ request.GET.cliente }}">
+                </div>
+                <div class="col">
+                    <input type="text" name="articulo" class="form-control" placeholder="Buscar por Artículo" value="{{ request.GET.articulo }}">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+        
         {% if ventas %}
             <table id="elementosTable"class="table">
                 <thead>

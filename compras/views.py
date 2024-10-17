@@ -3,7 +3,7 @@ from .models import Compras
 from .forms import ComprasForm
 from django.db.models import Q
 from django.template.loader import get_template
-
+from insumos.models import Insumos
 # Exportar pdf, excel
 from django.http import HttpResponse
 from io import BytesIO
@@ -22,7 +22,38 @@ from django.db.models import Q
 
 
 def lista_compras(request):
+    id_query = request.GET.get('id', '')
+    fecha_query = request.GET.get('fecha', '')
+    proveedor_query = request.GET.get('proveedor', '')
+    insumo_query = request.GET.get('insumo', '')
+
     compras = Compras.objects.all()
+
+    # Validación del ID
+    if id_query and not id_query.isdigit():
+        messages.error(request, "Debe colocar un número válido para el ID.")
+    else:
+        if id_query:
+            compras = compras.filter(id=id_query)
+
+    # Filtrado por fecha
+    if fecha_query:
+        compras = compras.filter(fecha__date=fecha_query)
+
+    # Filtrado por proveedor
+    if proveedor_query:
+        compras = compras.filter(proveedor__nombre__icontains=proveedor_query)  # Cambia 'nombre' por el campo adecuado
+
+    # Filtrado por insumo
+    if insumo_query:
+        compras = compras.filter(detalles__insumo__nombre__icontains=insumo_query)
+
+    # Validación de insumos
+    for compra in compras:
+        for detalle in compra.detalles.all():
+            if not Insumos.objects.filter(id=detalle.insumo.id).exists():
+                messages.warning(request, f"El insumo '{detalle.insumo.nombre}' no se encuentra en inventario.")
+
     return render(request, 'lista_compras.html', {'compras': compras})
 
 def crear_compras(request):
