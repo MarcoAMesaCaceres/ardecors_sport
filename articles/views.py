@@ -7,13 +7,21 @@ from django.db import transaction
 from django.core.exceptions import ValidationError
 
 def lista_articles(request):
+    id_query = request.GET.get('id', '')
     nombre_query = request.GET.get('nombre', '')
     descripcion_query = request.GET.get('descripcion', '')
     precio_query = request.GET.get('precio', '')
     stock_query = request.GET.get('stock', '')
 
+    # Validación del ID
+    if id_query and not id_query.isdigit():
+        messages.error(request, "Debe colocar un número válido para el ID.")
+        return render(request, 'lista_articles.html', {'articles': Article.objects.none()})
+
     articles = Article.objects.all()
 
+    if id_query:
+        articles = articles.filter(id=id_query)
     if nombre_query:
         articles = articles.filter(nombre__icontains=nombre_query)
     if descripcion_query:

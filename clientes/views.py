@@ -3,6 +3,7 @@ from django.contrib import messages
 from .forms import ClientesForm
 from .models import Clientes
 from django.db.models import Q
+from django.http import HttpResponse
 
 def lista_clientes(request):
     id_query = request.GET.get('id', '')
@@ -11,7 +12,11 @@ def lista_clientes(request):
     email_query = request.GET.get('email', '')
     direccion_query = request.GET.get('direccion', '')
     
-
+    # Validación del ID
+    if id_query and not id_query.isdigit():
+        messages.error(request, "Debe colocar un número válido para el ID.")
+        return render(request, 'lista_clientes.html', {'clientes': Clientes.objects.none()})
+    
     clientes = Clientes.objects.all()
 
     if id_query:
@@ -25,7 +30,7 @@ def lista_clientes(request):
     if direccion_query:
         clientes = clientes.filter(direccion__icontains=direccion_query)
     
-    return render(request, 'lista_clientes.html', {'clientes': clientes})
+    return render(request, 'lista_clientes.html', {'clientes': clientes}) 
 
 def editar_clientes(request, pk):
     cliente = get_object_or_404(Clientes, pk=pk)
