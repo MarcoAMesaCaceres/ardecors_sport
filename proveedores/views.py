@@ -6,7 +6,30 @@ from django.core.exceptions import ValidationError
 from insumos.models import Insumos
 from proveedores.models import  Proveedor
 def lista_proveedores(request):
+    id_query = request.GET.get('id', '')
+    nombre_query = request.GET.get('nombre', '')
+    telefono_query = request.GET.get('telefono', '')
+    email_query = request.GET.get('email', '')
+    direccion_query = request.GET.get('direccion', '')
+
+    # Validación del ID
+    if id_query and not id_query.isdigit():
+        messages.error(request, "Debe colocar un número válido para el ID.")
+        return render(request, 'lista_proveedores.html', {'proveedores': Proveedor.objects.none()})
+
     proveedores = Proveedor.objects.all()
+
+    if id_query:
+        proveedores = proveedores.filter(id=id_query)
+    if nombre_query:
+        proveedores = proveedores.filter(nombre__icontains=nombre_query)
+    if telefono_query:
+        proveedores = proveedores.filter(telefono__icontains=telefono_query)
+    if email_query:
+        proveedores = proveedores.filter(email__icontains=email_query)
+    if direccion_query:
+        proveedores = proveedores.filter(direccion__icontains=direccion_query)
+
     return render(request, 'lista_proveedores.html', {'proveedores': proveedores})
 
 def editar_proveedor(request, pk):

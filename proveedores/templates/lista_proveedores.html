@@ -28,7 +28,28 @@
 
     <a href="{% url 'crear_proveedor' %}" class="btn btn-primary mb-3">Crear Nuevo Proveedor</a>
 
-    
+    <form method="GET" class="mb-3">
+        <div class="row">
+            <div class="col">
+                <input type="number" name="id" class="form-control" placeholder="ID" value="{{ request.GET.id }}" min="0">
+            </div>
+            <div class="col">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="{{ request.GET.nombre }}">
+            </div>
+            <div class="col">
+                <input type="text" name="telefono" class="form-control" placeholder="Teléfono" value="{{ request.GET.telefono }}">
+            </div>
+            <div class="col">
+                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ request.GET.email }}">
+            </div>
+            <div class="col">
+                <input type="text" name="direccion" class="form-control" placeholder="Dirección" value="{{ request.GET.direccion }}">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </form>
 
     <table id="elementosTable" class="table table-striped">
         <thead>
