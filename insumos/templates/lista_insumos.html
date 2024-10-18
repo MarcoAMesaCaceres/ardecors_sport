@@ -17,6 +17,33 @@
             <h1>Lista de Insumos</h1>
 
             <a href="{% url 'crear_insumos' %}" class="btn btn-primary mb-3">Crear Nuevo Insumo</a>
+            
+            <form method="GET" class="mb-3">
+                <div class="row">
+                    <div class="col">
+                        <input type="number" name="id" class="form-control" placeholder="ID" value="{{ request.GET.id }}" min="0">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="{{ request.GET.nombre }}">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="descripcion" class="form-control" placeholder="Descripción" value="{{ request.GET.descripcion }}">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="proveedor" class="form-control" placeholder="Proveedor" value="{{ request.GET.proveedor }}">
+                    </div>
+                    <div class="col">
+                        <input type="number" name="precio" class="form-control" placeholder="Precio" value="{{ request.GET.precio }}" step="0.01" min="0">
+                    </div>
+                    <div class="col">
+                        <input type="number" name="stock" class="form-control" placeholder="Stock" value="{{ request.GET.stock }}" min="0">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </div>
+                </div>
+            </form> 
+
 
             <table id="elementosTable" class="table">
                 <thead>
@@ -52,7 +79,7 @@
                 </tbody>
             </table>
 
-           
+            
         </div>
         <a href="{% url 'admin_dashboard' %}" class="btn btn-primary mb-3">Volver al Panel de Administración</a>
     </div>
