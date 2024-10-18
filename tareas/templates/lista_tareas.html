@@ -34,6 +34,34 @@
 <h1>Lista de Tareas</h1>
 <a href="{% url 'crear_tareas' %}" class="btn btn-primary mb-3">Crear Nueva Tarea</a>
 
+<!-- Formulario de filtros -->
+<form method="get" class="mb-3">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="descripcion">Descripción</label>
+            <input type="text" name="descripcion" class="form-control" id="descripcion" value="{{ request.GET.descripcion }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="completada">Completada</label>
+            <select name="completada" class="form-control" id="completada">
+                <option value="">-- Selecciona --</option>
+                <option value="si" {% if request.GET.completada == 'si' %}selected{% endif %}>Sí</option>
+                <option value="no" {% if request.GET.completada == 'no' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="fecha_creacion">Fecha Creación (YYYY-MM-DD)</label>
+            <input type="date" name="fecha_creacion" class="form-control" id="fecha_creacion" value="{{ request.GET.fecha_creacion }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="fecha_vencimiento">Fecha Vencimiento (YYYY-MM-DD)</label>
+            <input type="date" name="fecha_vencimiento" class="form-control" id="fecha_vencimiento" value="{{ request.GET.fecha_vencimiento }}">
+        </div>
+        <div class="form-group col-md-4 align-self-end">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </div>
+</form> 
 
 
 <table id="elementosTable" class="table table-striped">

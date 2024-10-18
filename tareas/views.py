@@ -11,9 +11,37 @@ from django.http import FileResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from django.utils import timezone
+from django.contrib import messages
 
 def lista_tareas(request):
+    descripcion_query = request.GET.get('descripcion', '').strip()
+    completada_query = request.GET.get('completada', '')
+    fecha_creacion_query = request.GET.get('fecha_creacion', '').strip()
+    fecha_vencimiento_query = request.GET.get('fecha_vencimiento', '').strip()
+
     tareas = Tarea.objects.all()
+
+    if descripcion_query:
+        tareas = tareas.filter(descripcion__icontains=descripcion_query)
+    if completada_query:
+        if completada_query.lower() == 'si':
+            tareas = tareas.filter(completada=True)
+        elif completada_query.lower() == 'no':
+            tareas = tareas.filter(completada=False)
+    if fecha_creacion_query:
+        try:
+            fecha_creacion = timezone.datetime.strptime(fecha_creacion_query, '%Y-%m-%d')
+            tareas = tareas.filter(fecha_creacion__date=fecha_creacion)
+        except ValueError:
+            messages.error(request, "Formato de fecha de creación inválido. Use YYYY-MM-DD.")
+    if fecha_vencimiento_query:
+        try:
+            fecha_vencimiento = timezone.datetime.strptime(fecha_vencimiento_query, '%Y-%m-%d')
+            tareas = tareas.filter(fecha_vencimiento__date=fecha_vencimiento)
+        except ValueError:
+            messages.error(request, "Formato de fecha de vencimiento inválido. Use YYYY-MM-DD.")
+
     return render(request, 'lista_tareas.html', {'tareas': tareas})
 
 
