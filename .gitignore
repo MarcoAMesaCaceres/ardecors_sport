@@ -1,1 +1,3 @@
 backups/
+.idea
+db.sqlite3
